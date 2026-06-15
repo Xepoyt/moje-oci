@@ -2,6 +2,7 @@
 
 namespace Nette\PHPStan\Utils;
 
+use Nette\Utils\Html;
 use PHPStan\Reflection\ClassMemberReflection;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\FunctionVariant;
@@ -23,7 +24,7 @@ final class HtmlMethodsClassReflectionExtension implements MethodsClassReflectio
 {
 	public function hasMethod(ClassReflection $classReflection, string $methodName): bool
 	{
-		if (!$classReflection->is('Nette\Utils\Html')) {
+		if (!$classReflection->is(Html::class)) {
 			return false;
 		}
 

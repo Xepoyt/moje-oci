@@ -1,0 +1,44 @@
+MIME-Version: 1.0
+X-Mailer: Nette Framework
+Date: Mon, 15 Jun 2026 16:45:26 +0200
+From: =?UTF-8?B?Ik1PSkUgT8SMSSAtIFBvcnTDoWwi?= <registrace@mojeoci.cz>
+To: ocar@ocarstvi.cz
+Subject: =?UTF-8?B?RG9rb27EjWVuw60gcmVnaXN0cmFjZSB6YcWZw616ZW7DrQ==?=
+Message-ID: <1q0ykvthl3@localhost8080>
+Content-Type: multipart/alternative;
+	boundary="--------gb9ytoghme"
+
+----------gb9ytoghme
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Dobrý den, Pan Očař,
+
+děkujeme za zahájení registrace vašeho zdravotního zařízení do sítě MOJE OČI.
+
+Pro dokončení registrace a vyplnění zbývajících údajů o firmě a výběru programu klikněte prosím na tlačítko níže:
+
+Dokončit registraci <http://localhost:8080/dokonceni-registrace?token=dj6p3yqz1dxlgfiw3319k5vq769ln32c>
+
+Pokud tlačítko nefunguje, zkopírujte tento odkaz do prohlížeče:
+http://localhost:8080/dokonceni-registrace?token=dj6p3yqz1dxlgfiw3319k5vq769ln32c
+----------gb9ytoghme
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+<html>
+<head>
+    <style>
+        body { font-family: sans-serif; color: #333; }
+        .btn { display: inline-block; padding: 10px 20px; background: #0056b3; color: white; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h2>Dobrý den, Pan Očař,</h2>
+    <p>děkujeme za zahájení registrace vašeho zdravotního zařízení do sítě MOJE OČI.</p>
+    <p>Pro dokončení registrace a vyplnění zbývajících údajů o firmě a výběru programu klikněte prosím na tlačítko níže:</p>
+    <p><a href="http://localhost:8080/dokonceni-registrace?token=dj6p3yqz1dxlgfiw3319k5vq769ln32c" class="btn">Dokončit registraci</a></p>
+    <p>Pokud tlačítko nefunguje, zkopírujte tento odkaz do prohlížeče:<br> http://localhost:8080/dokonceni-registrace?token=dj6p3yqz1dxlgfiw3319k5vq769ln32c</p>
+</body>
+</html>
+----------gb9ytoghme--

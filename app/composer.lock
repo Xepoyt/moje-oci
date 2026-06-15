@@ -4,8 +4,70 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "640f43ea464e73d2e48de3d4f5dd1f22",
+    "content-hash": "d9c119b06d6f9b9bbb7641a8bdcf2f8a",
     "packages": [
+        {
+            "name": "contributte/forms-bootstrap",
+            "version": "v0.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/contributte/forms-bootstrap.git",
+                "reference": "439d33aade5720b70f271646bed535baaea93907"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/contributte/forms-bootstrap/zipball/439d33aade5720b70f271646bed535baaea93907",
+                "reference": "439d33aade5720b70f271646bed535baaea93907",
+                "shasum": ""
+            },
+            "require": {
+                "nette/application": "^3.0",
+                "nette/forms": "^3.0.4",
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "ninjify/qa": "^v0.10",
+                "phpstan/phpstan": "^0.12.6",
+                "phpstan/phpstan-deprecation-rules": "^0.12",
+                "phpstan/phpstan-nette": "^0.12",
+                "phpstan/phpstan-strict-rules": "^0.12",
+                "phpunit/phpunit": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Contributte\\FormsBootstrap\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dalibor Korpar",
+                    "email": "dalibor.korpar@gmail.com"
+                }
+            ],
+            "description": "Nette extension for Bootstrap forms",
+            "homepage": "https://github.com/contributte/forms-bootstrap",
+            "keywords": [
+                "Forms",
+                "bootstrap",
+                "library",
+                "nette"
+            ],
+            "support": {
+                "issues": "https://github.com/contributte/forms-bootstrap/issues",
+                "source": "https://github.com/contributte/forms-bootstrap/tree/v0.3.1"
+            },
+            "time": "2020-10-30T11:38:27+00:00"
+        },
         {
             "name": "latte/latte",
             "version": "v3.1.4",
@@ -103,12 +165,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/application.git",
-                "reference": "bd426567d00070834bcd8b97f8965ced33da790d"
+                "reference": "cdf59b0a1e3aaf8afb490070539c2b1974655bf6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/application/zipball/bd426567d00070834bcd8b97f8965ced33da790d",
-                "reference": "bd426567d00070834bcd8b97f8965ced33da790d",
+                "url": "https://api.github.com/repos/nette/application/zipball/cdf59b0a1e3aaf8afb490070539c2b1974655bf6",
+                "reference": "cdf59b0a1e3aaf8afb490070539c2b1974655bf6",
                 "shasum": ""
             },
             "require": {
@@ -192,7 +254,7 @@
                 "issues": "https://github.com/nette/application/issues",
                 "source": "https://github.com/nette/application/tree/v3.2.10"
             },
-            "time": "2026-06-01T18:38:42+00:00"
+            "time": "2026-06-01T19:39:23+00:00"
         },
         {
             "name": "nette/assets",
@@ -744,34 +806,34 @@
         },
         {
             "name": "nette/http",
-            "version": "v3.3.4",
+            "version": "v3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/http.git",
-                "reference": "d92cb97fea369d10b46677223cc2bfb5adc1a2f2"
+                "reference": "de5988d8802e76d9bda85fe5a871d29c794684f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/http/zipball/d92cb97fea369d10b46677223cc2bfb5adc1a2f2",
-                "reference": "d92cb97fea369d10b46677223cc2bfb5adc1a2f2",
+                "url": "https://api.github.com/repos/nette/http/zipball/de5988d8802e76d9bda85fe5a871d29c794684f4",
+                "reference": "de5988d8802e76d9bda85fe5a871d29c794684f4",
                 "shasum": ""
             },
             "require": {
-                "nette/utils": "^4.0.4",
-                "php": "8.1 - 8.5"
+                "nette/utils": "^4.1",
+                "php": "8.3 - 8.5"
             },
             "conflict": {
                 "nette/di": "<3.0.3",
                 "nette/schema": "<1.2"
             },
             "require-dev": {
-                "nette/di": "^3.0",
+                "nette/di": "^3.2",
                 "nette/phpstan-rules": "^1.0",
-                "nette/security": "^3.0",
+                "nette/security": "^3.2",
                 "nette/tester": "^2.6",
                 "phpstan/extension-installer": "^1.4@stable",
-                "phpstan/phpstan": "^2.1@stable",
-                "tracy/tracy": "^2.8"
+                "phpstan/phpstan": "^2.2@stable",
+                "tracy/tracy": "^2.12"
             },
             "suggest": {
                 "ext-fileinfo": "to detect MIME type of uploaded files by Nette\\Http\\FileUpload",
@@ -782,7 +844,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.3-dev"
+                    "dev-master": "3.4-dev"
                 }
             },
             "autoload": {
@@ -824,9 +886,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/http/issues",
-                "source": "https://github.com/nette/http/tree/v3.3.4"
+                "source": "https://github.com/nette/http/tree/v3.4.0"
             },
-            "time": "2026-05-26T16:57:36+00:00"
+            "time": "2026-06-13T01:04:19+00:00"
         },
         {
             "name": "nette/mail",
@@ -1257,16 +1319,16 @@
         },
         {
             "name": "nette/security",
-            "version": "v3.2.4",
+            "version": "v3.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/security.git",
-                "reference": "9af540e72fe3452145f5190016d40b902ff9e0e8"
+                "reference": "50ce3c4b8edd27cb134237cac3af514a84331524"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/security/zipball/9af540e72fe3452145f5190016d40b902ff9e0e8",
-                "reference": "9af540e72fe3452145f5190016d40b902ff9e0e8",
+                "url": "https://api.github.com/repos/nette/security/zipball/50ce3c4b8edd27cb134237cac3af514a84331524",
+                "reference": "50ce3c4b8edd27cb134237cac3af514a84331524",
                 "shasum": ""
             },
             "require": {
@@ -1327,9 +1389,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/security/issues",
-                "source": "https://github.com/nette/security/tree/v3.2.4"
+                "source": "https://github.com/nette/security/tree/v3.2.5"
             },
-            "time": "2026-05-23T02:39:03+00:00"
+            "time": "2026-06-15T05:40:46+00:00"
         },
         {
             "name": "nette/utils",
@@ -1510,12 +1572,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/phpstan-rules.git",
-                "reference": "c3c9d34d781355008be84c80421de69ba01b62ad"
+                "reference": "29ca0706045b4ccbb6a27b25f526b8130f4d7c41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/phpstan-rules/zipball/c3c9d34d781355008be84c80421de69ba01b62ad",
-                "reference": "c3c9d34d781355008be84c80421de69ba01b62ad",
+                "url": "https://api.github.com/repos/nette/phpstan-rules/zipball/29ca0706045b4ccbb6a27b25f526b8130f4d7c41",
+                "reference": "29ca0706045b4ccbb6a27b25f526b8130f4d7c41",
                 "shasum": ""
             },
             "require": {
@@ -1523,9 +1585,11 @@
                 "phpstan/phpstan": "^2.1.40"
             },
             "require-dev": {
+                "nette/application": "^3.2",
                 "nette/assets": "^1.0",
                 "nette/component-model": "^3.1",
                 "nette/database": "^3.2",
+                "nette/di": "^3.2",
                 "nette/forms": "^3.2",
                 "nette/schema": "^1.3",
                 "nette/tester": "^2.6"
@@ -1570,7 +1634,7 @@
                 "issues": "https://github.com/nette/phpstan-rules/issues",
                 "source": "https://github.com/nette/phpstan-rules/tree/master"
             },
-            "time": "2026-06-01T15:08:52+00:00"
+            "time": "2026-06-08T17:06:21+00:00"
         },
         {
             "name": "nette/tester",
@@ -1700,11 +1764,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.2.1",
+            "version": "2.2.2",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/dea9c8f2d25cc849391042b71e429c1a4bf82660",
-                "reference": "dea9c8f2d25cc849391042b71e429c1a4bf82660",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e5cc34d491a90e79c216d824f60fe21fd4d93bd6",
+                "reference": "e5cc34d491a90e79c216d824f60fe21fd4d93bd6",
                 "shasum": ""
             },
             "require": {
@@ -1760,7 +1824,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-05-28T14:44:12+00:00"
+            "time": "2026-06-05T09:00:01+00:00"
         },
         {
             "name": "symfony/thanks",

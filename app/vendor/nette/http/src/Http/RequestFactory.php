@@ -10,7 +10,7 @@ namespace Nette\Http;
 use Nette;
 use Nette\Utils\Arrays;
 use Nette\Utils\Strings;
-use function array_filter, base64_encode, count, end, explode, file_get_contents, filter_input_array, filter_var, function_exists, get_debug_type, in_array, ini_get, is_array, is_string, key, min, preg_last_error, preg_match, preg_replace, preg_split, rtrim, sprintf, str_contains, strcasecmp, strlen, strncmp, strpos, strrpos, strtolower, strtr, substr, trim;
+use function array_filter, base64_encode, count, end, explode, file_get_contents, filter_input_array, function_exists, get_debug_type, in_array, ini_get, is_array, is_string, key, min, preg_last_error, preg_match, preg_replace, preg_split, rtrim, sprintf, str_contains, strcasecmp, strlen, strncmp, strpos, strrpos, strtolower, strtr, substr, trim;
 use const PHP_SAPI;
 
 
@@ -53,7 +53,7 @@ class RequestFactory
 	 * Sets the trusted proxy IP addresses or CIDR blocks used to resolve the real client IP and URL scheme.
 	 * @param string|list<string>  $proxy
 	 */
-	public function setProxy($proxy): static
+	public function setProxy(string|array $proxy): static
 	{
 		$this->proxies = (array) $proxy;
 		return $this;
@@ -79,7 +79,7 @@ class RequestFactory
 		$this->getServer($url);
 		$this->getPathAndQuery($url);
 		[$post, $cookies] = $this->getGetPostCookie($url);
-		[$remoteAddr, $remoteHost] = $this->getClient($url);
+		$remoteAddr = $this->getClient($url);
 		if ($this->forceHttps) {
 			$url->setScheme('https');
 		}
@@ -92,7 +92,7 @@ class RequestFactory
 			$this->getHeaders(),
 			$this->getMethod(),
 			$remoteAddr,
-			$remoteHost,
+			null,
 			fn() => (string) file_get_contents('php://input'),
 		);
 	}
@@ -255,7 +255,7 @@ class RequestFactory
 	private function getHeaders(): array
 	{
 		if (function_exists('apache_request_headers')) {
-			$headers = apache_request_headers();
+			$headers = apache_request_headers() ?: [];
 		} else {
 			$headers = [];
 			foreach ($_SERVER as $k => $v) {
@@ -295,24 +295,20 @@ class RequestFactory
 	}
 
 
-	/** @return array{?string, ?string}  [remoteAddr, remoteHost] */
-	private function getClient(Url $url): array
+	private function getClient(Url $url): ?string
 	{
 		$remoteAddr = !empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
 
-		// use real client address and host if trusted proxy is used
-		$usingTrustedProxy = $remoteAddr && Arrays::some($this->proxies, fn(string $proxy): bool => Helpers::ipMatch($remoteAddr, $proxy));
+		// use real client address if trusted proxy is used
+		$client = $remoteAddr ? IPAddress::tryFrom($remoteAddr) : null;
+		$usingTrustedProxy = $client && Arrays::some($this->proxies, fn(string $proxy): bool => $client->isInRange($proxy));
 		if ($usingTrustedProxy) {
-			$remoteHost = null;
-			$remoteAddr = empty($_SERVER['HTTP_FORWARDED'])
+			return empty($_SERVER['HTTP_FORWARDED'])
 				? $this->useNonstandardProxy($url)
 				: $this->useForwardedProxy($url);
-
-		} else {
-			$remoteHost = !empty($_SERVER['REMOTE_HOST']) ? $_SERVER['REMOTE_HOST'] : null;
 		}
 
-		return [$remoteAddr, $remoteHost];
+		return $remoteAddr;
 	}
 
 
@@ -363,8 +359,8 @@ class RequestFactory
 		if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
 			$xForwardedForWithoutProxies = array_filter(
 				explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']),
-				fn(string $ip): bool => filter_var($ip = trim($ip), FILTER_VALIDATE_IP) === false
-					|| !Arrays::some($this->proxies, fn(string $proxy): bool => Helpers::ipMatch($ip, $proxy)),
+				fn(string $ip): bool => ($address = IPAddress::tryFrom(trim($ip))) === null
+					|| !Arrays::some($this->proxies, fn(string $proxy): bool => $address->isInRange($proxy)),
 			);
 			if ($xForwardedForWithoutProxies) {
 				$remoteAddr = trim(end($xForwardedForWithoutProxies));

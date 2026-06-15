@@ -1,0 +1,31 @@
+{form form}
+    <div n:if="$form->hasErrors()" class="alert alert-danger">
+        <p n:foreach="$form->errors as $error">{$error}</p>
+    </div>
+
+    <div class="mb-3">
+        {label ico, class => "form-label fw-bold" /}
+        {input ico, class => "form-control"}
+        <span class="text-danger small" n:ifcontent>{$form['ico']->error}</span>
+    </div>
+
+    <div class="mb-3">
+        {label contact_person, class => "form-label fw-bold" /}
+        {input contact_person, class => "form-control"}
+        <span class="text-danger small" n:ifcontent>{$form['contact_person']->error}</span>
+    </div>
+
+    <div class="mb-3">
+        {label email, class => "form-label fw-bold" /}
+        {input email, class => "form-control"}
+        <span class="text-danger small" n:ifcontent>{$form['email']->error}</span>
+    </div>
+
+    <div class="form-check mb-4">
+        {input is_authorized, class => "form-check-input"}
+        {label is_authorized, class => "form-check-label" /}
+        <span class="text-danger d-block small" n:ifcontent>{$form['is_authorized']->error}</span>
+    </div>
+
+    {input send, class => "btn btn-primary w-100"}
+{/form}

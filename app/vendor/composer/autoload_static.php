@@ -34,6 +34,10 @@ class ComposerStaticInit640f43ea464e73d2e48de3d4f5dd1f22
         array (
             'Latte\\' => 6,
         ),
+        'C' =>
+        array (
+            'Contributte\\FormsBootstrap\\' => 27,
+        ),
         'A' =>
         array (
             'App\\' => 4,
@@ -65,15 +69,15 @@ class ComposerStaticInit640f43ea464e73d2e48de3d4f5dd1f22
         array (
             0 => __DIR__ . '/..' . '/nette/security/src',
             1 => __DIR__ . '/..' . '/nette/mail/src',
-            2 => __DIR__ . '/..' . '/nette/forms/src',
-            3 => __DIR__ . '/..' . '/nette/database/src',
-            4 => __DIR__ . '/..' . '/nette/bootstrap/src',
-            5 => __DIR__ . '/..' . '/nette/assets/src',
-            6 => __DIR__ . '/..' . '/nette/application/src',
-            7 => __DIR__ . '/..' . '/nette/routing/src',
-            8 => __DIR__ . '/..' . '/nette/di/src',
-            9 => __DIR__ . '/..' . '/nette/caching/src',
-            10 => __DIR__ . '/..' . '/nette/schema/src',
+            2 => __DIR__ . '/..' . '/nette/database/src',
+            3 => __DIR__ . '/..' . '/nette/bootstrap/src',
+            4 => __DIR__ . '/..' . '/nette/assets/src',
+            5 => __DIR__ . '/..' . '/nette/forms/src',
+            6 => __DIR__ . '/..' . '/nette/di/src',
+            7 => __DIR__ . '/..' . '/nette/caching/src',
+            8 => __DIR__ . '/..' . '/nette/application/src',
+            9 => __DIR__ . '/..' . '/nette/schema/src',
+            10 => __DIR__ . '/..' . '/nette/routing/src',
             11 => __DIR__ . '/..' . '/nette/robot-loader/src',
             12 => __DIR__ . '/..' . '/nette/php-generator/src',
             13 => __DIR__ . '/..' . '/nette/neon/src',
@@ -84,6 +88,10 @@ class ComposerStaticInit640f43ea464e73d2e48de3d4f5dd1f22
         'Latte\\' =>
         array (
             0 => __DIR__ . '/..' . '/latte/latte/src/Latte',
+        ),
+        'Contributte\\FormsBootstrap\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/contributte/forms-bootstrap/src',
         ),
         'App\\' =>
         array (
@@ -563,19 +571,23 @@ class ComposerStaticInit640f43ea464e73d2e48de3d4f5dd1f22
         'Nette\\Forms\\Validator' => __DIR__ . '/..' . '/nette/forms/src/Forms/Validator.php',
         'Nette\\HtmlStringable' => __DIR__ . '/..' . '/nette/utils/src/HtmlStringable.php',
         'Nette\\Http\\Context' => __DIR__ . '/..' . '/nette/http/src/Http/Context.php',
+        'Nette\\Http\\FetchDest' => __DIR__ . '/..' . '/nette/http/src/Http/enums.php',
+        'Nette\\Http\\FetchSite' => __DIR__ . '/..' . '/nette/http/src/Http/enums.php',
         'Nette\\Http\\FileUpload' => __DIR__ . '/..' . '/nette/http/src/Http/FileUpload.php',
         'Nette\\Http\\Helpers' => __DIR__ . '/..' . '/nette/http/src/Http/Helpers.php',
+        'Nette\\Http\\IPAddress' => __DIR__ . '/..' . '/nette/http/src/Http/IPAddress.php',
         'Nette\\Http\\IRequest' => __DIR__ . '/..' . '/nette/http/src/Http/IRequest.php',
         'Nette\\Http\\IResponse' => __DIR__ . '/..' . '/nette/http/src/Http/IResponse.php',
         'Nette\\Http\\Request' => __DIR__ . '/..' . '/nette/http/src/Http/Request.php',
         'Nette\\Http\\RequestFactory' => __DIR__ . '/..' . '/nette/http/src/Http/RequestFactory.php',
         'Nette\\Http\\Response' => __DIR__ . '/..' . '/nette/http/src/Http/Response.php',
+        'Nette\\Http\\SameSite' => __DIR__ . '/..' . '/nette/http/src/Http/enums.php',
         'Nette\\Http\\Session' => __DIR__ . '/..' . '/nette/http/src/Http/Session.php',
         'Nette\\Http\\SessionSection' => __DIR__ . '/..' . '/nette/http/src/Http/SessionSection.php',
         'Nette\\Http\\Url' => __DIR__ . '/..' . '/nette/http/src/Http/Url.php',
         'Nette\\Http\\UrlImmutable' => __DIR__ . '/..' . '/nette/http/src/Http/UrlImmutable.php',
         'Nette\\Http\\UrlScript' => __DIR__ . '/..' . '/nette/http/src/Http/UrlScript.php',
-        'Nette\\Http\\UserStorage' => __DIR__ . '/..' . '/nette/http/src/Http/UserStorage.php',
+        'Nette\\Http\\UrlValidator' => __DIR__ . '/..' . '/nette/http/src/Http/UrlValidator.php',
         'Nette\\IOException' => __DIR__ . '/..' . '/nette/utils/src/exceptions.php',
         'Nette\\InvalidArgumentException' => __DIR__ . '/..' . '/nette/utils/src/exceptions.php',
         'Nette\\InvalidStateException' => __DIR__ . '/..' . '/nette/utils/src/exceptions.php',

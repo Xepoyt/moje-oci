@@ -2,6 +2,7 @@
 
 namespace Nette\PHPStan\Utils;
 
+use Nette\Utils\Arrays;
 use PhpParser\Node\Expr\StaticCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
@@ -22,7 +23,7 @@ class ArraysInvokeTypeExtension implements DynamicStaticMethodReturnTypeExtensio
 {
 	public function getClass(): string
 	{
-		return 'Nette\Utils\Arrays';
+		return Arrays::class;
 	}
 
 
@@ -38,6 +39,10 @@ class ArraysInvokeTypeExtension implements DynamicStaticMethodReturnTypeExtensio
 		Scope $scope,
 	): ?Type
 	{
+		if ($methodCall->isFirstClassCallable()) {
+			return null;
+		}
+
 		return match ($methodReflection->getName()) {
 			'invoke' => $this->resolveInvoke($methodCall, $scope),
 			'invokeMethod' => $this->resolveInvokeMethod($methodCall, $scope),

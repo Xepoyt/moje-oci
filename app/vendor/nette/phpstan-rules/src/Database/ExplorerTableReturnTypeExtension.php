@@ -2,6 +2,8 @@
 
 namespace Nette\PHPStan\Database;
 
+use Nette\Database\Explorer;
+use Nette\Database\Table\Selection;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
@@ -25,7 +27,7 @@ class ExplorerTableReturnTypeExtension implements DynamicMethodReturnTypeExtensi
 
 	public function getClass(): string
 	{
-		return 'Nette\Database\Explorer';
+		return Explorer::class;
 	}
 
 
@@ -41,6 +43,10 @@ class ExplorerTableReturnTypeExtension implements DynamicMethodReturnTypeExtensi
 		Scope $scope,
 	): ?Type
 	{
+		if ($methodCall->isFirstClassCallable()) {
+			return null;
+		}
+
 		$args = $methodCall->getArgs();
 		if ($args === []) {
 			return null;
@@ -58,6 +64,6 @@ class ExplorerTableReturnTypeExtension implements DynamicMethodReturnTypeExtensi
 			return null;
 		}
 
-		return new GenericObjectType('Nette\Database\Table\Selection', [$rowType]);
+		return new GenericObjectType(Selection::class, [$rowType]);
 	}
 }

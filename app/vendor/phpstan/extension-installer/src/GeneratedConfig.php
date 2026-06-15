@@ -12,7 +12,7 @@ final class GeneratedConfig
 	public const EXTENSIONS = array (
   'nette/phpstan-rules' => 
   array (
-    'install_path' => '/app/app/vendor/nette/phpstan-rules',
+    'install_path' => '/app/vendor/nette/phpstan-rules',
     'relative_install_path' => '../../../nette/phpstan-rules',
     'extra' => 
     array (
@@ -21,7 +21,7 @@ final class GeneratedConfig
         0 => 'extension.neon',
       ),
     ),
-    'version' => 'dev-master c3c9d34',
+    'version' => 'dev-master 29ca070',
     'phpstanVersionConstraint' => '>=2.1.40.0-dev, <3.0.0.0-dev',
   ),
 );

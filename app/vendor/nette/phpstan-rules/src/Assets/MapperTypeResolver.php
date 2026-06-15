@@ -2,6 +2,11 @@
 
 namespace Nette\PHPStan\Assets;
 
+use Nette\Assets\AudioAsset;
+use Nette\Assets\FilesystemMapper;
+use Nette\Assets\FontAsset, Nette\Assets\ImageAsset, Nette\Assets\ScriptAsset, Nette\Assets\StyleAsset;
+use Nette\Assets\VideoAsset;
+use Nette\Assets\ViteMapper;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Type\ObjectType;
 use function pathinfo, strpos, strtolower, substr;
@@ -15,37 +20,37 @@ use function pathinfo, strpos, strtolower, substr;
 class MapperTypeResolver
 {
 	private const ExtensionToAssetClass = [
-		'avif' => 'Nette\Assets\ImageAsset',
-		'gif' => 'Nette\Assets\ImageAsset',
-		'ico' => 'Nette\Assets\ImageAsset',
-		'jpeg' => 'Nette\Assets\ImageAsset',
-		'jpg' => 'Nette\Assets\ImageAsset',
-		'png' => 'Nette\Assets\ImageAsset',
-		'svg' => 'Nette\Assets\ImageAsset',
-		'webp' => 'Nette\Assets\ImageAsset',
-		'js' => 'Nette\Assets\ScriptAsset',
-		'mjs' => 'Nette\Assets\ScriptAsset',
-		'css' => 'Nette\Assets\StyleAsset',
-		'aac' => 'Nette\Assets\AudioAsset',
-		'flac' => 'Nette\Assets\AudioAsset',
-		'm4a' => 'Nette\Assets\AudioAsset',
-		'mp3' => 'Nette\Assets\AudioAsset',
-		'ogg' => 'Nette\Assets\AudioAsset',
-		'wav' => 'Nette\Assets\AudioAsset',
-		'avi' => 'Nette\Assets\VideoAsset',
-		'mkv' => 'Nette\Assets\VideoAsset',
-		'mov' => 'Nette\Assets\VideoAsset',
-		'mp4' => 'Nette\Assets\VideoAsset',
-		'ogv' => 'Nette\Assets\VideoAsset',
-		'webm' => 'Nette\Assets\VideoAsset',
-		'woff' => 'Nette\Assets\FontAsset',
-		'woff2' => 'Nette\Assets\FontAsset',
-		'ttf' => 'Nette\Assets\FontAsset',
+		'avif' => ImageAsset::class,
+		'gif' => ImageAsset::class,
+		'ico' => ImageAsset::class,
+		'jpeg' => ImageAsset::class,
+		'jpg' => ImageAsset::class,
+		'png' => ImageAsset::class,
+		'svg' => ImageAsset::class,
+		'webp' => ImageAsset::class,
+		'js' => ScriptAsset::class,
+		'mjs' => ScriptAsset::class,
+		'css' => StyleAsset::class,
+		'aac' => AudioAsset::class,
+		'flac' => AudioAsset::class,
+		'm4a' => AudioAsset::class,
+		'mp3' => AudioAsset::class,
+		'ogg' => AudioAsset::class,
+		'wav' => AudioAsset::class,
+		'avi' => VideoAsset::class,
+		'mkv' => VideoAsset::class,
+		'mov' => VideoAsset::class,
+		'mp4' => VideoAsset::class,
+		'ogv' => VideoAsset::class,
+		'webm' => VideoAsset::class,
+		'woff' => FontAsset::class,
+		'woff2' => FontAsset::class,
+		'ttf' => FontAsset::class,
 	];
 
 	private const KnownMappers = [
-		'Nette\Assets\FilesystemMapper',
-		'Nette\Assets\ViteMapper',
+		FilesystemMapper::class,
+		ViteMapper::class,
 	];
 
 
@@ -78,8 +83,8 @@ class MapperTypeResolver
 	private function inferMapperClass(string $value): string
 	{
 		return match ($value) {
-			'file' => 'Nette\Assets\FilesystemMapper',
-			'vite' => 'Nette\Assets\ViteMapper',
+			'file' => FilesystemMapper::class,
+			'vite' => ViteMapper::class,
 			default => $value,
 		};
 	}

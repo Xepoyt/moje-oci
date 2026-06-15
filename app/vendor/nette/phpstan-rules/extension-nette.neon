@@ -39,7 +39,7 @@ parametersSchema:
 
 services:
 	# nette/assets
-	nette.assets.mapperTypeResolver:
+	-
 		create: Nette\PHPStan\Assets\MapperTypeResolver(
 			mapping: %nette.assets.mapping%
 		)
@@ -60,13 +60,20 @@ services:
 		create: Nette\PHPStan\Assets\RegistryGetAssetExtension
 		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
 
+	# nette/application
+	-
+		create: Nette\PHPStan\Application\RethrowAbortExceptionRule
+		tags: [phpstan.rules.rule]
+
 	# nette/component-model
+	-
+		create: Nette\PHPStan\Components\ComponentTreeResolver(@defaultAnalysisParser)
 	-
 		create: Nette\PHPStan\ComponentModel\GetComponentReturnTypeExtension
 		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
 
 	# nette/database
-	nette.database.tableRowTypeResolver:
+	-
 		create: Nette\PHPStan\Database\TableRowTypeResolver(
 			tables: %nette.database.mapping.tables%
 		)
@@ -79,10 +86,18 @@ services:
 	-
 		create: Nette\PHPStan\Database\ActiveRowRefReturnTypeExtension
 		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+	-
+		create: Nette\PHPStan\Database\SelectionInsertReturnTypeExtension
+		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+
+	# nette/di
+	-
+		create: Nette\PHPStan\DI\InjectPropertyExtension
+		tags: [phpstan.properties.readWriteExtension]
 
 	# nette/forms
 	-
-		create: Nette\PHPStan\Forms\FormContainerReturnTypeExtension(@defaultAnalysisParser)
+		create: Nette\PHPStan\Forms\FormContainerReturnTypeExtension
 		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
 
 	# nette/schema
@@ -109,14 +124,25 @@ services:
 
 	# nette/utils
 	-
+		create: Nette\PHPStan\Utils\StringsRegexHelper
+	-
 		create: Nette\PHPStan\Utils\FalseToNullReturnTypeExtension
 		tags: [phpstan.broker.dynamicStaticMethodReturnTypeExtension]
 	-
 		create: Nette\PHPStan\Utils\StringsReturnTypeExtension
 		tags: [phpstan.broker.dynamicStaticMethodReturnTypeExtension]
 	-
+		create: Nette\PHPStan\Utils\StringsReplaceClosureTypeExtension
+		tags: [phpstan.staticMethodParameterClosureTypeExtension]
+	-
+		create: Nette\PHPStan\Utils\StringsMatchTypeSpecifyingExtension
+		tags: [phpstan.typeSpecifier.staticMethodTypeSpecifyingExtension]
+	-
 		create: Nette\PHPStan\Utils\ArraysInvokeTypeExtension
 		tags: [phpstan.broker.dynamicStaticMethodReturnTypeExtension]
 	-
 		create: Nette\PHPStan\Utils\HtmlMethodsClassReflectionExtension
 		tags: [phpstan.broker.methodsClassReflectionExtension]
+	-
+		create: Nette\PHPStan\Utils\ValidRegularExpressionRule
+		tags: [phpstan.rules.rule]

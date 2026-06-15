@@ -2,6 +2,8 @@
 
 namespace Nette\PHPStan\Database;
 
+use Nette\Database\Table\ActiveRow;
+use Nette\Database\Table\GroupedSelection;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
@@ -25,7 +27,7 @@ class ActiveRowRelatedReturnTypeExtension implements DynamicMethodReturnTypeExte
 
 	public function getClass(): string
 	{
-		return 'Nette\Database\Table\ActiveRow';
+		return ActiveRow::class;
 	}
 
 
@@ -41,6 +43,10 @@ class ActiveRowRelatedReturnTypeExtension implements DynamicMethodReturnTypeExte
 		Scope $scope,
 	): ?Type
 	{
+		if ($methodCall->isFirstClassCallable()) {
+			return null;
+		}
+
 		$args = $methodCall->getArgs();
 		if ($args === []) {
 			return null;
@@ -59,6 +65,6 @@ class ActiveRowRelatedReturnTypeExtension implements DynamicMethodReturnTypeExte
 			return null;
 		}
 
-		return new GenericObjectType('Nette\Database\Table\GroupedSelection', [$rowType]);
+		return new GenericObjectType(GroupedSelection::class, [$rowType]);
 	}
 }

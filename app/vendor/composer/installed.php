@@ -1,8 +1,8 @@
 <?php return array(
     'root' => array(
         'name' => 'nette/web-project',
-        'pretty_version' => 'v3.3.1',
-        'version' => '3.3.1.0',
+        'pretty_version' => '1.0.0+no-version-set',
+        'version' => '1.0.0.0',
         'reference' => null,
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
@@ -10,6 +10,15 @@
         'dev' => true,
     ),
     'versions' => array(
+        'contributte/forms-bootstrap' => array(
+            'pretty_version' => 'v0.3.1',
+            'version' => '0.3.1.0',
+            'reference' => '439d33aade5720b70f271646bed535baaea93907',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../contributte/forms-bootstrap',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'latte/latte' => array(
             'pretty_version' => 'v3.1.4',
             'version' => '3.1.4.0',
@@ -22,7 +31,7 @@
         'nette/application' => array(
             'pretty_version' => 'v3.2.10',
             'version' => '3.2.10.0',
-            'reference' => 'bd426567d00070834bcd8b97f8965ced33da790d',
+            'reference' => 'cdf59b0a1e3aaf8afb490070539c2b1974655bf6',
             'type' => 'library',
             'install_path' => __DIR__ . '/../nette/application',
             'aliases' => array(),
@@ -92,9 +101,9 @@
             'dev_requirement' => false,
         ),
         'nette/http' => array(
-            'pretty_version' => 'v3.3.4',
-            'version' => '3.3.4.0',
-            'reference' => 'd92cb97fea369d10b46677223cc2bfb5adc1a2f2',
+            'pretty_version' => 'v3.4.0',
+            'version' => '3.4.0.0',
+            'reference' => 'de5988d8802e76d9bda85fe5a871d29c794684f4',
             'type' => 'library',
             'install_path' => __DIR__ . '/../nette/http',
             'aliases' => array(),
@@ -130,7 +139,7 @@
         'nette/phpstan-rules' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'c3c9d34d781355008be84c80421de69ba01b62ad',
+            'reference' => '29ca0706045b4ccbb6a27b25f526b8130f4d7c41',
             'type' => 'phpstan-extension',
             'install_path' => __DIR__ . '/../nette/phpstan-rules',
             'aliases' => array(
@@ -166,9 +175,9 @@
             'dev_requirement' => false,
         ),
         'nette/security' => array(
-            'pretty_version' => 'v3.2.4',
-            'version' => '3.2.4.0',
-            'reference' => '9af540e72fe3452145f5190016d40b902ff9e0e8',
+            'pretty_version' => 'v3.2.5',
+            'version' => '3.2.5.0',
+            'reference' => '50ce3c4b8edd27cb134237cac3af514a84331524',
             'type' => 'library',
             'install_path' => __DIR__ . '/../nette/security',
             'aliases' => array(),
@@ -193,8 +202,8 @@
             'dev_requirement' => false,
         ),
         'nette/web-project' => array(
-            'pretty_version' => 'v3.3.1',
-            'version' => '3.3.1.0',
+            'pretty_version' => '1.0.0+no-version-set',
+            'version' => '1.0.0.0',
             'reference' => null,
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
@@ -211,9 +220,9 @@
             'dev_requirement' => true,
         ),
         'phpstan/phpstan' => array(
-            'pretty_version' => '2.2.1',
-            'version' => '2.2.1.0',
-            'reference' => 'dea9c8f2d25cc849391042b71e429c1a4bf82660',
+            'pretty_version' => '2.2.2',
+            'version' => '2.2.2.0',
+            'reference' => 'e5cc34d491a90e79c216d824f60fe21fd4d93bd6',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpstan/phpstan',
             'aliases' => array(),

@@ -2,6 +2,7 @@
 
 namespace Nette\PHPStan\Assets;
 
+use Nette\Assets\Registry;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
@@ -24,7 +25,7 @@ class GetMapperReturnTypeExtension implements DynamicMethodReturnTypeExtension
 
 	public function getClass(): string
 	{
-		return 'Nette\Assets\Registry';
+		return Registry::class;
 	}
 
 
@@ -40,6 +41,10 @@ class GetMapperReturnTypeExtension implements DynamicMethodReturnTypeExtension
 		Scope $scope,
 	): ?Type
 	{
+		if ($methodCall->isFirstClassCallable()) {
+			return null;
+		}
+
 		$args = $methodCall->getArgs();
 		if ($args === []) {
 			return $this->resolver->resolveMapper('default');

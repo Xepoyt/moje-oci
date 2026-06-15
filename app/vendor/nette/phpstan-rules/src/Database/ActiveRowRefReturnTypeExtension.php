@@ -2,6 +2,7 @@
 
 namespace Nette\PHPStan\Database;
 
+use Nette\Database\Table\ActiveRow;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
@@ -31,7 +32,7 @@ class ActiveRowRefReturnTypeExtension implements DynamicMethodReturnTypeExtensio
 
 	public function getClass(): string
 	{
-		return 'Nette\Database\Table\ActiveRow';
+		return ActiveRow::class;
 	}
 
 
@@ -47,6 +48,10 @@ class ActiveRowRefReturnTypeExtension implements DynamicMethodReturnTypeExtensio
 		Scope $scope,
 	): ?Type
 	{
+		if ($methodCall->isFirstClassCallable()) {
+			return null;
+		}
+
 		$args = $methodCall->getArgs();
 		if ($args === []) {
 			return null;

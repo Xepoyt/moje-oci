@@ -7,6 +7,7 @@
 
 namespace Nette\Bridges\ApplicationLatte;
 
+use Latte\Runtime\Block;
 use Nette;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Renderable;
@@ -94,7 +95,7 @@ final class SnippetRuntime
 
 
 	/**
-	 * @param  Block[]  $blocks
+	 * @param  array<string, Block>  $blocks
 	 * @param  mixed[]  $params
 	 */
 	public function renderSnippets(array $blocks, array $params): bool
