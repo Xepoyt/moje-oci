@@ -8,7 +8,7 @@ use Latte\Runtime as LR;
 final class Template_64dee9b48d extends Latte\Runtime\Template
 {
 	public const Blocks = [
-		['content' => 'blockContent'],
+		['title' => 'blockTitle', 'content' => 'blockContent'],
 	];
 
 
@@ -21,11 +21,20 @@ final class Template_64dee9b48d extends Latte\Runtime\Template
 			return;
 		}
 
-		$this->renderBlock('content', get_defined_vars()) /* pos 1:1 */;
+		$this->renderBlock('title', get_defined_vars()) /* pos 1:1 */;
+		echo "\n";
+		$this->renderBlock('content', get_defined_vars()) /* pos 2:1 */;
 	}
 
 
-	/** {block content} on line 1 */
+	/** {block title} on line 1 */
+	public function blockTitle(array $ʟ_args): void
+	{
+		echo 'Dokončení registrace';
+	}
+
+
+	/** {block content} on line 2 */
 	public function blockContent(array $ʟ_args): void
 	{
 		extract($this->params);
@@ -35,15 +44,13 @@ final class Template_64dee9b48d extends Latte\Runtime\Template
 		echo '<div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h1 class="mb-4">Dokončení registrace</h1>
             <p class="lead">Vyberte variantu programu a doplňte zbývající údaje.</p>
-
             <div class="card shadow-sm">
                 <div class="card-body">
 ';
 		$ʟ_tmp = $this->global->uiControl->getComponent('completeForm');
 		if ($ʟ_tmp instanceof Nette\Application\UI\Renderable) $ʟ_tmp->redrawControl(null, false);
-		$ʟ_tmp->render() /* pos 10:21 */;
+		$ʟ_tmp->render() /* pos 9:21 */;
 
 		echo '                </div>
             </div>

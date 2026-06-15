@@ -42,4 +42,33 @@ class FacilityManager
 
         $this->database->table('clinics')->where('id', $id)->update($data);
     }
+
+    public function getClinicsCount(): int
+    {
+        return $this->database->table('clinics')
+            ->count('*');
+    }
+
+    public function getClinicsPage(int $offset, int $limit, string $sort = 'created_at', string $order = 'DESC')
+    {
+        $query = $this->database->table('clinics');
+        if ($sort === 'is_approved') {
+            $query->order('((is_approved * 2) + is_email_verified) ' . $order);
+        } else {
+            $query->order($sort . ' ' . $order);
+        }
+        return $query->limit($limit, $offset);
+    }
+
+    public function approveClinic(int $id): void
+    {
+        $this->database->table('clinics')
+            ->where('id', $id)
+            ->update(['is_approved' => 1]);
+    }
+
+    public function getClinic(int $id): ?Nette\Database\Table\ActiveRow
+    {
+        return $this->database->table('clinics')->get($id);
+    }
 }

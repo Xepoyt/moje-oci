@@ -15,23 +15,32 @@ final class Template_456232faa9 extends Latte\Runtime\Template
 
 		echo '<html>
 <head>
+<meta charset="utf-8">
+    <title>Dokončení registrace zařízení</title>
     <style>
-        body { font-family: sans-serif; color: #333; }
+        body { font-family: sans-serif; line-height: 1.5; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
         .btn { display: inline-block; padding: 10px 20px; background: #0056b3; color: white; text-decoration: none; border-radius: 5px; }
+        .footer { margin-top: 30px; font-size: 12px; color: #777; }
     </style>
 </head>
 <body>
-    <h2>Dobrý den, ';
-		echo LR\HtmlHelpers::escapeText($contactPerson) /* pos 9:21 */;
-		echo ',</h2>
-    <p>děkujeme za zahájení registrace vašeho zdravotního zařízení do sítě MOJE OČI.</p>
-    <p>Pro dokončení registrace a vyplnění zbývajících údajů o firmě a výběru programu klikněte prosím na tlačítko níže:</p>
-    <p><a';
-		echo LR\HtmlHelpers::formatAttribute(' href', ($this->filters->checkUrl)($link)) /* pos 12:18 */;
+    <div class="container">
+        <h1>Dobrý den, ';
+		echo LR\HtmlHelpers::escapeText($contactPerson) /* pos 14:25 */;
+		echo ',</h1>
+        <p>děkujeme za zahájení registrace vašeho zdravotního zařízení do sítě MOJE OČI.</p>
+        <p>Pro dokončení registrace a vyplnění zbývajících údajů o firmě a výběru programu klikněte prosím na tlačítko níže:</p>
+        <p><a';
+		echo LR\HtmlHelpers::formatAttribute(' href', ($this->filters->checkUrl)($link)) /* pos 17:22 */;
 		echo ' class="btn">Dokončit registraci</a></p>
-    <p>Pokud tlačítko nefunguje, zkopírujte tento odkaz do prohlížeče:<br> ';
-		echo LR\HtmlHelpers::escapeText($link) /* pos 13:82 */;
+        <p>Pokud tlačítko nefunguje, zkopírujte tento odkaz do prohlížeče:<br> ';
+		echo LR\HtmlHelpers::escapeText($link) /* pos 18:86 */;
 		echo '</p>
+        <div class="footer">
+            Tento e-mail byl vygenerován automaticky, neodpovídejte na něj.
+        </div>
+    </div>
 </body>
 </html>';
 	}

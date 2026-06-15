@@ -27,7 +27,7 @@ class EmailService
         $htmlBody = $latte->renderToString(__DIR__ . '/../Mails/verification.latte', $params);
 
         $mail = new Message;
-        $mail->setFrom('registrace@mojeoci.cz', 'MOJE OČI - Portál')
+        $mail->setFrom('moje-oci@seznam.cz', 'MOJE OČI - Portál')
             ->addTo($email)
             ->setSubject('Dokončení registrace zařízení')
             ->setHtmlBody($htmlBody);
@@ -35,5 +35,42 @@ class EmailService
         $this->mailer->send($mail);
     }
     
-    //TODO: sendApprovalNotification
+    public function sendWaitingForApprovalEmail(string $email,string $contactPerson, string $facilityName): void
+    {
+        $params = [
+            'contactPerson' => $contactPerson,
+            'facilityName' => $facilityName
+        ];
+
+        $latte = $this->latteFactory->create();
+        
+        $htmlBody = $latte->renderToString(__DIR__ . '/../Mails/registrationWaiting.latte', $params);
+
+        $mail = new Message;
+        $mail->setFrom('moje-oci@seznam.cz', 'MOJE OČI - Portál')
+            ->addTo($email)
+            ->setSubject('Registrace dokončena - čeká na schválení')
+            ->setHtmlBody($htmlBody);
+
+        $this->mailer->send($mail);
+    }
+
+    public function sendApprovalNotification(string $email, string $facilityName): void
+    {
+        $params = [
+            'facilityName' => $facilityName,
+        ];
+
+        $latte = $this->latteFactory->create();
+        
+        $htmlBody = $latte->renderToString(__DIR__ . '/../Mails/registrationApproved.latte', $params);
+
+        $mail = new Message;
+        $mail->setFrom('moje-oci@seznam.cz', 'MOJE OČI - Portál')
+            ->addTo($email)
+            ->setSubject('Vaše registrace byla schválena!')
+            ->setHtmlBody($htmlBody);
+
+        $this->mailer->send($mail);
+    }
 }

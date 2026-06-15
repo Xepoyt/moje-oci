@@ -1,0 +1,137 @@
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <span class="badge bg-secondary">Celkem záznamů: {$paginator->getItemCount()}</span>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>
+            <a n:href="this, sort => 'name', order => ($sort === 'name' && $order === 'ASC' ? 'DESC' : 'ASC')" class="text-decoration-none text-white d-block">
+                Název / IČO
+                <i n:if="$sort === 'name'" class="bi bi-caret-{if $order === 'ASC'}up{else}down{/if}-fill ms-1"></i>
+            </a>
+        </th>
+        <th>
+            <a n:href="this, sort => 'contact_person', order => ($sort === 'contact_person' && $order === 'ASC' ? 'DESC' : 'ASC')" class="text-decoration-none text-white d-block">
+                Kontakt
+                <i n:if="$sort === 'contact_person'" class="bi bi-caret-{if $order === 'ASC'}up{else}down{/if}-fill ms-1"></i>
+            </a>
+        </th>
+        <th>
+            <a n:href="this, sort => 'address', order => ($sort === 'address' && $order === 'ASC' ? 'DESC' : 'ASC')" class="text-decoration-none text-white d-block">
+                Adresa & Web
+                <i n:if="$sort === 'address'" class="bi bi-caret-{if $order === 'ASC'}up{else}down{/if}-fill ms-1"></i>
+            </a>
+        </th>
+        <th>
+            <a n:href="this, sort => 'program_type', order => ($sort === 'program_type' && $order === 'ASC' ? 'DESC' : 'ASC')" class="text-decoration-none text-white d-block">
+                Program
+                <i n:if="$sort === 'program_type'" class="bi bi-caret-{if $order === 'ASC'}up{else}down{/if}-fill ms-1"></i>
+            </a>
+        </th>
+        <th>Detaily programu</th>
+        <th>
+            <a n:href="this, sort => 'is_approved', order => ($sort === 'is_approved' && $order === 'ASC' ? 'DESC' : 'ASC')" class="text-decoration-none text-white d-block">
+                Stav
+                <i n:if="$sort === 'is_approved'" class="bi bi-caret-{if $order === 'ASC'}up{else}down{/if}-fill ms-1"></i>
+            </a>
+        </th>
+        <th>Akce</th>
+        <th>
+            <a n:href="this, sort => 'created_at', order => ($sort === 'created_at' && $order === 'ASC' ? 'DESC' : 'ASC')" class="text-decoration-none text-white d-block">
+                Datum registrace
+                <i n:if="$sort === 'created_at'" class="bi bi-caret-{if $order === 'ASC'}up{else}down{/if}-fill ms-1"></i>
+            </a>
+        </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr n:foreach="$clinics as $clinic">
+                    <td>
+                        <strong>{$clinic->name}</strong><br>
+                        <small class="text-muted">IČO: {$clinic->ico}</small>
+                    </td>
+                    <td>
+                        {$clinic->contact_person}<br>
+                        <small><a href="mailto:{$clinic->email}">{$clinic->email}</a></small>
+                    </td>
+                    <td>
+                        {$clinic->address}<br>
+                        <small n:if="$clinic->web"><a href="{$clinic->web}" target="_blank">{$clinic->web}</a></small>
+                    </td>
+                    <td>
+                        {if $clinic->program_type}
+                            <span n:class="badge, $clinic->program_type === 3 ? 'bg-purple text-white' : ($clinic->program_type === 2 ? 'bg-info' : 'bg-primary')">
+                                {if $clinic->program_type === 1}1 - Kontaktní údaje
+                                {elseif $clinic->program_type === 2}2 - "Ozveme se"
+                                {elseif $clinic->program_type === 3}3 - API Rezervační systém
+                                {/if}
+                            </span>
+                        {/if}
+                    </td>
+                    <td>
+                        <small>
+                            {if $clinic->program_type === 1}
+                                <strong>Tel:</strong> {$clinic->reservation_phone}<br>
+                                <strong>Email:</strong> {$clinic->reservation_email}
+                            {elseif $clinic->program_type === 2}
+                                <strong>Max pacientů:</strong> {$clinic->max_patients}<br>
+                                <strong>Email:</strong> {$clinic->reservation_email}
+                            {elseif $clinic->program_type === 3}
+                                <span class="text-success"><i class="bi bi-infinity"></i> Bez limitu (API)</span>
+                            {/if}
+                        </small>
+                    </td>
+                    <td>
+                        {if $clinic->is_approved}
+                            <span class="badge bg-success">Schváleno</span>
+                        {elseif $clinic->is_email_verified}
+                            <span class="badge bg-warning text-dark">Čeká na schválení</span>
+                        {else}
+                            <span class="badge bg-danger">E-mail neověřen</span>
+                        {/if}
+                    </td>
+                    <td>
+                        {if !$clinic->is_approved && $clinic->is_email_verified}
+                            <a n:href="approve! $clinic->id" class="btn btn-sm btn-success">
+                                <i class="bi bi-check-lg"></i> Schválit
+                            </a>
+                        {elseif !$clinic->is_email_verified}
+                            <button class="btn btn-sm btn-danger text-nowrap" disabled>
+                                <i class="bi bi-x-lg"></i> Neověřeno
+                            </button>
+                        {else}
+                            <button class="btn btn-sm btn-secondary" disabled>Schváleno</button>
+                        {/if}
+                    </td>
+                    <td>{$clinic->created_at|date:'j. n. Y H:i'}</td>
+                </tr>
+                <tr n:if="!$clinics->fetch()">
+                    <td colspan="8" class="text-center text-muted py-4">Zatím nebyly dokončeny žádné registrace.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <nav n:if="$paginator->getPageCount() > 1" class="mt-4">
+        <ul class="pagination justify-content-center">
+            <li n:class="page-item, $paginator->isFirst() ? disabled">
+                <a class="page-link" n:href="this, page => $paginator->getPage() - 1"><i class="bi bi-caret-left-fill ms-1"></i></a>
+            </li>
+
+            <li n:for="$i = 1; $i <= $paginator->getPageCount(); $i++" n:class="page-item, $paginator->getPage() === $i ? active">
+                <a class="page-link" n:href="this, page => $i">{$i}</a>
+            </li>
+
+            <li n:class="page-item, $paginator->isLast() ? disabled">
+                <a class="page-link" n:href="this, page => $paginator->getPage() + 1"><i class="bi bi-caret-right-fill me-1"></i></a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<style>
+    .bg-purple { background-color: #6f42c1; }
+</style>

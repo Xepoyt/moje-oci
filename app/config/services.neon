@@ -5,6 +5,7 @@ services:
 	- App\Services\RegistrationService
 	- App\Components\RegistrationForm\InitRegistrationControlFactory
 	- App\Components\RegistrationForm\CompleteRegistrationControlFactory
+	- App\Components\Admin\ClinicsGridControlFactory
 
 
 search:

@@ -54,7 +54,6 @@ class Container_0a689cc314 extends Nette\DI\Container
 		'Nette\Application\UI\TemplateFactory' => [['latte.templateFactory']],
 		'Nette\Bridges\ApplicationLatte\TemplateFactory' => [['latte.templateFactory']],
 		'Nette\Mail\Mailer' => [['mail.mailer']],
-		'App\Services\FileMailer' => [['mail.mailer']],
 		'Nette\Security\Passwords' => [['security.passwords']],
 		'Nette\Security\UserStorage' => [['security.userStorage']],
 		'Nette\Security\User' => [['security.user']],
@@ -64,32 +63,46 @@ class Container_0a689cc314 extends Nette\DI\Container
 		'Tracy\Bar' => [['tracy.bar']],
 		'Nette\Routing\RouteList' => [['01']],
 		'Nette\Routing\Router' => [['01']],
-		'ArrayAccess' => [2 => ['01', 'application.1', 'application.3', 'application.4']],
+		'ArrayAccess' => [2 => ['01', 'application.1', 'application.2', 'application.4', 'application.5']],
 		'Nette\Application\Routers\RouteList' => [['01']],
 		'App\Models\FacilityManager' => [['02']],
 		'App\Services\EmailService' => [['03']],
 		'App\Services\RegistrationService' => [['04']],
 		'App\Components\RegistrationForm\InitRegistrationControlFactory' => [['05']],
 		'App\Components\RegistrationForm\CompleteRegistrationControlFactory' => [['06']],
-		'Nette\Application\UI\Presenter' => [2 => ['application.1', 'application.3', 'application.4']],
-		'Nette\Application\UI\Control' => [2 => ['application.1', 'application.3', 'application.4']],
-		'Nette\Application\UI\Component' => [2 => ['application.1', 'application.3', 'application.4']],
-		'Nette\ComponentModel\Container' => [2 => ['application.1', 'application.3', 'application.4']],
-		'Nette\ComponentModel\Component' => [2 => ['application.1', 'application.3', 'application.4']],
+		'App\Components\Admin\ClinicsGridControlFactory' => [['07']],
+		'Nette\Application\UI\Presenter' => [2 => ['application.1', 'application.2', 'application.4', 'application.5']],
+		'Nette\Application\UI\Control' => [2 => ['application.1', 'application.2', 'application.4', 'application.5']],
+		'Nette\Application\UI\Component' => [2 => ['application.1', 'application.2', 'application.4', 'application.5']],
+		'Nette\ComponentModel\Container' => [2 => ['application.1', 'application.2', 'application.4', 'application.5']],
+		'Nette\ComponentModel\Component' => [2 => ['application.1', 'application.2', 'application.4', 'application.5']],
 		'Nette\Application\IPresenter' => [
-			2 => ['application.1', 'application.2', 'application.3', 'application.4', 'application.5', 'application.6'],
+			2 => [
+				'application.1',
+				'application.2',
+				'application.3',
+				'application.4',
+				'application.5',
+				'application.6',
+				'application.7',
+			],
 		],
-		'Nette\Application\UI\Renderable' => [2 => ['application.1', 'application.3', 'application.4']],
-		'Nette\Application\UI\StatePersistent' => [2 => ['application.1', 'application.3', 'application.4']],
-		'Nette\Application\UI\SignalReceiver' => [2 => ['application.1', 'application.3', 'application.4']],
-		'Nette\ComponentModel\IContainer' => [2 => ['application.1', 'application.3', 'application.4']],
-		'Nette\ComponentModel\IComponent' => [2 => ['application.1', 'application.3', 'application.4']],
-		'App\Presentation\Error\Error4xx\Error4xxPresenter' => [2 => ['application.1']],
-		'App\Presentation\Error\Error5xx\Error5xxPresenter' => [2 => ['application.2']],
-		'App\Presentation\Home\HomePresenter' => [2 => ['application.3']],
-		'App\Presentation\Registration\RegistrationPresenter' => [2 => ['application.4']],
-		'NetteModule\ErrorPresenter' => [2 => ['application.5']],
-		'NetteModule\MicroPresenter' => [2 => ['application.6']],
+		'Nette\Application\UI\Renderable' => [2 => ['application.1', 'application.2', 'application.4', 'application.5']],
+		'Nette\Application\UI\StatePersistent' => [
+			2 => ['application.1', 'application.2', 'application.4', 'application.5'],
+		],
+		'Nette\Application\UI\SignalReceiver' => [
+			2 => ['application.1', 'application.2', 'application.4', 'application.5'],
+		],
+		'Nette\ComponentModel\IContainer' => [2 => ['application.1', 'application.2', 'application.4', 'application.5']],
+		'Nette\ComponentModel\IComponent' => [2 => ['application.1', 'application.2', 'application.4', 'application.5']],
+		'App\Presentation\Admin\AdminPresenter' => [2 => ['application.1']],
+		'App\Presentation\Error\Error4xx\Error4xxPresenter' => [2 => ['application.2']],
+		'App\Presentation\Error\Error5xx\Error5xxPresenter' => [2 => ['application.3']],
+		'App\Presentation\Home\HomePresenter' => [2 => ['application.4']],
+		'App\Presentation\Registration\RegistrationPresenter' => [2 => ['application.5']],
+		'NetteModule\ErrorPresenter' => [2 => ['application.6']],
+		'NetteModule\MicroPresenter' => [2 => ['application.7']],
 	];
 
 
@@ -164,7 +177,41 @@ class Container_0a689cc314 extends Nette\DI\Container
 	}
 
 
-	public function createServiceApplication__1(): App\Presentation\Error\Error4xx\Error4xxPresenter
+	public function createService07(): App\Components\Admin\ClinicsGridControlFactory
+	{
+		return new class ($this) implements App\Components\Admin\ClinicsGridControlFactory {
+			public function __construct(
+				private Container_0a689cc314 $container,
+			) {
+			}
+
+
+			public function create(): App\Components\Admin\ClinicsGridControl
+			{
+				return new App\Components\Admin\ClinicsGridControl($this->container->getService('02'), $this->container->getService('03'), $this->container->getService('04'));
+			}
+		};
+	}
+
+
+	public function createServiceApplication__1(): App\Presentation\Admin\AdminPresenter
+	{
+		$service = new App\Presentation\Admin\AdminPresenter($this->getService('07'));
+		$service->injectPrimary(
+			$this->getService('http.request'),
+			$this->getService('http.response'),
+			$this->getService('application.presenterFactory'),
+			$this->getService('01'),
+			$this->getService('session.session'),
+			$this->getService('security.user'),
+			$this->getService('latte.templateFactory'),
+		);
+		$service->invalidLinkMode = 5;
+		return $service;
+	}
+
+
+	public function createServiceApplication__2(): App\Presentation\Error\Error4xx\Error4xxPresenter
 	{
 		$service = new App\Presentation\Error\Error4xx\Error4xxPresenter;
 		$service->injectPrimary(
@@ -181,13 +228,13 @@ class Container_0a689cc314 extends Nette\DI\Container
 	}
 
 
-	public function createServiceApplication__2(): App\Presentation\Error\Error5xx\Error5xxPresenter
+	public function createServiceApplication__3(): App\Presentation\Error\Error5xx\Error5xxPresenter
 	{
 		return new App\Presentation\Error\Error5xx\Error5xxPresenter($this->getService('tracy.logger'));
 	}
 
 
-	public function createServiceApplication__3(): App\Presentation\Home\HomePresenter
+	public function createServiceApplication__4(): App\Presentation\Home\HomePresenter
 	{
 		$service = new App\Presentation\Home\HomePresenter;
 		$service->injectPrimary(
@@ -204,7 +251,7 @@ class Container_0a689cc314 extends Nette\DI\Container
 	}
 
 
-	public function createServiceApplication__4(): App\Presentation\Registration\RegistrationPresenter
+	public function createServiceApplication__5(): App\Presentation\Registration\RegistrationPresenter
 	{
 		$service = new App\Presentation\Registration\RegistrationPresenter(
 			$this->getService('02'),
@@ -225,13 +272,13 @@ class Container_0a689cc314 extends Nette\DI\Container
 	}
 
 
-	public function createServiceApplication__5(): NetteModule\ErrorPresenter
+	public function createServiceApplication__6(): NetteModule\ErrorPresenter
 	{
 		return new NetteModule\ErrorPresenter($this->getService('tracy.logger'));
 	}
 
 
-	public function createServiceApplication__6(): NetteModule\MicroPresenter
+	public function createServiceApplication__7(): NetteModule\MicroPresenter
 	{
 		return new NetteModule\MicroPresenter($this, $this->getService('http.request'), $this->getService('01'));
 	}
@@ -423,9 +470,19 @@ class Container_0a689cc314 extends Nette\DI\Container
 	}
 
 
-	public function createServiceMail__mailer(): App\Services\FileMailer
+	public function createServiceMail__mailer(): Nette\Mail\Mailer
 	{
-		return new App\Services\FileMailer('/var/www/html/app/temp/mail-log');
+		return new Nette\Mail\SmtpMailer(
+			'smtp.seznam.cz',
+			'moje-oci@seznam.cz',
+			/*sensitive{*/'Heslo123'/*}*/,
+			465,
+			'ssl',
+			false,
+			20,
+			null,
+			null,
+		);
 	}
 
 

@@ -41,5 +41,28 @@ class RegistrationService
         }
 
         $this->facilityManager->completeRegistration($clinicId, $values);
+        
+        $clinic = $this->facilityManager->getClinic($clinicId);
+        if ($clinic) {
+            $this->emailService->sendWaitingForApprovalEmail(
+                $clinic->email, 
+                $clinic->contact_person, 
+                $clinic->name
+            );
+        }
+    }
+
+    public function approveClinic(int $clinicId): void
+    {
+        $this->facilityManager->approveClinic($clinicId);
+
+        $clinic = $this->facilityManager->getClinic($clinicId);
+
+        if ($clinic) {
+            $this->emailService->sendApprovalNotification(
+                $clinic->email,
+                $clinic->name
+            );
+        }
     }
 }

@@ -42,9 +42,6 @@ final class Template_ff60e1ff01 extends Latte\Runtime\Template
 	<script src="';
 		echo LR\HtmlHelpers::escapeAttr($basePath) /* pos 13:15 */;
 		echo '/assets/bootstrap/js/bootstrap.min.js"></script>
-	<script src="';
-		echo LR\HtmlHelpers::escapeAttr($basePath) /* pos 14:15 */;
-		echo '/assets/jQuery/jquery-3.7.1.min.js"></script>
 	<script src="https://unpkg.com/naja@2/dist/Naja.min.js"></script>
 	<script src="https://unpkg.com/nette-forms@3"></script>
 </head>
@@ -53,19 +50,19 @@ final class Template_ff60e1ff01 extends Latte\Runtime\Template
 	<header class="bg-primary text-light position-sticky top-0 py-3 mb-4 z-3">
 		<div class="container d-flex justify-content-center align-items-center">
 			<h1><a href="';
-		echo LR\HtmlHelpers::escapeAttr($this->global->uiControl->link(':Home:Home:default')) /* pos 22:11 */;
+		echo LR\HtmlHelpers::escapeAttr($this->global->uiControl->link(':Home:Home:default')) /* pos 21:11 */;
 		echo '" class="text-light text-decoration-none">Moje Oči</a></h1>
 		</div>
 	</header>
 
 	<div class="container mt-3 z-3">
 ';
-		foreach ($flashes as $flash) /* pos 27:8 */ {
+		foreach ($flashes as $flash) /* pos 26:8 */ {
 			echo '		<div class="alert alert-';
-			echo LR\HtmlHelpers::escapeAttr($flash->type === 'error' ? 'danger' : $flash->type) /* pos 27:58 */;
+			echo LR\HtmlHelpers::escapeAttr($flash->type === 'error' ? 'danger' : $flash->type) /* pos 26:58 */;
 			echo ' alert-dismissible fade show shadow-sm text-center" role="alert">
 			';
-			echo LR\HtmlHelpers::escapeText($flash->message) /* pos 28:4 */;
+			echo LR\HtmlHelpers::escapeText($flash->message) /* pos 27:4 */;
 			echo '
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Zavřít"></button>
 		</div>
@@ -76,13 +73,13 @@ final class Template_ff60e1ff01 extends Latte\Runtime\Template
 		echo '	</div>
 	<main class="container my-4 d-flex flex-column align-items-center">
 ';
-		if ($this->hasBlock('title')) /* pos 33:3 */ {
+		if ($this->hasBlock('title')) /* pos 32:3 */ {
 			echo '		<h2 class="text-center">';
-			$this->renderBlock('title', [], 'html') /* pos 33:40 */;
+			$this->renderBlock('title', [], 'html') /* pos 32:40 */;
 			echo '</h2>';
 		}
 		echo "\n";
-		$this->renderBlock('content', [], 'html') /* pos 34:3 */;
+		$this->renderBlock('content', [], 'html') /* pos 33:3 */;
 		echo '	</main>
 </body>
 </html>
@@ -95,7 +92,7 @@ final class Template_ff60e1ff01 extends Latte\Runtime\Template
 		extract($this->params);
 
 		if (!$this->getReferringTemplate() || $this->getReferenceType() === 'extends') {
-			foreach (array_intersect_key(['flash' => '27'], $this->params) as $ʟ_v => $ʟ_l) {
+			foreach (array_intersect_key(['flash' => '26'], $this->params) as $ʟ_v => $ʟ_l) {
 				trigger_error("Variable \$$ʟ_v overwritten in foreach on line $ʟ_l");
 			}
 		}

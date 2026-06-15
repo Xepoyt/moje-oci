@@ -39,45 +39,63 @@ final class Template_f5cdad43a9 extends Latte\Runtime\Template
 		echo '
     </div>
 
+    <div class="mb-3">
+        ';
+		echo ($ʟ_label = Nette\Bridges\FormsLatte\Runtime::item('web', $this->global)->getLabel())?->addAttributes(['class' => 'form-label fw-bold']) /* pos 13:9 */;
+		echo '
+        ';
+		echo Nette\Bridges\FormsLatte\Runtime::item('web', $this->global)->getControl()->addAttributes(['class' => 'form-control']) /* pos 14:9 */;
+		echo '
+    </div>
+    
+    <div class="mb-3">
+        ';
+		echo ($ʟ_label = Nette\Bridges\FormsLatte\Runtime::item('description', $this->global)->getLabel())?->addAttributes(['class' => 'form-label fw-bold']) /* pos 18:9 */;
+		echo '
+        ';
+		echo Nette\Bridges\FormsLatte\Runtime::item('description', $this->global)->getControl()->addAttributes(['class' => 'form-control']) /* pos 19:9 */;
+		echo '
+    </div>
+
     <div class="mb-4">
         ';
-		echo ($ʟ_label = Nette\Bridges\FormsLatte\Runtime::item('program_type', $this->global)->getLabel())?->addAttributes(['class' => 'form-label fw-bold']) /* pos 13:9 */;
+		echo ($ʟ_label = Nette\Bridges\FormsLatte\Runtime::item('program_type', $this->global)->getLabel())?->addAttributes(['class' => 'form-label fw-bold']) /* pos 23:9 */;
 		echo ' <br>
         ';
-		echo Nette\Bridges\FormsLatte\Runtime::item('program_type', $this->global)->getControl() /* pos 14:9 */;
+		echo Nette\Bridges\FormsLatte\Runtime::item('program_type', $this->global)->getControl() /* pos 24:9 */;
 		echo '
     </div>
 
     <div id="snippet-email" class="mb-3">
         ';
-		echo ($ʟ_label = Nette\Bridges\FormsLatte\Runtime::item('reservation_email', $this->global)->getLabel())?->addAttributes(['class' => 'form-label fw-bold']) /* pos 18:9 */;
+		echo ($ʟ_label = Nette\Bridges\FormsLatte\Runtime::item('reservation_email', $this->global)->getLabel())?->addAttributes(['class' => 'form-label fw-bold']) /* pos 28:9 */;
 		echo '
         ';
-		echo Nette\Bridges\FormsLatte\Runtime::item('reservation_email', $this->global)->getControl()->addAttributes(['class' => 'form-control']) /* pos 19:9 */;
+		echo Nette\Bridges\FormsLatte\Runtime::item('reservation_email', $this->global)->getControl()->addAttributes(['class' => 'form-control']) /* pos 29:9 */;
 		echo '
     </div>
 
     <div id="snippet-phone" class="mb-3">
         ';
-		echo ($ʟ_label = Nette\Bridges\FormsLatte\Runtime::item('reservation_phone', $this->global)->getLabel())?->addAttributes(['class' => 'form-label fw-bold']) /* pos 23:9 */;
+		echo ($ʟ_label = Nette\Bridges\FormsLatte\Runtime::item('reservation_phone', $this->global)->getLabel())?->addAttributes(['class' => 'form-label fw-bold']) /* pos 33:9 */;
 		echo '
         ';
-		echo Nette\Bridges\FormsLatte\Runtime::item('reservation_phone', $this->global)->getControl()->addAttributes(['class' => 'form-control']) /* pos 24:9 */;
+		echo Nette\Bridges\FormsLatte\Runtime::item('reservation_phone', $this->global)->getControl()->addAttributes(['class' => 'form-control']) /* pos 34:9 */;
 		echo '
     </div>
 
     <div id="snippet-patients" class="mb-3">
         ';
-		echo ($ʟ_label = Nette\Bridges\FormsLatte\Runtime::item('max_patients', $this->global)->getLabel())?->addAttributes(['class' => 'form-label fw-bold']) /* pos 28:9 */;
+		echo ($ʟ_label = Nette\Bridges\FormsLatte\Runtime::item('max_patients', $this->global)->getLabel())?->addAttributes(['class' => 'form-label fw-bold']) /* pos 38:9 */;
 		echo '
         ';
-		echo Nette\Bridges\FormsLatte\Runtime::item('max_patients', $this->global)->getControl()->addAttributes(['class' => 'form-control']) /* pos 29:9 */;
+		echo Nette\Bridges\FormsLatte\Runtime::item('max_patients', $this->global)->getControl()->addAttributes(['class' => 'form-control']) /* pos 39:9 */;
 		echo '
     </div>
 
     ';
-		echo Nette\Bridges\FormsLatte\Runtime::item('send', $this->global)->getControl()->addAttributes(['class' => 'btn btn-success w-100 mt-3']) /* pos 32:5 */;
+		echo Nette\Bridges\FormsLatte\Runtime::item('send', $this->global)->getControl()->addAttributes(['class' => 'btn btn-success w-100 mt-3']) /* pos 42:5 */;
 		echo "\n";
-		echo Nette\Bridges\FormsLatte\Runtime::renderFormEnd(array_pop($this->global->formsStack)) /* pos 33:1 */;
+		echo Nette\Bridges\FormsLatte\Runtime::renderFormEnd(array_pop($this->global->formsStack)) /* pos 43:1 */;
 	}
 }

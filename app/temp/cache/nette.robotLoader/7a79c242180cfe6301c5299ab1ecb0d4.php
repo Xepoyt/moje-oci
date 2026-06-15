@@ -7,10 +7,20 @@ return array (
       0 => '/var/www/html/app/app/Bootstrap.php',
       1 => 1781533772,
     ),
+    'App\\Components\\Admin\\ClinicsGridControl' => 
+    array (
+      0 => '/var/www/html/app/app/Components/Admin/ClinicsGridControl.php',
+      1 => 1781549525,
+    ),
+    'App\\Components\\Admin\\ClinicsGridControlFactory' => 
+    array (
+      0 => '/var/www/html/app/app/Components/Admin/ClinicsGridControlFactory.php',
+      1 => 1781546343,
+    ),
     'App\\Components\\RegistrationForm\\CompleteRegistrationControl' => 
     array (
       0 => '/var/www/html/app/app/Components/RegistrationForm/CompleteRegistrationControl.php',
-      1 => 1781533134,
+      1 => 1781551228,
     ),
     'App\\Components\\RegistrationForm\\CompleteRegistrationControlFactory' => 
     array (
@@ -20,7 +30,7 @@ return array (
     'App\\Components\\RegistrationForm\\InitRegistrationControl' => 
     array (
       0 => '/var/www/html/app/app/Components/RegistrationForm/InitRegistrationControl.php',
-      1 => 1781533182,
+      1 => 1781537985,
     ),
     'App\\Components\\RegistrationForm\\InitRegistrationControlFactory' => 
     array (
@@ -30,17 +40,22 @@ return array (
     'App\\Core\\RouterFactory' => 
     array (
       0 => '/var/www/html/app/app/Core/RouterFactory.php',
-      1 => 1781531598,
+      1 => 1781536605,
     ),
     'App\\Models\\FacilityManager' => 
     array (
       0 => '/var/www/html/app/app/Models/FacilityManager.php',
-      1 => 1781529100,
+      1 => 1781548347,
     ),
     'App\\Presentation\\Accessory\\LatteExtension' => 
     array (
       0 => '/var/www/html/app/app/Presentation/Accessory/LatteExtension.php',
       1 => 1780339767,
+    ),
+    'App\\Presentation\\Admin\\AdminPresenter' => 
+    array (
+      0 => '/var/www/html/app/app/Presentation/Admin/AdminPresenter.php',
+      1 => 1781546446,
     ),
     'App\\Presentation\\Error\\Error4xx\\Error4xxPresenter' => 
     array (
@@ -60,12 +75,12 @@ return array (
     'App\\Presentation\\Registration\\RegistrationPresenter' => 
     array (
       0 => '/var/www/html/app/app/Presentation/Registration/RegistrationPresenter.php',
-      1 => 1781531347,
+      1 => 1781537512,
     ),
     'App\\Services\\EmailService' => 
     array (
       0 => '/var/www/html/app/app/Services/EmailService.php',
-      1 => 1781531098,
+      1 => 1781550857,
     ),
     'App\\Services\\FileMailer' => 
     array (
@@ -75,7 +90,7 @@ return array (
     'App\\Services\\RegistrationService' => 
     array (
       0 => '/var/www/html/app/app/Services/RegistrationService.php',
-      1 => 1781533440,
+      1 => 1781549438,
     ),
   ),
   1 => 
@@ -87,6 +102,11 @@ return array (
     'App\\Components\\RegistrationForm\\InitRegistrationTemplate' => 3,
     'App\\Presentation\\Registration\\RegistrationCompleteTemplate' => 3,
     'App\\Components\\RegistrationForm\\CompleteRegistrationTemplate' => 3,
+    'App\\Presentation\\Home\\HomeDefaultTemplate' => 3,
+    'App\\Presentation\\Home\\HomeTemplate' => 3,
+    'App\\Presentation\\Admin\\AdminDefaultTemplate' => 3,
+    'App\\Presentation\\Admin\\AdminTemplate' => 3,
+    'App\\Components\\Admin\\ClinicsGridTemplate' => 3,
   ),
   2 => 
   array (
