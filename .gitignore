@@ -1,8 +1,22 @@
-/.idea/
-/.vscode/
-Thumbs.db
-.DS_Store
+# 1. Stažené knihovny z Composeru (stahují se na serveru znovu, do Gitu nepatří!)
+/app/vendor/
 
+# 2. Dočasné soubory a cache Nette
+/app/temp/*
+!/app/temp/.gitignore
+
+# 3. Chybové logy
+/app/log/*
+!/app/log/.gitignore
+
+# 4. Lokální konfigurace (obsahuje hesla k DB)
 /app/config/local.neon
 
+# 5. Vývojové nástroje a IDE (PhpStorm, VS Code)
+/.idea/
+/.vscode/
+
+# 6. Odpad z operačních systémů a Docker
+.DS_Store
+Thumbs.db
 .env
