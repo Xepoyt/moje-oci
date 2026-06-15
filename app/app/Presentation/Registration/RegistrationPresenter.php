@@ -16,23 +16,17 @@ class RegistrationPresenter extends Presenter
     private ?\Nette\Database\Table\ActiveRow $clinicRecord = null;
 
     public function __construct(
-        // Už nepotřebujeme EmailService, ten si bere komponenta
         private FacilityManager $facilityManager,
-        
-        // Využijeme automaticky generované továrničky (viz bod 3 níže)
         private InitRegistrationControlFactory $initControlFactory,
         private CompleteRegistrationControlFactory $completeControlFactory
     ) {
         parent::__construct();
     }
 
-    // --- KROK 1 ---
     protected function createComponentInitForm(): InitRegistrationControl
     {
-        // Továrnička nám vytvoří komponentu s už doplněnými závislostmi
         $control = $this->initControlFactory->create();
         
-        // Nastavíme, co se má stát po úspěšném zpracování (Routing + Flash)
         $control->onComplete[] = function () {
             $this->flashMessage('Na váš e-mail byl odeslán odkaz pro pokračování.', 'success');
             $this->redirect('this');
@@ -41,7 +35,6 @@ class RegistrationPresenter extends Presenter
         return $control;
     }
 
-    // --- KROK 2 ---
     public function actionComplete(string $token): void
     {
         $this->clinicRecord = $this->facilityManager->findByToken($token);
