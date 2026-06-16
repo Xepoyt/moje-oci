@@ -14,13 +14,14 @@ class FacilityManager
         private Explorer $database
     ) {}
 
-    public function createInitialRegistration(string $ico, string $contactPerson, string $email): string
+    public function createInitialRegistration(string $ico, string $contactPersonName, string $contactPersonSurname, string $email): string
     {
         $token = Random::generate(32);
         
         $this->database->table('clinics')->insert([
             'ico' => $ico,
-            'contact_person' => $contactPerson,
+            'contact_person_name' => $contactPersonName,
+            'contact_person_surname' => $contactPersonSurname,
             'email' => $email,
             'is_authorized' => 1,
             'token' => $token,
@@ -52,10 +53,18 @@ class FacilityManager
     public function getClinicsPage(int $offset, int $limit, string $sort = 'created_at', string $order = 'DESC')
     {
         $query = $this->database->table('clinics');
-        if ($sort === 'is_approved') {
-            $query->order('((is_approved * 2) + is_email_verified) ' . $order);
-        } else {
-            $query->order($sort . ' ' . $order);
+        switch($sort){
+            case 'is_approved':
+                $query->order('((is_approved * 2) + is_email_verified) ' . $order);
+                break;
+            case 'contact_person':
+                $query->order('contact_person_surname ' . $order . ', contact_person_name ' . $order);
+                break;
+            case 'address':
+                $query->order('address_city ' . $order . ', address_ZIP ' . $order . ', address_street_number ' . $order);
+                break;
+            default:
+                $query->order($sort . ' ' . $order);
         }
         return $query->limit($limit, $offset);
     }

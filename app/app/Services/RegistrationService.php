@@ -19,14 +19,15 @@ class RegistrationService
     {
         $token = $this->facilityManager->createInitialRegistration(
             $values->ico, 
-            $values->contact_person, 
+            $values->contact_person_name,
+            $values->contact_person_surname, 
             $values->email
         );
         
         // LinkGenerator vyžaduje plný název cíle
         $link = $this->linkGenerator->link('Registration:Registration:complete', ['token' => $token]);
         
-        $this->emailService->sendVerificationEmail($values->email, $values->contact_person, $link);
+        $this->emailService->sendVerificationEmail($values->email, $values->contact_person_name . ' ' . $values->contact_person_surname, $link);
     }
 
     public function completeRegistration(int $clinicId, array $values): void
@@ -46,7 +47,7 @@ class RegistrationService
         if ($clinic) {
             $this->emailService->sendWaitingForApprovalEmail(
                 $clinic->email, 
-                $clinic->contact_person, 
+                $clinic->contact_person_name . ' ' . $clinic->contact_person_surname, 
                 $clinic->name
             );
         }

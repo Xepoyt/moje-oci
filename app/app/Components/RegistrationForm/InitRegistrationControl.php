@@ -22,10 +22,12 @@ class InitRegistrationControl extends Control
     {
         $form = new Form;
         $form->addText('ico', 'IČO')
-            ->setRequired()
-            ->addRule($form::Pattern, 'IČO musí být ve formátu 8 číslic', '^[0-9]{8}$');
-        $form->addText('contact_person', 'Kontaktní osoba')
-            ->setRequired('Jméno kontaktní osoby je povinné.'); //TODO: rozdělit jméno a příjmení
+            ->setRequired('IČO je povinné.')
+            ->addRule($form::Pattern, 'IČO musí být ve formátu 12345678', '^[0-9]{8}$');
+        $form->addText('contact_person_name', 'Jméno')
+            ->setRequired('Jméno je povinné.');
+        $form->addText('contact_person_surname', 'Příjmení')
+            ->setRequired('Příjmení je povinné.');
         $form->addEmail('email', 'E-mail')
             ->setRequired('E-mail je povinný.')
             ->addRule($form::Email, 'Zadejte platný e-mail.');

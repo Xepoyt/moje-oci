@@ -1,5 +1,5 @@
 <div class="container mt-5">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-2">
         <span class="badge bg-secondary">Celkem záznamů: {$paginator->getItemCount()}</span>
     </div>
 
@@ -32,6 +32,7 @@
             </a>
         </th>
         <th>Detaily programu</th>
+        <th>Popis</th>
         <th>
             <a n:href="this, sort => 'is_approved', order => ($sort === 'is_approved' && $order === 'ASC' ? 'DESC' : 'ASC')" class="text-decoration-none text-white d-block">
                 Stav
@@ -54,19 +55,19 @@
                         <small class="text-muted">IČO: {$clinic->ico}</small>
                     </td>
                     <td>
-                        {$clinic->contact_person}<br>
+                        {$clinic->contact_person_name} {$clinic->contact_person_surname}<br>
                         <small><a href="mailto:{$clinic->email}">{$clinic->email}</a></small>
                     </td>
                     <td>
-                        {$clinic->address}<br>
+                        {$clinic->address_street_number}{if ($clinic->address_street_number && $clinic->address_city)}, {/if}{$clinic->address_city}{if ($clinic->address_city &&$clinic->address_ZIP)}, {/if}{$clinic->address_ZIP}<br>
                         <small n:if="$clinic->web"><a href="{$clinic->web}" target="_blank">{$clinic->web}</a></small>
                     </td>
                     <td>
                         {if $clinic->program_type}
                             <span n:class="badge, $clinic->program_type === 3 ? 'bg-purple text-white' : ($clinic->program_type === 2 ? 'bg-info' : 'bg-primary')">
-                                {if $clinic->program_type === 1}1 - Kontaktní údaje
-                                {elseif $clinic->program_type === 2}2 - "Ozveme se"
-                                {elseif $clinic->program_type === 3}3 - API Rezervační systém
+                                {if $clinic->program_type === 1}1 - Základní profil
+                                {elseif $clinic->program_type === 2}2 - Zprostředkování poptávek
+                                {elseif $clinic->program_type === 3}3 - Přímé rezervace termínů
                                 {/if}
                             </span>
                         {/if}
@@ -84,6 +85,7 @@
                             {/if}
                         </small>
                     </td>
+                    <td>{$clinic->description|truncate:100}</td>
                     <td>
                         {if $clinic->is_approved}
                             <span class="badge bg-success">Schváleno</span>
@@ -95,7 +97,7 @@
                     </td>
                     <td>
                         {if !$clinic->is_approved && $clinic->is_email_verified}
-                            <a n:href="approve! $clinic->id" class="btn btn-sm btn-success">
+                            <a n:href="approve! $clinic->id" class="btn btn-sm btn-success text-nowrap">
                                 <i class="bi bi-check-lg"></i> Schválit
                             </a>
                         {elseif !$clinic->is_email_verified}
@@ -109,7 +111,7 @@
                     <td>{$clinic->created_at|date:'j. n. Y H:i'}</td>
                 </tr>
                 <tr n:if="!$clinics->fetch()">
-                    <td colspan="8" class="text-center text-muted py-4">Zatím nebyly dokončeny žádné registrace.</td>
+                    <td colspan="9" class="text-center text-muted py-4">Zatím nebyly dokončeny žádné registrace.</td>
                 </tr>
             </tbody>
         </table>

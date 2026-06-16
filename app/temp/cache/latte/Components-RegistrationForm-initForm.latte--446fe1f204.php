@@ -66,19 +66,21 @@ final class Template_446fe1f204 extends Latte\Runtime\Template
 		}
 		echo '    </div>
 
-    <div class="mb-3">
-        ';
-		echo ($ʟ_label = Nette\Bridges\FormsLatte\Runtime::item('contact_person', $this->global)->getLabel())?->addAttributes(['class' => 'form-label fw-bold']) /* pos 13:9 */;
+    <label class="form-label fw-bold">Kontaktní osoba</label>
+    <div class="row g-3 mb-3">
+        <div class="col-md-6">
+            ';
+		echo ($ʟ_label = Nette\Bridges\FormsLatte\Runtime::item('contact_person_name', $this->global)->getLabel())?->addAttributes(['class' => 'form-label']) /* pos 15:13 */;
 		echo '
-        ';
-		echo Nette\Bridges\FormsLatte\Runtime::item('contact_person', $this->global)->getControl()->addAttributes(['class' => 'form-control']) /* pos 14:9 */;
+            ';
+		echo Nette\Bridges\FormsLatte\Runtime::item('contact_person_name', $this->global)->getControl()->addAttributes(['class' => 'form-control']) /* pos 16:13 */;
 		echo "\n";
 		ob_start(fn() => '');
 		try {
-			echo '        <span class="text-danger small">';
+			echo '            <span class="text-danger small">';
 			ob_start();
 			try {
-				echo LR\HtmlHelpers::escapeText($form['contact_person']->error) /* pos 15:53 */;
+				echo LR\HtmlHelpers::escapeText($form['contact_person_name']->error) /* pos 17:57 */;
 
 			} finally {
 				$ʟ_ifc[1] = rtrim(ob_get_flush()) === '';
@@ -94,21 +96,20 @@ final class Template_446fe1f204 extends Latte\Runtime\Template
 				echo ob_get_clean();
 			}
 		}
-		echo '    </div>
-
-    <div class="mb-3">
-        ';
-		echo ($ʟ_label = Nette\Bridges\FormsLatte\Runtime::item('email', $this->global)->getLabel())?->addAttributes(['class' => 'form-label fw-bold']) /* pos 19:9 */;
+		echo '        </div>
+        <div class="col-md-6">
+            ';
+		echo ($ʟ_label = Nette\Bridges\FormsLatte\Runtime::item('contact_person_surname', $this->global)->getLabel())?->addAttributes(['class' => 'form-label']) /* pos 20:13 */;
 		echo '
-        ';
-		echo Nette\Bridges\FormsLatte\Runtime::item('email', $this->global)->getControl()->addAttributes(['class' => 'form-control']) /* pos 20:9 */;
+            ';
+		echo Nette\Bridges\FormsLatte\Runtime::item('contact_person_surname', $this->global)->getControl()->addAttributes(['class' => 'form-control']) /* pos 21:13 */;
 		echo "\n";
 		ob_start(fn() => '');
 		try {
-			echo '        <span class="text-danger small">';
+			echo '            <span class="text-danger small">';
 			ob_start();
 			try {
-				echo LR\HtmlHelpers::escapeText($form['email']->error) /* pos 21:53 */;
+				echo LR\HtmlHelpers::escapeText($form['contact_person_surname']->error) /* pos 22:57 */;
 
 			} finally {
 				$ʟ_ifc[2] = rtrim(ob_get_flush()) === '';
@@ -124,21 +125,22 @@ final class Template_446fe1f204 extends Latte\Runtime\Template
 				echo ob_get_clean();
 			}
 		}
-		echo '    </div>
+		echo '        </div>
+    </div>
 
-    <div class="form-check mb-4">
+    <div class="mb-3">
         ';
-		echo Nette\Bridges\FormsLatte\Runtime::item('is_authorized', $this->global)->getControl()->addAttributes(['class' => 'form-check-input']) /* pos 25:9 */;
+		echo ($ʟ_label = Nette\Bridges\FormsLatte\Runtime::item('email', $this->global)->getLabel())?->addAttributes(['class' => 'form-label']) /* pos 27:9 */;
 		echo '
         ';
-		echo ($ʟ_label = Nette\Bridges\FormsLatte\Runtime::item('is_authorized', $this->global)->getLabel())?->addAttributes(['class' => 'form-check-label']) /* pos 26:9 */;
+		echo Nette\Bridges\FormsLatte\Runtime::item('email', $this->global)->getControl()->addAttributes(['class' => 'form-control']) /* pos 28:9 */;
 		echo "\n";
 		ob_start(fn() => '');
 		try {
-			echo '        <span class="text-danger d-block small">';
+			echo '        <span class="text-danger small">';
 			ob_start();
 			try {
-				echo LR\HtmlHelpers::escapeText($form['is_authorized']->error) /* pos 27:61 */;
+				echo LR\HtmlHelpers::escapeText($form['email']->error) /* pos 29:53 */;
 
 			} finally {
 				$ʟ_ifc[3] = rtrim(ob_get_flush()) === '';
@@ -156,10 +158,40 @@ final class Template_446fe1f204 extends Latte\Runtime\Template
 		}
 		echo '    </div>
 
-    ';
-		echo Nette\Bridges\FormsLatte\Runtime::item('send', $this->global)->getControl()->addAttributes(['class' => 'btn btn-primary w-100']) /* pos 30:5 */;
+    <div class="form-check mb-4">
+        ';
+		echo Nette\Bridges\FormsLatte\Runtime::item('is_authorized', $this->global)->getControl()->addAttributes(['class' => 'form-check-input']) /* pos 33:9 */;
+		echo '
+        ';
+		echo ($ʟ_label = Nette\Bridges\FormsLatte\Runtime::item('is_authorized', $this->global)->getLabel())?->addAttributes(['class' => 'form-check-label']) /* pos 34:9 */;
 		echo "\n";
-		echo Nette\Bridges\FormsLatte\Runtime::renderFormEnd(array_pop($this->global->formsStack)) /* pos 31:1 */;
+		ob_start(fn() => '');
+		try {
+			echo '        <span class="text-danger d-block small">';
+			ob_start();
+			try {
+				echo LR\HtmlHelpers::escapeText($form['is_authorized']->error) /* pos 35:61 */;
+
+			} finally {
+				$ʟ_ifc[4] = rtrim(ob_get_flush()) === '';
+			}
+			echo '</span>
+';
+
+		} finally {
+			if ($ʟ_ifc[4] ?? null) {
+				ob_end_clean();
+
+			} else {
+				echo ob_get_clean();
+			}
+		}
+		echo '    </div>
+
+    ';
+		echo Nette\Bridges\FormsLatte\Runtime::item('send', $this->global)->getControl()->addAttributes(['class' => 'btn btn-primary w-100']) /* pos 38:5 */;
+		echo "\n";
+		echo Nette\Bridges\FormsLatte\Runtime::renderFormEnd(array_pop($this->global->formsStack)) /* pos 39:1 */;
 	}
 
 

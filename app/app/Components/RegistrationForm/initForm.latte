@@ -9,14 +9,22 @@
         <span class="text-danger small" n:ifcontent>{$form['ico']->error}</span>
     </div>
 
-    <div class="mb-3">
-        {label contact_person, class => "form-label fw-bold" /}
-        {input contact_person, class => "form-control"}
-        <span class="text-danger small" n:ifcontent>{$form['contact_person']->error}</span>
+    <label class="form-label fw-bold">Kontaktní osoba</label>
+    <div class="row g-3 mb-3">
+        <div class="col-md-6">
+            {label contact_person_name, class => "form-label" /}
+            {input contact_person_name, class => "form-control"}
+            <span class="text-danger small" n:ifcontent>{$form['contact_person_name']->error}</span>
+        </div>
+        <div class="col-md-6">
+            {label contact_person_surname, class => "form-label" /}
+            {input contact_person_surname, class => "form-control"}
+            <span class="text-danger small" n:ifcontent>{$form['contact_person_surname']->error}</span>
+        </div>
     </div>
 
     <div class="mb-3">
-        {label email, class => "form-label fw-bold" /}
+        {label email, class => "form-label" /}
         {input email, class => "form-control"}
         <span class="text-danger small" n:ifcontent>{$form['email']->error}</span>
     </div>

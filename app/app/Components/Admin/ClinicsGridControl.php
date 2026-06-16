@@ -21,7 +21,7 @@ class ClinicsGridControl extends Control
     /** @persistent */
     public string $order = 'DESC'; // Výchozí směr řazení
 
-    private int $itemsPerPage = 10;
+    private int $itemsPerPage = 5;
 
     public function __construct(
         private FacilityManager $facilityManager,
@@ -57,9 +57,6 @@ class ClinicsGridControl extends Control
         $this->template->render();
     }
 
-    /**
-     * Signál pro schválení, který se teď volá uvnitř komponenty
-     */
     public function handleApprove(int $id): void
     {
         $clinic = $this->facilityManager->getClinic($id);

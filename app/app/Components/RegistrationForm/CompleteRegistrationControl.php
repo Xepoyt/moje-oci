@@ -24,26 +24,34 @@ class CompleteRegistrationControl extends Control
         
         $form->addText('name', 'Název zařízení')
             ->setRequired('Zadejte název zařízení.');
-        $form->addText('address', 'Adresa')
-            ->setRequired('Zadejte adresu.'); //TODO: rozdělit adresu na ulici + č.p., město, PSČ
+
+        // Adresa
+        $form->addText('address_street_number', 'Ulice, číslo popisné')
+            ->setRequired('Zadejte ulici a číslo popisné.');
+        $form->addText('address_city', 'Město')
+            ->setRequired('Zadejte město.');
+        $form->addText('address_ZIP', 'PSČ')
+            ->setRequired('Zadejte PSČ.')
+            ->addRule($form::Pattern, 'PSČ musí být ve formátu 12345', '^\d{5}$');
+        
         $form->addText('web', 'Webové stránky')
             ->addRule($form::URL, 'Zadejte platnou URL adresu.');
         $form->addTextArea('description', 'Popis zařízení')
             ->setRequired('Zadejte popis zařízení.')
             ->setHtmlAttribute('rows', 5);
 
-        $programs = [ //TODO: upravit nazvy
-            1 => 'Kontaktní údaje',
-            2 => '"Ozveme se"',
-            3 => 'Rezervační systém (API)'
-        ];
+        $programs = [
+            1 => 'Základní profil',
+            2 => 'Zprostředkování poptávek',
+            3 => 'Přímé rezervace termínů'
+        ]; //TODO: tahat z DB
 
         $programType = $form->addRadioList('program_type', 'Varianta spolupráce', $programs)
-            ->setRequired('Vyberte prosím variantu spolupráce.'); //TODO: přidat popisky k jednotlivým variantám, aby bylo jasné, co znamenají
+            ->setRequired('Vyberte prosím variantu spolupráce.');
 
         // --- DYNAMICKÁ POLE ---
 
-        $form->addEmail('reservation_email', 'Kontaktní e-mail')
+        $form->addText('reservation_email', 'Kontaktní e-mail')
             ->addConditionOn($programType, $form::IsIn, [1, 2])
                 ->setRequired('Zadejte e-mail.')
                 ->addRule($form::Email, 'Zadejte platný e-mail.')
@@ -52,7 +60,7 @@ class CompleteRegistrationControl extends Control
         $form->addText('reservation_phone', 'Kontaktní telefon')
             ->addConditionOn($programType, $form::Equal, 1)
                 ->setRequired('Zadejte telefon.')
-                ->addRule($form::Pattern, 'Telefon musí být ve formátu +420 123 456 789', '^\+420\s\d{3}\s\d{3}\s\d{3}$')
+                ->addRule($form::Pattern, 'Telefon musí být ve formátu +420123456789', '^\+420\d{9}$')
                 ->toggle('snippet-phone');
 
         $form->addInteger('max_patients', 'Maximální počet pacientů', )
@@ -60,6 +68,11 @@ class CompleteRegistrationControl extends Control
                 ->setRequired('Zadejte limit.')
                 ->addRule($form::Min, 'Počet pacientů musí být kladné číslo.', 1)
                 ->toggle('snippet-patients');
+
+        // --- KONEC DYNAMICKÝCH POLÍ ---
+
+        $form->addCheckbox('tos', 'Souhlasím s podmínkami služby.')
+            ->setRequired('Musíte souhlasit s podmínkami služby.');
 
         $form->addSubmit('send', 'Dokončit registraci');
         $form->onSuccess[] = [$this, 'processForm'];
@@ -75,6 +88,11 @@ class CompleteRegistrationControl extends Control
 
     public function render(): void
     {
+        $this->template->descriptions = [
+            1 => 'Zveřejníme váš telefon a e-mail. Pacienti si schůzku domlouvají napřímo s vámi. (Zcela zdarma)',
+            2 => 'Pacient vyplní formulář přímo u nás a my vám hotovou poptávku pošleme na e-mail. (5 poptávek za období zdarma, dále 100 Kč / poptávka)',
+            3 => 'Plné propojení s vaším kalendářem. Pacient si u nás rovnou vybere a zarezervuje volný termín. (Vyžaduje technickou integraci, 200 Kč / termín)'
+        ]; //TODO: tahat z DB
         $this->template->setFile(__DIR__ . '/completeForm.latte');
         $this->template->render();
     }

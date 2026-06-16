@@ -41,7 +41,7 @@ final class Template_2835150f72 extends Latte\Runtime\Template
 		extract($ʟ_args);
 		unset($ʟ_args);
 
-		echo '<div class="container mt-5">
+		echo '<div class="container mt-2">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <p class="lead">Vyplňte prosím IČO a kontaktní e-mail. Pošleme vám na něj odkaz pro pokračování.</p>

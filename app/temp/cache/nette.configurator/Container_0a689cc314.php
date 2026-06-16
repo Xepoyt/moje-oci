@@ -322,7 +322,7 @@ class Container_0a689cc314 extends Nette\DI\Container
 			5,
 			'/var/www/html/app/temp/cache/nette.application/touch',
 		));
-		$service->setMapping(['*' => 'App\Presentation\*\*Presenter']);
+		$service->setMapping(['Error' => 'App\Presentation\Error\*\**Presenter', '*' => 'App\Presentation\*\*Presenter']);
 		return $service;
 	}
 

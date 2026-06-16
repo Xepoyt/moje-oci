@@ -4,39 +4,72 @@
         {input name, class => "form-control"}
     </div>
 
+    <label class="form-label fw-bold">Adresa</label>
     <div class="mb-3">
-        {label address, class => "form-label fw-bold" /}
-        {input address, class => "form-control"}
+        {label address_street_number, class => "form-label" /}
+        {input address_street_number, class => "form-control"}
+    </div>
+
+    <div class="row g-3 mb-3">
+        <div class="col-md-8">
+            {label address_city, class => "form-label" /}
+            {input address_city, class => "form-control"}
+        </div>
+
+        <div class="col-md-4">
+            {label address_ZIP, class => "form-label" /}
+            {input address_ZIP, class => "form-control"}
+        </div>
     </div>
 
     <div class="mb-3">
         {label web, class => "form-label fw-bold" /}
         {input web, class => "form-control"}
     </div>
-    
+
     <div class="mb-3">
         {label description, class => "form-label fw-bold" /}
         {input description, class => "form-control"}
     </div>
 
-    <div class="mb-4">
-        {label program_type, class => "form-label fw-bold" /} <br>
-        {input program_type}
+    <div class="form-group">
+    <label class="form-label fw-bold">{$form['program_type']->caption}</label>
+    
+    <div class="radio-list">
+        {foreach $form['program_type']->items as $key => $label}
+            <div class="radio-item mb-1">
+                <label n:name="program_type:$key">
+                    <input n:name="program_type:$key"> 
+                    <strong>{$label}</strong>
+                </label>
+                
+                <div class="description" style="margin-left: 25px; color: #666; font-size: 0.9em;">
+                    {$descriptions[$key]}
+                </div>
+            </div>
+        {/foreach}
     </div>
+</div>
 
     <div id="snippet-email" class="mb-3">
         {label reservation_email, class => "form-label fw-bold" /}
-        {input reservation_email, class => "form-control"}
+        {input reservation_email, class => "form-control", type => "email"}
     </div>
 
     <div id="snippet-phone" class="mb-3">
         {label reservation_phone, class => "form-label fw-bold" /}
-        {input reservation_phone, class => "form-control"}
+        {input reservation_phone, class => "form-control", type => "tel"}
     </div>
 
     <div id="snippet-patients" class="mb-3">
         {label max_patients, class => "form-label fw-bold" /}
-        {input max_patients, class => "form-control"}
+        {input max_patients, class => "form-control", min => 1}
+    </div>
+
+    <div class="form-check mb-4">
+        {input tos, class => "form-check-input"}
+        {label tos, class => "form-check-label" /}
+        <a href="obchodni-podminky.pdf" target="_blank">(Obchodní podmínky)</a>
     </div>
 
     {input send, class => "btn btn-success w-100 mt-3"}
