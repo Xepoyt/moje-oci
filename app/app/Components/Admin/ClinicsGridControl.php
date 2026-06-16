@@ -48,6 +48,8 @@ class ClinicsGridControl extends Control
             $this->sort,
             $this->order
         );
+
+        $this->template->programs = $this->facilityManager->getProgramNames();
         
         $this->template->paginator = $paginator;
         $this->template->sort = $this->sort;

@@ -65,10 +65,7 @@
                     <td>
                         {if $clinic->program_type}
                             <span n:class="badge, $clinic->program_type === 3 ? 'bg-purple text-white' : ($clinic->program_type === 2 ? 'bg-info' : 'bg-primary')">
-                                {if $clinic->program_type === 1}1 - Základní profil
-                                {elseif $clinic->program_type === 2}2 - Zprostředkování poptávek
-                                {elseif $clinic->program_type === 3}3 - Přímé rezervace termínů
-                                {/if}
+                                {$clinic->program_type} - {$programs[$clinic->program_type]}
                             </span>
                         {/if}
                     </td>

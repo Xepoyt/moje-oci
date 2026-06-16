@@ -171,7 +171,11 @@ class Container_0a689cc314 extends Nette\DI\Container
 
 			public function create(int $clinicId): App\Components\RegistrationForm\CompleteRegistrationControl
 			{
-				return new App\Components\RegistrationForm\CompleteRegistrationControl($clinicId, $this->container->getService('04'));
+				return new App\Components\RegistrationForm\CompleteRegistrationControl(
+					$clinicId,
+					$this->container->getService('04'),
+					$this->container->getService('02'),
+				);
 			}
 		};
 	}

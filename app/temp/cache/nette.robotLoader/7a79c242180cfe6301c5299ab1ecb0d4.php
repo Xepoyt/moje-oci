@@ -10,7 +10,7 @@ return array (
     'App\\Components\\Admin\\ClinicsGridControl' => 
     array (
       0 => '/var/www/html/app/app/Components/Admin/ClinicsGridControl.php',
-      1 => 1781641224,
+      1 => 1781644307,
     ),
     'App\\Components\\Admin\\ClinicsGridControlFactory' => 
     array (
@@ -20,7 +20,7 @@ return array (
     'App\\Components\\RegistrationForm\\CompleteRegistrationControl' => 
     array (
       0 => '/var/www/html/app/app/Components/RegistrationForm/CompleteRegistrationControl.php',
-      1 => 1781642120,
+      1 => 1781644154,
     ),
     'App\\Components\\RegistrationForm\\CompleteRegistrationControlFactory' => 
     array (
@@ -45,7 +45,7 @@ return array (
     'App\\Models\\FacilityManager' => 
     array (
       0 => '/var/www/html/app/app/Models/FacilityManager.php',
-      1 => 1781642296,
+      1 => 1781644121,
     ),
     'App\\Presentation\\Accessory\\LatteExtension' => 
     array (
@@ -102,6 +102,8 @@ return array (
     'App\\Presentation\\Admin\\AdminDefaultTemplate' => 3,
     'App\\Presentation\\Admin\\AdminTemplate' => 3,
     'App\\Components\\Admin\\ClinicsGridTemplate' => 3,
+    'App\\Presentation\\Registration\\RegistrationCompleteTemplate' => 1,
+    'App\\Components\\RegistrationForm\\CompleteRegistrationTemplate' => 1,
   ),
   2 => 
   array (

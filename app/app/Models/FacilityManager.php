@@ -80,4 +80,19 @@ class FacilityManager
     {
         return $this->database->table('clinics')->get($id);
     }
+
+    public function getPrograms(): array
+    {
+        return $this->database->table('programs')->fetchAll();
+    }
+
+    public function getProgramNames(): array
+    {
+        return $this->database->table('programs')->fetchPairs('id', 'name');
+    }
+
+    public function getProgramDescriptions(): array
+    {
+        return $this->database->table('programs')->fetchPairs('id', 'description');
+    }
 }

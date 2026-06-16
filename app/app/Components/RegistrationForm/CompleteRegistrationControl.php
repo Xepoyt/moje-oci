@@ -7,6 +7,7 @@ namespace App\Components\RegistrationForm;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
 use App\Services\RegistrationService;
+use App\Models\FacilityManager;
 
 class CompleteRegistrationControl extends Control
 {
@@ -15,7 +16,8 @@ class CompleteRegistrationControl extends Control
 
     public function __construct(
         private int $clinicId,
-        private RegistrationService $registrationService
+        private RegistrationService $registrationService,
+        private FacilityManager $facilityManager
     ) {}
 
     protected function createComponentForm(): Form
@@ -40,11 +42,7 @@ class CompleteRegistrationControl extends Control
             ->setRequired('Zadejte popis zařízení.')
             ->setHtmlAttribute('rows', 5);
 
-        $programs = [
-            1 => 'Základní profil',
-            2 => 'Zprostředkování poptávek',
-            3 => 'Přímé rezervace termínů'
-        ]; //TODO: tahat z DB
+        $programs = $this->facilityManager->getProgramNames();
 
         $programType = $form->addRadioList('program_type', 'Varianta spolupráce', $programs)
             ->setRequired('Vyberte prosím variantu spolupráce.');
@@ -52,7 +50,7 @@ class CompleteRegistrationControl extends Control
         // --- DYNAMICKÁ POLE ---
 
         $form->addText('reservation_email', 'Kontaktní e-mail')
-            ->addConditionOn($programType, $form::IsIn, [1, 2])
+            ->addConditionOn($programType, $form::IsIn, [1, 2]) //magicky cisla :(
                 ->setRequired('Zadejte e-mail.')
                 ->addRule($form::Email, 'Zadejte platný e-mail.')
                 ->toggle('snippet-email'); // Toto ID musí být v Latte
@@ -88,11 +86,7 @@ class CompleteRegistrationControl extends Control
 
     public function render(): void
     {
-        $this->template->descriptions = [
-            1 => 'Zveřejníme váš telefon a e-mail. Pacienti si schůzku domlouvají napřímo s vámi. (Zcela zdarma)',
-            2 => 'Pacient vyplní formulář přímo u nás a my vám hotovou poptávku pošleme na e-mail. (5 poptávek za období zdarma, dále 100 Kč / poptávka)',
-            3 => 'Plné propojení s vaším kalendářem. Pacient si u nás rovnou vybere a zarezervuje volný termín. (Vyžaduje technickou integraci, 200 Kč / termín)'
-        ]; //TODO: tahat z DB
+        $this->template->descriptions = $this->facilityManager->getProgramDescriptions();
         $this->template->setFile(__DIR__ . '/completeForm.latte');
         $this->template->render();
     }
