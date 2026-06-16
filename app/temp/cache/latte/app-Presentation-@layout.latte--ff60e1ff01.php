@@ -7,6 +7,10 @@ use Latte\Runtime as LR;
 /** source: /var/www/html/app/app/Presentation/@layout.latte */
 final class Template_ff60e1ff01 extends Latte\Runtime\Template
 {
+	public const Blocks = [
+		'snippet' => ['flashes' => 'blockFlashes'],
+	];
+
 
 	public function main(array $ʟ_args): void
 	{
@@ -38,11 +42,12 @@ final class Template_ff60e1ff01 extends Latte\Runtime\Template
 		echo '/assets/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 	
+	<link rel="icon" href="eye.svg" sizes="any" type="image/svg+xml">
+
 	
 	<script src="';
-		echo LR\HtmlHelpers::escapeAttr($basePath) /* pos 13:15 */;
+		echo LR\HtmlHelpers::escapeAttr($basePath) /* pos 15:15 */;
 		echo '/assets/bootstrap/js/bootstrap.min.js"></script>
-	<script src="https://unpkg.com/naja@2/dist/Naja.min.js"></script>
 	<script src="https://unpkg.com/nette-forms@3"></script>
 </head>
 
@@ -50,38 +55,34 @@ final class Template_ff60e1ff01 extends Latte\Runtime\Template
 	<header class="bg-primary text-light position-sticky top-0 py-3 mb-4 z-3">
 		<div class="container d-flex justify-content-center align-items-center">
 			<h1><a href="';
-		echo LR\HtmlHelpers::escapeAttr($this->global->uiControl->link(':Home:Home:default')) /* pos 21:11 */;
-		echo '" class="text-light text-decoration-none">Moje Oči</a></h1>
+		echo LR\HtmlHelpers::escapeAttr($this->global->uiControl->link(':Home:Home:default')) /* pos 22:11 */;
+		echo '" class="text-light text-decoration-none"><i class="bi bi-eye"></i> Moje Oči</a></h1>
 		</div>
 	</header>
 
-	<div class="container mt-3 z-3">
-';
-		foreach ($flashes as $flash) /* pos 26:8 */ {
-			echo '		<div class="alert alert-';
-			echo LR\HtmlHelpers::escapeAttr($flash->type === 'error' ? 'danger' : $flash->type) /* pos 26:58 */;
-			echo ' alert-dismissible fade show shadow-sm text-center" role="alert">
-			';
-			echo LR\HtmlHelpers::escapeText($flash->message) /* pos 27:4 */;
-			echo '
-			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Zavřít"></button>
-		</div>
-';
-
-		}
-
-		echo '	</div>
+	<div';
+		echo ' id="', htmlspecialchars($this->global->snippetDriver->getHtmlId('flashes')), '"';
+		echo ' class="container mt-3 z-3">';
+		$this->renderBlock('flashes', [], null, 'snippet') /* pos 26:7 */;
+		echo '</div>
 	<main class="container my-4 d-flex flex-column align-items-center">
 ';
-		if ($this->hasBlock('title')) /* pos 32:3 */ {
+		if ($this->hasBlock('title')) /* pos 33:3 */ {
 			echo '		<h2 class="text-center">';
-			$this->renderBlock('title', [], 'html') /* pos 32:40 */;
+			$this->renderBlock('title', [], 'html') /* pos 33:40 */;
 			echo '</h2>';
 		}
 		echo "\n";
-		$this->renderBlock('content', [], 'html') /* pos 33:3 */;
+		$this->renderBlock('content', [], 'html') /* pos 34:3 */;
 		echo '	</main>
 </body>
+<script src="https://unpkg.com/naja@2/dist/Naja.min.js"></script>
+
+<script>
+    document.addEventListener(\'DOMContentLoaded\', () => {
+        naja.initialize();
+    });
+</script>
 </html>
 ';
 	}
@@ -92,10 +93,41 @@ final class Template_ff60e1ff01 extends Latte\Runtime\Template
 		extract($this->params);
 
 		if (!$this->getReferringTemplate() || $this->getReferenceType() === 'extends') {
-			foreach (array_intersect_key(['flash' => '26'], $this->params) as $ʟ_v => $ʟ_l) {
+			foreach (array_intersect_key(['flash' => '27'], $this->params) as $ʟ_v => $ʟ_l) {
 				trigger_error("Variable \$$ʟ_v overwritten in foreach on line $ʟ_l");
 			}
 		}
 		return get_defined_vars();
+	}
+
+
+	/** n:snippet="flashes" on line 26 */
+	public function blockFlashes(array $ʟ_args): void
+	{
+		extract($this->params);
+		extract($ʟ_args);
+		unset($ʟ_args);
+
+		$this->global->snippetDriver->enter('flashes', 'static') /* pos 26:7 */;
+		try {
+			echo "\n";
+			foreach ($flashes as $flash) /* pos 27:8 */ {
+				echo '		<div class="alert alert-';
+				echo LR\HtmlHelpers::escapeAttr($flash->type === 'error' ? 'danger' : $flash->type) /* pos 27:58 */;
+				echo ' alert-dismissible fade show shadow-sm text-center" role="alert">
+			';
+				echo LR\HtmlHelpers::escapeText($flash->message) /* pos 28:4 */;
+				echo '
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Zavřít"></button>
+		</div>
+';
+
+			}
+
+			echo '	';
+
+		} finally {
+			$this->global->snippetDriver->leave();
+		}
 	}
 }

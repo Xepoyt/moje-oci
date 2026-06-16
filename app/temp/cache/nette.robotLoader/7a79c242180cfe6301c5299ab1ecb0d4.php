@@ -5,12 +5,12 @@ return array (
     'App\\Bootstrap' => 
     array (
       0 => '/var/www/html/app/app/Bootstrap.php',
-      1 => 1781640669,
+      1 => 1781646263,
     ),
     'App\\Components\\Admin\\ClinicsGridControl' => 
     array (
       0 => '/var/www/html/app/app/Components/Admin/ClinicsGridControl.php',
-      1 => 1781644307,
+      1 => 1781650671,
     ),
     'App\\Components\\Admin\\ClinicsGridControlFactory' => 
     array (
@@ -20,7 +20,7 @@ return array (
     'App\\Components\\RegistrationForm\\CompleteRegistrationControl' => 
     array (
       0 => '/var/www/html/app/app/Components/RegistrationForm/CompleteRegistrationControl.php',
-      1 => 1781644154,
+      1 => 1781644419,
     ),
     'App\\Components\\RegistrationForm\\CompleteRegistrationControlFactory' => 
     array (
@@ -45,7 +45,7 @@ return array (
     'App\\Models\\FacilityManager' => 
     array (
       0 => '/var/www/html/app/app/Models/FacilityManager.php',
-      1 => 1781644121,
+      1 => 1781647526,
     ),
     'App\\Presentation\\Accessory\\LatteExtension' => 
     array (
@@ -70,7 +70,7 @@ return array (
     'App\\Presentation\\Home\\HomePresenter' => 
     array (
       0 => '/var/www/html/app/app/Presentation/Home/HomePresenter.php',
-      1 => 1780339767,
+      1 => 1781644725,
     ),
     'App\\Presentation\\Registration\\RegistrationPresenter' => 
     array (
@@ -90,7 +90,7 @@ return array (
     'App\\Services\\RegistrationService' => 
     array (
       0 => '/var/www/html/app/app/Services/RegistrationService.php',
-      1 => 1781641817,
+      1 => 1781646265,
     ),
   ),
   1 => 
@@ -102,8 +102,10 @@ return array (
     'App\\Presentation\\Admin\\AdminDefaultTemplate' => 3,
     'App\\Presentation\\Admin\\AdminTemplate' => 3,
     'App\\Components\\Admin\\ClinicsGridTemplate' => 3,
-    'App\\Presentation\\Registration\\RegistrationCompleteTemplate' => 1,
-    'App\\Components\\RegistrationForm\\CompleteRegistrationTemplate' => 1,
+    'App\\Presentation\\Registration\\RegistrationCompleteTemplate' => 3,
+    'App\\Components\\RegistrationForm\\CompleteRegistrationTemplate' => 3,
+    'App\\Presentation\\Home\\HomeDefaultTemplate' => 3,
+    'App\\Presentation\\Home\\HomeTemplate' => 3,
   ),
   2 => 
   array (

@@ -23,7 +23,6 @@ class FacilityManager
             'contact_person_name' => $contactPersonName,
             'contact_person_surname' => $contactPersonSurname,
             'email' => $email,
-            'is_authorized' => 1,
             'token' => $token,
             'is_email_verified' => 0
         ]);
@@ -44,15 +43,31 @@ class FacilityManager
         $this->database->table('clinics')->where('id', $id)->update($data);
     }
 
-    public function getClinicsCount(): int
+    private function applySearch(Nette\Database\Table\Selection $query, ?string $searchField, ?string $searchQuery): void
     {
-        return $this->database->table('clinics')
-            ->count('*');
+        $allowedFields = [
+            'contact_person_name', 'contact_person_surname', 'email', 
+            'name', 'address_street_number', 'address_city', 'address_ZIP'
+        ];
+
+        if ($searchField && $searchQuery && in_array($searchField, $allowedFields, true)) {
+            $query->where("$searchField LIKE ?", "%$searchQuery%");
+        }
     }
 
-    public function getClinicsPage(int $offset, int $limit, string $sort = 'created_at', string $order = 'DESC')
+    public function getClinicsCount(?string $searchField = null, ?string $searchQuery = null): int
     {
         $query = $this->database->table('clinics');
+        $this->applySearch($query, $searchField, $searchQuery);
+        
+        return $query->count('*');
+    }
+
+    public function getClinicsPage(int $offset, int $limit, string $sort = 'created_at', string $order = 'DESC', ?string $searchField = null, ?string $searchQuery = null)
+    {
+        $query = $this->database->table('clinics');
+        $this->applySearch($query, $searchField, $searchQuery);
+
         switch($sort){
             case 'is_approved':
                 $query->order('((is_approved * 2) + is_email_verified) ' . $order);

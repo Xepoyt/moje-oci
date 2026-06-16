@@ -1,12 +1,38 @@
 {block title}Portál{/block}
 {block content}
 <div class="container mt-2 text-center">
-    <h1>Vítejte na portálu MOJE OČI</h1>
+    <h1 class="display-5 fw-normal">Vítejte na portálu MOJE OČI</h1>
     <p class="lead mt-3">Přidejte svou kliniku do našeho systému a získejte nové pacienty.</p>
     
     <a n:href=":Registration:Registration:default" class="btn btn-primary btn-lg mt-4">
         Zahájit registraci zařízení
     </a>
-	{*TODO: pridat informace o programech*}
+</div>
+<div class="container py-5">
+    
+    {* Hlavička sekce *}
+    <div class="row text-center mb-4">
+        <div class="col">
+            <h1 class="display-5">Možnosti spolupráce</h1>
+        </div>
+    </div>
+
+    {* Výpis variant *}
+    <div class="row g-4 justify-content-center">
+        {foreach $programs as $program}
+            <div class="col-12 col-md-6 col-lg-4">
+                
+                <div class="card h-100 shadow-sm 'border-primary'">
+                    <div class="card-body d-flex flex-column text-center p-4">
+                        <h3 class="card-title h4 mb-3">{$program->name}</h3>
+                        <p class="card-text text-muted mb-4">
+                            {$program->description}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {/foreach}
+    </div>
+
 </div>
 {/block}

@@ -41,7 +41,20 @@ class RegistrationService
             $values['reservation_phone'] = null;
         }
 
-        $this->facilityManager->completeRegistration($clinicId, $values);
+        $data = [
+            'name' => $values['name'],
+            'address_street_number' => $values['address_street_number'],
+            'address_city' => $values['address_city'],
+            'address_ZIP' => $values['address_ZIP'],
+            'web' => $values['web'],
+            'description' => $values['description'],
+            'program_type' => $values['program_type'],
+            'reservation_email' => $values['reservation_email'] ?? null,
+            'reservation_phone' => $values['reservation_phone'] ?? null,
+            'max_patients' => $values['max_patients'] ?? null
+        ];
+
+        $this->facilityManager->completeRegistration($clinicId, $data);
         
         $clinic = $this->facilityManager->getClinic($clinicId);
         if ($clinic) {

@@ -1,4 +1,28 @@
 <div class="container mt-5">
+    {snippet grid}
+    <div class="card mb-4 shadow-sm border-0 bg-light">
+        <div class="card-body py-3">
+            <form n:name="searchForm" class="row g-3 align-items-center ajax">
+                <div class="col-auto">
+                    <label n:name="field" class="visually-hidden">Hledat v</label>
+                    <select n:name="field" class="form-select border-secondary"></select>
+                </div>
+                <div class="col-md-4">
+                    <label n:name="query" class="visually-hidden">Hledaný text</label>
+                    <input n:name="query" class="form-control border-secondary" placeholder="Zadejte hledaný text...">
+                </div>
+                <div class="col-auto">
+                    <button n:name="search" class="btn btn-primary">
+                        <i class="bi bi-search"></i> Hledat
+                    </button>
+                    <button n:if="$control->searchQuery" n:name="reset" class="btn btn-outline-danger">
+                        <i class="bi bi-x-circle"></i> Zrušit filtr
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div class="d-flex justify-content-between align-items-center mb-2">
         <span class="badge bg-secondary">Celkem záznamů: {$paginator->getItemCount()}</span>
     </div>
@@ -8,44 +32,44 @@
             <thead class="table-dark">
                 <tr>
                     <th>
-            <a n:href="this, sort => 'name', order => ($sort === 'name' && $order === 'ASC' ? 'DESC' : 'ASC')" class="text-decoration-none text-white d-block">
-                Název / IČO
-                <i n:if="$sort === 'name'" class="bi bi-caret-{if $order === 'ASC'}up{else}down{/if}-fill ms-1"></i>
-            </a>
-        </th>
-        <th>
-            <a n:href="this, sort => 'contact_person', order => ($sort === 'contact_person' && $order === 'ASC' ? 'DESC' : 'ASC')" class="text-decoration-none text-white d-block">
-                Kontakt
-                <i n:if="$sort === 'contact_person'" class="bi bi-caret-{if $order === 'ASC'}up{else}down{/if}-fill ms-1"></i>
-            </a>
-        </th>
-        <th>
-            <a n:href="this, sort => 'address', order => ($sort === 'address' && $order === 'ASC' ? 'DESC' : 'ASC')" class="text-decoration-none text-white d-block">
-                Adresa & Web
-                <i n:if="$sort === 'address'" class="bi bi-caret-{if $order === 'ASC'}up{else}down{/if}-fill ms-1"></i>
-            </a>
-        </th>
-        <th>
-            <a n:href="this, sort => 'program_type', order => ($sort === 'program_type' && $order === 'ASC' ? 'DESC' : 'ASC')" class="text-decoration-none text-white d-block">
-                Program
-                <i n:if="$sort === 'program_type'" class="bi bi-caret-{if $order === 'ASC'}up{else}down{/if}-fill ms-1"></i>
-            </a>
-        </th>
-        <th>Detaily programu</th>
-        <th>Popis</th>
-        <th>
-            <a n:href="this, sort => 'is_approved', order => ($sort === 'is_approved' && $order === 'ASC' ? 'DESC' : 'ASC')" class="text-decoration-none text-white d-block">
-                Stav
-                <i n:if="$sort === 'is_approved'" class="bi bi-caret-{if $order === 'ASC'}up{else}down{/if}-fill ms-1"></i>
-            </a>
-        </th>
-        <th>Akce</th>
-        <th>
-            <a n:href="this, sort => 'created_at', order => ($sort === 'created_at' && $order === 'ASC' ? 'DESC' : 'ASC')" class="text-decoration-none text-white d-block">
-                Datum registrace
-                <i n:if="$sort === 'created_at'" class="bi bi-caret-{if $order === 'ASC'}up{else}down{/if}-fill ms-1"></i>
-            </a>
-        </th>
+                        <a n:href="redraw!, sort => 'name', order => ($sort === 'name' && $order === 'ASC' ? 'DESC' : 'ASC'), page => 1" class="ajax text-decoration-none text-white d-block">
+                            Název / IČO
+                            <i n:if="$sort === 'name'" class="bi bi-caret-{if $order === 'ASC'}up{else}down{/if}-fill ms-1"></i>
+                        </a>
+                    </th>
+                    <th>
+                        <a n:href="redraw!, sort => 'contact_person', order => ($sort === 'contact_person' && $order === 'ASC' ? 'DESC' : 'ASC'), page => 1" class="ajax text-decoration-none text-white d-block">
+                            Kontakt
+                            <i n:if="$sort === 'contact_person'" class="bi bi-caret-{if $order === 'ASC'}up{else}down{/if}-fill ms-1"></i>
+                        </a>
+                    </th>
+                    <th>
+                        <a n:href="redraw!, sort => 'address', order => ($sort === 'address' && $order === 'ASC' ? 'DESC' : 'ASC'), page => 1" class="ajax text-decoration-none text-white d-block">
+                            Adresa & Web
+                            <i n:if="$sort === 'address'" class="bi bi-caret-{if $order === 'ASC'}up{else}down{/if}-fill ms-1"></i>
+                        </a>
+                    </th>
+                    <th>
+                        <a n:href="redraw!, sort => 'program_type', order => ($sort === 'program_type' && $order === 'ASC' ? 'DESC' : 'ASC'), page => 1" class="ajax text-decoration-none text-white d-block">
+                            Program
+                            <i n:if="$sort === 'program_type'" class="bi bi-caret-{if $order === 'ASC'}up{else}down{/if}-fill ms-1"></i>
+                        </a>
+                    </th>
+                    <th>Detaily programu</th>
+                    <th>Popis</th>
+                    <th>
+                        <a n:href="redraw!, sort => 'is_approved', order => ($sort === 'is_approved' && $order === 'ASC' ? 'DESC' : 'ASC'), page => 1" class="ajax text-decoration-none text-white d-block">
+                            Stav
+                            <i n:if="$sort === 'is_approved'" class="bi bi-caret-{if $order === 'ASC'}up{else}down{/if}-fill ms-1"></i>
+                        </a>
+                    </th>
+                    <th>Akce</th>
+                    <th>
+                        <a n:href="redraw!, sort => 'created_at', order => ($sort === 'created_at' && $order === 'ASC' ? 'DESC' : 'ASC'), page => 1" class="ajax text-decoration-none text-white d-block">
+                            Datum registrace
+                            <i n:if="$sort === 'created_at'" class="bi bi-caret-{if $order === 'ASC'}up{else}down{/if}-fill ms-1"></i>
+                        </a>
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -94,7 +118,7 @@
                     </td>
                     <td>
                         {if !$clinic->is_approved && $clinic->is_email_verified}
-                            <a n:href="approve! $clinic->id" class="btn btn-sm btn-success text-nowrap">
+                            <a n:href="approve! $clinic->id" class="ajax btn btn-sm btn-success text-nowrap">
                                 <i class="bi bi-check-lg"></i> Schválit
                             </a>
                         {elseif !$clinic->is_email_verified}
@@ -108,7 +132,7 @@
                     <td>{$clinic->created_at|date:'j. n. Y H:i'}</td>
                 </tr>
                 <tr n:if="!$clinics->fetch()">
-                    <td colspan="9" class="text-center text-muted py-4">Zatím nebyly dokončeny žádné registrace.</td>
+                    <td colspan="9" class="text-center text-muted py-4">Zatím nebyly nalezeny žádné registrace.</td>
                 </tr>
             </tbody>
         </table>
@@ -117,18 +141,19 @@
     <nav n:if="$paginator->getPageCount() > 1" class="mt-4">
         <ul class="pagination justify-content-center">
             <li n:class="page-item, $paginator->isFirst() ? disabled">
-                <a class="page-link" n:href="this, page => $paginator->getPage() - 1"><i class="bi bi-caret-left-fill ms-1"></i></a>
+                <a class="ajax page-link" n:href="redraw!, page => $paginator->getPage() - 1"><i class="bi bi-caret-left-fill ms-1"></i></a>
             </li>
 
             <li n:for="$i = 1; $i <= $paginator->getPageCount(); $i++" n:class="page-item, $paginator->getPage() === $i ? active">
-                <a class="page-link" n:href="this, page => $i">{$i}</a>
+                <a class="ajax page-link" n:href="redraw!, page => $i">{$i}</a>
             </li>
 
             <li n:class="page-item, $paginator->isLast() ? disabled">
-                <a class="page-link" n:href="this, page => $paginator->getPage() + 1"><i class="bi bi-caret-right-fill me-1"></i></a>
+                <a class="ajax page-link" n:href="redraw!, page => $paginator->getPage() + 1"><i class="bi bi-caret-right-fill me-1"></i></a>
             </li>
         </ul>
     </nav>
+    {/snippet}
 </div>
 
 <style>
