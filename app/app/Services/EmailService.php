@@ -12,7 +12,8 @@ class EmailService
 {
     public function __construct(
         private Mailer $mailer,
-        private LatteFactory $latteFactory
+        private LatteFactory $latteFactory,
+        private string $adminEmail
     ) {}
 
     public function sendVerificationEmail(string $email, string $contactPerson, string $verificationLink): void
@@ -69,6 +70,27 @@ class EmailService
         $mail->setFrom('moje-oci@seznam.cz', 'MOJE OČI - Portál')
             ->addTo($email)
             ->setSubject('Vaše registrace byla schválena!')
+            ->setHtmlBody($htmlBody);
+
+        $this->mailer->send($mail);
+    }
+
+    public function sendAdminNewRegistrationNotification(string $facilityName, string $ico, string $contactPerson): void
+    {
+        $params = [
+            'facilityName' => $facilityName,
+            'ico' => $ico,
+            'contactPerson' => $contactPerson
+        ];
+
+        $latte = $this->latteFactory->create();
+        
+        $htmlBody = $latte->renderToString(__DIR__ . '/../Mails/newRegistrationAdmin.latte', $params);
+
+        $mail = new Message;
+        $mail->setFrom('moje-oci@seznam.cz', 'MOJE OČI - Portál')
+            ->addTo($this->adminEmail)
+            ->setSubject('Nová registrace ke schválení: ' . $facilityName)
             ->setHtmlBody($htmlBody);
 
         $this->mailer->send($mail);

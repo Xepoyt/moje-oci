@@ -129,7 +129,11 @@ class Container_0a689cc314 extends Nette\DI\Container
 
 	public function createService03(): App\Services\EmailService
 	{
-		return new App\Services\EmailService($this->getService('mail.mailer'), $this->getService('latte.latteFactory'));
+		return new App\Services\EmailService(
+			$this->getService('mail.mailer'),
+			$this->getService('latte.latteFactory'),
+			'adyherout@seznam.cz',
+		);
 	}
 
 

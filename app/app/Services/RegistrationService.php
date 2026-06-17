@@ -63,6 +63,12 @@ class RegistrationService
                 $clinic->contact_person_name . ' ' . $clinic->contact_person_surname, 
                 $clinic->name
             );
+            
+            $this->emailService->sendAdminNewRegistrationNotification(
+                $clinic->name,
+                $clinic->ico,
+                $clinic->contact_person_name . ' ' . $clinic->contact_person_surname
+            );
         }
     }
 

@@ -1,7 +1,7 @@
 services:
 	- App\Core\RouterFactory::createRouter
 	- App\Models\FacilityManager
-	- App\Services\EmailService
+	- App\Services\EmailService(adminEmail: %adminEmail%)
 	- App\Services\RegistrationService
 	- App\Components\RegistrationForm\InitRegistrationControlFactory
 	- App\Components\RegistrationForm\CompleteRegistrationControlFactory
