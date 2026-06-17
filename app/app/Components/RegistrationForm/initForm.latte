@@ -25,7 +25,7 @@
 
     <div class="mb-3">
         {label email, class => "form-label" /}
-        {input email, class => "form-control"}
+        {input email, class => "form-control", type => "email"}
         <span class="text-danger small" n:ifcontent>{$form['email']->error}</span>
     </div>
 

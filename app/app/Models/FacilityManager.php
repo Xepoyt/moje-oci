@@ -16,7 +16,9 @@ class FacilityManager
 
     public function createInitialRegistration(string $ico, string $contactPersonName, string $contactPersonSurname, string $email): string
     {
-        $token = Random::generate(32);
+        do {
+            $token = Random::generate(32);
+        } while ($this->database->table('clinics')->where('token', $token)->fetch());
         
         $this->database->table('clinics')->insert([
             'ico' => $ico,

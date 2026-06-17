@@ -133,7 +133,7 @@ final class Template_446fe1f204 extends Latte\Runtime\Template
 		echo ($ʟ_label = Nette\Bridges\FormsLatte\Runtime::item('email', $this->global)->getLabel())?->addAttributes(['class' => 'form-label']) /* pos 27:9 */;
 		echo '
         ';
-		echo Nette\Bridges\FormsLatte\Runtime::item('email', $this->global)->getControl()->addAttributes(['class' => 'form-control']) /* pos 28:9 */;
+		echo Nette\Bridges\FormsLatte\Runtime::item('email', $this->global)->getControl()->addAttributes(['class' => 'form-control', 'type' => 'email']) /* pos 28:9 */;
 		echo "\n";
 		ob_start(fn() => '');
 		try {

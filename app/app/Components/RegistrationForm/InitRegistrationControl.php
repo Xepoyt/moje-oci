@@ -23,12 +23,12 @@ class InitRegistrationControl extends Control
         $form = new Form;
         $form->addText('ico', 'IČO')
             ->setRequired('IČO je povinné.')
-            ->addRule($form::Pattern, 'IČO musí být ve formátu 12345678', '^[0-9]{8}$');
+            ->addRule($form::Pattern, 'IČO musí být ve formátu 12345678', '^\d{8}$');
         $form->addText('contact_person_name', 'Jméno')
             ->setRequired('Jméno je povinné.');
         $form->addText('contact_person_surname', 'Příjmení')
             ->setRequired('Příjmení je povinné.');
-        $form->addEmail('email', 'E-mail')
+        $form->addText('email', 'E-mail')
             ->setRequired('E-mail je povinný.')
             ->addRule($form::Email, 'Zadejte platný e-mail.');
         $form->addCheckbox('is_authorized', 'Jsem oprávněný jednat za toto zařízení')
@@ -47,7 +47,7 @@ class InitRegistrationControl extends Control
             $this->onComplete($this);
             
         } catch (UniqueConstraintViolationException $e) {
-            $form->addError('Toto IČO už u nás prochází/prošlo registrací.');
+            $form->addError('Toto IČO už u nás prošlo/prochází registrací.');
         }
     }
     
