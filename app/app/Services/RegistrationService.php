@@ -32,14 +32,12 @@ class RegistrationService
 
     public function completeRegistration(int $clinicId, array $values): void
     {
-        // Ošetření schovaných polí podle programu
-        if ($values['program_type'] === 3) {
-            $values['reservation_email'] = null;
-            $values['reservation_phone'] = null;
-            $values['max_patients'] = null;
-        } elseif ($values['program_type'] === 2) {
-            $values['reservation_phone'] = null;
+        
+        if ($values['program_type'] === 1) {
+            $values['reservation_phone'] = preg_replace('#\s+#', '', $values['reservation_phone']);
         }
+        $values['address_ZIP'] = preg_replace('#\s+#', '', $values['address_ZIP']);
+        
 
         $data = [
             'name' => $values['name'],

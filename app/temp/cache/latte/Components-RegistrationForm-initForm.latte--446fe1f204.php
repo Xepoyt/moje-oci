@@ -21,12 +21,12 @@ final class Template_446fe1f204 extends Latte\Runtime\Template
 		Nette\Bridges\FormsLatte\Runtime::initializeForm($form);
 		echo Nette\Bridges\FormsLatte\Runtime::renderFormBegin($form, []) /* pos 1:1 */;
 		echo "\n";
-		if ($form->hasErrors()) /* pos 2:10 */ {
+		if ($form->ownErrors) /* pos 2:10 */ {
 			echo '    <div class="alert alert-danger">
 ';
-			foreach ($form->errors as $error) /* pos 3:12 */ {
+			foreach ($form->ownErrors as $error) /* pos 3:12 */ {
 				echo '        <p>';
-				echo LR\HtmlHelpers::escapeText($error) /* pos 3:48 */;
+				echo LR\HtmlHelpers::escapeText($error) /* pos 3:51 */;
 				echo '</p>
 ';
 
@@ -36,24 +36,28 @@ final class Template_446fe1f204 extends Latte\Runtime\Template
 ';
 		}
 		echo '
-    <div class="mb-3">
-        ';
-		echo ($ʟ_label = Nette\Bridges\FormsLatte\Runtime::item('ico', $this->global)->getLabel())?->addAttributes(['class' => 'form-label fw-bold']) /* pos 7:9 */;
-		echo '
-        ';
-		echo Nette\Bridges\FormsLatte\Runtime::item('ico', $this->global)->getControl()->addAttributes(['class' => 'form-control']) /* pos 8:9 */;
-		echo "\n";
+    <div class="mb-2">
+        <label';
+		echo ($ʟ_elem = Nette\Bridges\FormsLatte\Runtime::item('ico', $this->global)->getLabelPart())->addAttributes(['class' => null])->attributes() /* pos 7:16 */;
+		echo ' class="form-label fw-bold">';
+		echo $ʟ_elem->getHtml() /* pos 7:16 */;
+		echo '</label>
+        <input';
+		echo ($ʟ_elem = Nette\Bridges\FormsLatte\Runtime::item('ico', $this->global)->getControlPart())->addAttributes(['class' => null])->attributes() /* pos 8:16 */;
+		echo ($ʟ_tmp = array_filter(['form-control', $form['ico']->error ? 'is-invalid' : null])) ? ' class="' . LR\HtmlHelpers::escapeAttr(implode(" ", array_unique($ʟ_tmp))) . '"' : "" /* pos 8:29 */;
+		echo '>
+';
 		ob_start(fn() => '');
 		try {
-			echo '        <span class="text-danger small">';
+			echo '        <div class="invalid-feedback">';
 			ob_start();
 			try {
-				echo LR\HtmlHelpers::escapeText($form['ico']->error) /* pos 9:53 */;
+				echo LR\HtmlHelpers::escapeText($form['ico']->error) /* pos 9:51 */;
 
 			} finally {
 				$ʟ_ifc[0] = rtrim(ob_get_flush()) === '';
 			}
-			echo '</span>
+			echo '</div>
 ';
 
 		} finally {
@@ -67,25 +71,29 @@ final class Template_446fe1f204 extends Latte\Runtime\Template
 		echo '    </div>
 
     <label class="form-label fw-bold">Kontaktní osoba</label>
-    <div class="row g-3 mb-3">
+    <div class="row g-3 mb-2">
         <div class="col-md-6">
-            ';
-		echo ($ʟ_label = Nette\Bridges\FormsLatte\Runtime::item('contact_person_name', $this->global)->getLabel())?->addAttributes(['class' => 'form-label']) /* pos 15:13 */;
-		echo '
-            ';
-		echo Nette\Bridges\FormsLatte\Runtime::item('contact_person_name', $this->global)->getControl()->addAttributes(['class' => 'form-control']) /* pos 16:13 */;
-		echo "\n";
+            <label';
+		echo ($ʟ_elem = Nette\Bridges\FormsLatte\Runtime::item('contact_person_name', $this->global)->getLabelPart())->addAttributes(['class' => null])->attributes() /* pos 15:20 */;
+		echo ' class="form-label">';
+		echo $ʟ_elem->getHtml() /* pos 15:20 */;
+		echo '</label>
+            <input';
+		echo ($ʟ_elem = Nette\Bridges\FormsLatte\Runtime::item('contact_person_name', $this->global)->getControlPart())->addAttributes(['class' => null])->attributes() /* pos 16:20 */;
+		echo ($ʟ_tmp = array_filter(['form-control', $form['contact_person_name']->error ? 'is-invalid' : null])) ? ' class="' . LR\HtmlHelpers::escapeAttr(implode(" ", array_unique($ʟ_tmp))) . '"' : "" /* pos 16:49 */;
+		echo '>
+';
 		ob_start(fn() => '');
 		try {
-			echo '            <span class="text-danger small">';
+			echo '            <div class="invalid-feedback">';
 			ob_start();
 			try {
-				echo LR\HtmlHelpers::escapeText($form['contact_person_name']->error) /* pos 17:57 */;
+				echo LR\HtmlHelpers::escapeText($form['contact_person_name']->error) /* pos 17:55 */;
 
 			} finally {
 				$ʟ_ifc[1] = rtrim(ob_get_flush()) === '';
 			}
-			echo '</span>
+			echo '</div>
 ';
 
 		} finally {
@@ -98,23 +106,27 @@ final class Template_446fe1f204 extends Latte\Runtime\Template
 		}
 		echo '        </div>
         <div class="col-md-6">
-            ';
-		echo ($ʟ_label = Nette\Bridges\FormsLatte\Runtime::item('contact_person_surname', $this->global)->getLabel())?->addAttributes(['class' => 'form-label']) /* pos 20:13 */;
-		echo '
-            ';
-		echo Nette\Bridges\FormsLatte\Runtime::item('contact_person_surname', $this->global)->getControl()->addAttributes(['class' => 'form-control']) /* pos 21:13 */;
-		echo "\n";
+            <label';
+		echo ($ʟ_elem = Nette\Bridges\FormsLatte\Runtime::item('contact_person_surname', $this->global)->getLabelPart())->addAttributes(['class' => null])->attributes() /* pos 20:20 */;
+		echo ' class="form-label">';
+		echo $ʟ_elem->getHtml() /* pos 20:20 */;
+		echo '</label>
+            <input';
+		echo ($ʟ_elem = Nette\Bridges\FormsLatte\Runtime::item('contact_person_surname', $this->global)->getControlPart())->addAttributes(['class' => null])->attributes() /* pos 21:20 */;
+		echo ($ʟ_tmp = array_filter(['form-control', $form['contact_person_surname']->error ? 'is-invalid' : null])) ? ' class="' . LR\HtmlHelpers::escapeAttr(implode(" ", array_unique($ʟ_tmp))) . '"' : "" /* pos 21:52 */;
+		echo '>
+';
 		ob_start(fn() => '');
 		try {
-			echo '            <span class="text-danger small">';
+			echo '            <div class="invalid-feedback">';
 			ob_start();
 			try {
-				echo LR\HtmlHelpers::escapeText($form['contact_person_surname']->error) /* pos 22:57 */;
+				echo LR\HtmlHelpers::escapeText($form['contact_person_surname']->error) /* pos 22:55 */;
 
 			} finally {
 				$ʟ_ifc[2] = rtrim(ob_get_flush()) === '';
 			}
-			echo '</span>
+			echo '</div>
 ';
 
 		} finally {
@@ -128,24 +140,29 @@ final class Template_446fe1f204 extends Latte\Runtime\Template
 		echo '        </div>
     </div>
 
-    <div class="mb-3">
-        ';
-		echo ($ʟ_label = Nette\Bridges\FormsLatte\Runtime::item('email', $this->global)->getLabel())?->addAttributes(['class' => 'form-label']) /* pos 27:9 */;
-		echo '
-        ';
-		echo Nette\Bridges\FormsLatte\Runtime::item('email', $this->global)->getControl()->addAttributes(['class' => 'form-control', 'type' => 'email']) /* pos 28:9 */;
-		echo "\n";
+    <div class="mb-2">
+        <label';
+		echo ($ʟ_elem = Nette\Bridges\FormsLatte\Runtime::item('email', $this->global)->getLabelPart())->addAttributes(['class' => null])->attributes() /* pos 27:16 */;
+		echo ' class="form-label">';
+		echo $ʟ_elem->getHtml() /* pos 27:16 */;
+		echo '</label>
+        <input';
+		echo ($ʟ_elem = Nette\Bridges\FormsLatte\Runtime::item('email', $this->global)->getControlPart())->addAttributes(['type' => null, 'class' => null])->attributes() /* pos 28:16 */;
+		echo ' type="email"';
+		echo ($ʟ_tmp = array_filter(['form-control', $form['email']->error ? 'is-invalid' : null])) ? ' class="' . LR\HtmlHelpers::escapeAttr(implode(" ", array_unique($ʟ_tmp))) . '"' : "" /* pos 28:44 */;
+		echo '>
+';
 		ob_start(fn() => '');
 		try {
-			echo '        <span class="text-danger small">';
+			echo '        <div class="invalid-feedback">';
 			ob_start();
 			try {
-				echo LR\HtmlHelpers::escapeText($form['email']->error) /* pos 29:53 */;
+				echo LR\HtmlHelpers::escapeText($form['email']->error) /* pos 29:51 */;
 
 			} finally {
 				$ʟ_ifc[3] = rtrim(ob_get_flush()) === '';
 			}
-			echo '</span>
+			echo '</div>
 ';
 
 		} finally {
@@ -159,23 +176,27 @@ final class Template_446fe1f204 extends Latte\Runtime\Template
 		echo '    </div>
 
     <div class="form-check mb-4">
-        ';
-		echo Nette\Bridges\FormsLatte\Runtime::item('is_authorized', $this->global)->getControl()->addAttributes(['class' => 'form-check-input']) /* pos 33:9 */;
-		echo '
-        ';
-		echo ($ʟ_label = Nette\Bridges\FormsLatte\Runtime::item('is_authorized', $this->global)->getLabel())?->addAttributes(['class' => 'form-check-label']) /* pos 34:9 */;
-		echo "\n";
+        <input';
+		echo ($ʟ_elem = Nette\Bridges\FormsLatte\Runtime::item('is_authorized', $this->global)->getControlPart())->addAttributes(['class' => null])->attributes() /* pos 33:16 */;
+		echo ($ʟ_tmp = array_filter(['form-check-input', $form['is_authorized']->error ? 'is-invalid' : null])) ? ' class="' . LR\HtmlHelpers::escapeAttr(implode(" ", array_unique($ʟ_tmp))) . '"' : "" /* pos 33:39 */;
+		echo '>
+        <label';
+		echo ($ʟ_elem = Nette\Bridges\FormsLatte\Runtime::item('is_authorized', $this->global)->getLabelPart())->addAttributes(['class' => null])->attributes() /* pos 34:16 */;
+		echo ' class="form-check-label">';
+		echo $ʟ_elem->getHtml() /* pos 34:16 */;
+		echo '</label>
+';
 		ob_start(fn() => '');
 		try {
-			echo '        <span class="text-danger d-block small">';
+			echo '        <div class="invalid-feedback">';
 			ob_start();
 			try {
-				echo LR\HtmlHelpers::escapeText($form['is_authorized']->error) /* pos 35:61 */;
+				echo LR\HtmlHelpers::escapeText($form['is_authorized']->error) /* pos 35:51 */;
 
 			} finally {
 				$ʟ_ifc[4] = rtrim(ob_get_flush()) === '';
 			}
-			echo '</span>
+			echo '</div>
 ';
 
 		} finally {
@@ -188,10 +209,89 @@ final class Template_446fe1f204 extends Latte\Runtime\Template
 		}
 		echo '    </div>
 
-    ';
-		echo Nette\Bridges\FormsLatte\Runtime::item('send', $this->global)->getControl()->addAttributes(['class' => 'btn btn-primary w-100']) /* pos 38:5 */;
-		echo "\n";
+    <input';
+		echo ($ʟ_elem = Nette\Bridges\FormsLatte\Runtime::item('send', $this->global)->getControlPart())->addAttributes(['class' => null])->attributes() /* pos 38:12 */;
+		echo ' class="btn btn-primary w-100">
+';
 		echo Nette\Bridges\FormsLatte\Runtime::renderFormEnd(array_pop($this->global->formsStack)) /* pos 39:1 */;
+
+		echo '
+
+<style>
+/* 1. Pro klasické samostatné bloky (které nejsou řádkem) */
+.mb-2:not(.row) {
+    position: relative;
+    padding-bottom: 20px !important; 
+}
+.mb-2:not(.row) .invalid-feedback {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-top: 0;
+}
+
+/* 2. Pro políčka, která jsou vedle sebe uvnitř Bootstrap řádku */
+.row > [class^="col-"], 
+.row > [class*=" col-"] {
+    position: relative;
+    /* Přidáme sloupcům spodní odsazení pro chybu */
+    padding-bottom: 20px !important; 
+}
+
+.row > [class^="col-"] .invalid-feedback,
+.row > [class*=" col-"] .invalid-feedback {
+    position: absolute;
+    bottom: 0;
+    /* Trik: Bootstrap sloupce mají vnitřní odsazení (gutter). 
+       Tímto zarovnáme text chyby přesně s okrajem inputu. */
+    left: calc(var(--bs-gutter-x, 1.5rem) * 0.5);
+    margin-top: 0;
+}
+
+/* 3. Ošetření pro checkbox na konci */
+.form-check.mb-4 {
+    position: relative;
+    padding-bottom: 20px !important;
+}
+.form-check.mb-4 .invalid-feedback {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+/* 1. Klasická políčka: Cílíme na label, po kterém HNED NÁSLEDUJE povinný prvek */
+.form-label:has(+ :required)::after {
+    content: " *";
+    color: #dc3545; /* Bootstrap danger červená */
+    font-weight: bold;
+}
+
+/* 2. Checkboxy: Cílíme na label, který je až ZA povinným checkboxem */
+.form-check-input:required + .form-check-label::after {
+    content: " *";
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* 3. Skupina rádio tlačítek: Cílíme na hlavní label, pokud je uvnitř seznamu povinné rádio */
+.form-group:has(.radio-list :required) > .form-label::after {
+    content: " *";
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.form-control.is-invalid {
+    /* Tvůj konkrétní bi-exclamation-circle převedený do data URI */
+    background-image: url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'16\' height=\'16\' fill=\'%23dc3545\' viewBox=\'0 0 16 16\'%3e%3cpath d=\'M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\'/%3e%3cpath d=\'M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z\'/%3e%3c/svg%3e") !important;
+    
+    background-repeat: no-repeat !important;
+    background-position: right calc(0.375em + 0.1875rem) center !important;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem) !important;
+    
+    /* Padding, aby text v políčku nepodjížděl pod novou ikonku */
+    padding-right: calc(1.5em + 0.75rem) !important;
+}
+</style>';
 	}
 
 

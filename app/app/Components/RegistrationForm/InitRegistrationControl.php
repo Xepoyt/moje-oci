@@ -8,6 +8,7 @@ use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
 use App\Services\RegistrationService;
 use Nette\Database\UniqueConstraintViolationException;
+use App\Utils\IcoValidator;
 
 class InitRegistrationControl extends Control
 {
@@ -23,7 +24,9 @@ class InitRegistrationControl extends Control
         $form = new Form;
         $form->addText('ico', 'IČO')
             ->setRequired('IČO je povinné.')
-            ->addRule($form::Pattern, 'IČO musí být ve formátu 12345678', '^\d{8}$');
+            ->setHtmlAttribute('data-number-only', true)
+            ->addRule($form::Pattern, 'IČO musí být ve formátu 12345678', '^(\s*\d){8}$')
+            ->addRule('App\Utils\IcoValidator::validateNette', 'Zadané IČO není platné (neodpovídá kontrolní součet).');
         $form->addText('contact_person_name', 'Jméno')
             ->setRequired('Jméno je povinné.');
         $form->addText('contact_person_surname', 'Příjmení')

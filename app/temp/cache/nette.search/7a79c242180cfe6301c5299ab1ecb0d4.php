@@ -20,7 +20,7 @@ return array (
     'App\\Components\\RegistrationForm\\CompleteRegistrationControl' => 
     array (
       0 => '/var/www/html/app/app/Components/RegistrationForm/CompleteRegistrationControl.php',
-      1 => 1781644419,
+      1 => 1781875251,
     ),
     'App\\Components\\RegistrationForm\\CompleteRegistrationControlFactory' => 
     array (
@@ -30,7 +30,7 @@ return array (
     'App\\Components\\RegistrationForm\\InitRegistrationControl' => 
     array (
       0 => '/var/www/html/app/app/Components/RegistrationForm/InitRegistrationControl.php',
-      1 => 1781699959,
+      1 => 1781876056,
     ),
     'App\\Components\\RegistrationForm\\InitRegistrationControlFactory' => 
     array (
@@ -80,7 +80,7 @@ return array (
     'App\\Services\\EmailService' => 
     array (
       0 => '/var/www/html/app/app/Services/EmailService.php',
-      1 => 1781701342,
+      1 => 1781702015,
     ),
     'App\\Services\\FileMailer' => 
     array (
@@ -90,7 +90,12 @@ return array (
     'App\\Services\\RegistrationService' => 
     array (
       0 => '/var/www/html/app/app/Services/RegistrationService.php',
-      1 => 1781701362,
+      1 => 1781874519,
+    ),
+    'App\\Utils\\IcoValidator' => 
+    array (
+      0 => '/var/www/html/app/app/Utils/IcoValidator.php',
+      1 => 1781876044,
     ),
   ),
   1 => 

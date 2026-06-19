@@ -1,39 +1,115 @@
 {form form}
-    <div n:if="$form->hasErrors()" class="alert alert-danger">
-        <p n:foreach="$form->errors as $error">{$error}</p>
+    <div n:if="$form->ownErrors" class="alert alert-danger">
+        <p n:foreach="$form->ownErrors as $error">{$error}</p>
     </div>
 
-    <div class="mb-3">
-        {label ico, class => "form-label fw-bold" /}
-        {input ico, class => "form-control"}
-        <span class="text-danger small" n:ifcontent>{$form['ico']->error}</span>
+    <div class="mb-2">
+        <label n:name="ico" class="form-label fw-bold" />
+        <input n:name="ico" n:class="form-control, $form['ico']->error ? is-invalid">
+        <div class="invalid-feedback" n:ifcontent>{$form['ico']->error}</div>
     </div>
 
     <label class="form-label fw-bold">Kontaktní osoba</label>
-    <div class="row g-3 mb-3">
+    <div class="row g-3 mb-2">
         <div class="col-md-6">
-            {label contact_person_name, class => "form-label" /}
-            {input contact_person_name, class => "form-control"}
-            <span class="text-danger small" n:ifcontent>{$form['contact_person_name']->error}</span>
+            <label n:name="contact_person_name" class="form-label" />
+            <input n:name="contact_person_name" n:class="form-control, $form['contact_person_name']->error ? is-invalid">
+            <div class="invalid-feedback" n:ifcontent>{$form['contact_person_name']->error}</div>
         </div>
         <div class="col-md-6">
-            {label contact_person_surname, class => "form-label" /}
-            {input contact_person_surname, class => "form-control"}
-            <span class="text-danger small" n:ifcontent>{$form['contact_person_surname']->error}</span>
+            <label n:name="contact_person_surname" class="form-label" />
+            <input n:name="contact_person_surname" n:class="form-control, $form['contact_person_surname']->error ? is-invalid">
+            <div class="invalid-feedback" n:ifcontent>{$form['contact_person_surname']->error}</div>
         </div>
     </div>
 
-    <div class="mb-3">
-        {label email, class => "form-label" /}
-        {input email, class => "form-control", type => "email"}
-        <span class="text-danger small" n:ifcontent>{$form['email']->error}</span>
+    <div class="mb-2">
+        <label n:name="email" class="form-label" />
+        <input n:name="email" type="email" n:class="form-control, $form['email']->error ? is-invalid">
+        <div class="invalid-feedback" n:ifcontent>{$form['email']->error}</div>
     </div>
 
     <div class="form-check mb-4">
-        {input is_authorized, class => "form-check-input"}
-        {label is_authorized, class => "form-check-label" /}
-        <span class="text-danger d-block small" n:ifcontent>{$form['is_authorized']->error}</span>
+        <input n:name="is_authorized" n:class="form-check-input, $form['is_authorized']->error ? is-invalid">
+        <label n:name="is_authorized" class="form-check-label" />
+        <div class="invalid-feedback" n:ifcontent>{$form['is_authorized']->error}</div>
     </div>
 
-    {input send, class => "btn btn-primary w-100"}
+    <input n:name="send" class="btn btn-primary w-100">
 {/form}
+
+<style>
+/* 1. Pro klasické samostatné bloky (které nejsou řádkem) */
+.mb-2:not(.row) {
+    position: relative;
+    padding-bottom: 20px !important; 
+}
+.mb-2:not(.row) .invalid-feedback {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-top: 0;
+}
+
+/* 2. Pro políčka, která jsou vedle sebe uvnitř Bootstrap řádku */
+.row > [class^="col-"], 
+.row > [class*=" col-"] {
+    position: relative;
+    /* Přidáme sloupcům spodní odsazení pro chybu */
+    padding-bottom: 20px !important; 
+}
+
+.row > [class^="col-"] .invalid-feedback,
+.row > [class*=" col-"] .invalid-feedback {
+    position: absolute;
+    bottom: 0;
+    /* Trik: Bootstrap sloupce mají vnitřní odsazení (gutter). 
+       Tímto zarovnáme text chyby přesně s okrajem inputu. */
+    left: calc(var(--bs-gutter-x, 1.5rem) * 0.5);
+    margin-top: 0;
+}
+
+/* 3. Ošetření pro checkbox na konci */
+.form-check.mb-4 {
+    position: relative;
+    padding-bottom: 20px !important;
+}
+.form-check.mb-4 .invalid-feedback {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+/* 1. Klasická políčka: Cílíme na label, po kterém HNED NÁSLEDUJE povinný prvek */
+.form-label:has(+ :required)::after {
+    content: " *";
+    color: #dc3545; /* Bootstrap danger červená */
+    font-weight: bold;
+}
+
+/* 2. Checkboxy: Cílíme na label, který je až ZA povinným checkboxem */
+.form-check-input:required + .form-check-label::after {
+    content: " *";
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* 3. Skupina rádio tlačítek: Cílíme na hlavní label, pokud je uvnitř seznamu povinné rádio */
+.form-group:has(.radio-list :required) > .form-label::after {
+    content: " *";
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.form-control.is-invalid {
+    /* Tvůj konkrétní bi-exclamation-circle převedený do data URI */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23dc3545' viewBox='0 0 16 16'%3e%3cpath d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16'/%3e%3cpath d='M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z'/%3e%3c/svg%3e") !important;
+    
+    background-repeat: no-repeat !important;
+    background-position: right calc(0.375em + 0.1875rem) center !important;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem) !important;
+    
+    /* Padding, aby text v políčku nepodjížděl pod novou ikonku */
+    padding-right: calc(1.5em + 0.75rem) !important;
+}
+</style>

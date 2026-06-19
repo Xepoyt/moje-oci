@@ -33,8 +33,9 @@ class CompleteRegistrationControl extends Control
         $form->addText('address_city', 'Město')
             ->setRequired('Zadejte město.');
         $form->addText('address_ZIP', 'PSČ')
+            ->setHtmlAttribute('data-number-only', true)
             ->setRequired('Zadejte PSČ.')
-            ->addRule($form::Pattern, 'PSČ musí být ve formátu 12345', '^\d{5}$');
+            ->addRule($form::Pattern, 'PSČ musí být ve formátu 12345', '^(\s*\d){5}$');
         
         $form->addText('web', 'Webové stránky')
             ->addRule($form::URL, 'Zadejte platnou URL adresu.');
@@ -56,9 +57,10 @@ class CompleteRegistrationControl extends Control
                 ->toggle('snippet-email'); // Toto ID musí být v Latte
 
         $form->addText('reservation_phone', 'Kontaktní telefon')
+            ->setHtmlAttribute('data-phone-only', true)
             ->addConditionOn($programType, $form::Equal, 1)
                 ->setRequired('Zadejte telefon.')
-                ->addRule($form::Pattern, 'Telefon musí být ve formátu +420123456789', '^\+420\d{9}$')
+                ->addRule($form::Pattern, 'Telefon musí být ve formátu +420123456789', '^\+420(\s*\d){9}$')
                 ->toggle('snippet-phone');
 
         $form->addInteger('max_patients', 'Maximální počet pacientů', )
