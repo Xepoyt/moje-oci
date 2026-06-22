@@ -47,7 +47,7 @@ class InitRegistrationControl extends Control
         try {
             $this->registrationService->initiateRegistration($values);
             
-            $this->onComplete($this);
+            $this->onComplete($this, $values);
             
         } catch (UniqueConstraintViolationException $e) {
             $form->addError('Toto IČO už u nás prošlo/prochází registrací.');

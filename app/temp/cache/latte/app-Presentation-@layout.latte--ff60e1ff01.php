@@ -42,7 +42,9 @@ final class Template_ff60e1ff01 extends Latte\Runtime\Template
 		echo '/assets/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 	
-	<link rel="icon" href="eye.svg" sizes="any" type="image/svg+xml">
+	<link rel="icon" href="';
+		echo LR\HtmlHelpers::escapeAttr($basePath) /* pos 12:25 */;
+		echo '/eye.svg" sizes="any" type="image/svg+xml">
 
 	
 	<script src="';

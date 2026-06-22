@@ -17,10 +17,20 @@ return array (
       0 => '/var/www/html/app/app/Components/Admin/ClinicsGridControlFactory.php',
       1 => 1781546343,
     ),
+    'App\\Components\\Info\\ClinicDetailControl' => 
+    array (
+      0 => '/var/www/html/app/app/Components/Info/ClinicDetailControl.php',
+      1 => 1782081872,
+    ),
+    'App\\Components\\Info\\ClinicDetailControlFactory' => 
+    array (
+      0 => '/var/www/html/app/app/Components/Info/ClinicDetailControlFactory.php',
+      1 => 1782081870,
+    ),
     'App\\Components\\RegistrationForm\\CompleteRegistrationControl' => 
     array (
       0 => '/var/www/html/app/app/Components/RegistrationForm/CompleteRegistrationControl.php',
-      1 => 1781875251,
+      1 => 1781878203,
     ),
     'App\\Components\\RegistrationForm\\CompleteRegistrationControlFactory' => 
     array (
@@ -30,7 +40,7 @@ return array (
     'App\\Components\\RegistrationForm\\InitRegistrationControl' => 
     array (
       0 => '/var/www/html/app/app/Components/RegistrationForm/InitRegistrationControl.php',
-      1 => 1781876056,
+      1 => 1781878198,
     ),
     'App\\Components\\RegistrationForm\\InitRegistrationControlFactory' => 
     array (
@@ -40,7 +50,7 @@ return array (
     'App\\Core\\RouterFactory' => 
     array (
       0 => '/var/www/html/app/app/Core/RouterFactory.php',
-      1 => 1781536605,
+      1 => 1782083015,
     ),
     'App\\Models\\FacilityManager' => 
     array (
@@ -75,7 +85,7 @@ return array (
     'App\\Presentation\\Registration\\RegistrationPresenter' => 
     array (
       0 => '/var/www/html/app/app/Presentation/Registration/RegistrationPresenter.php',
-      1 => 1781537512,
+      1 => 1782082979,
     ),
     'App\\Services\\EmailService' => 
     array (
@@ -95,7 +105,7 @@ return array (
     'App\\Utils\\IcoValidator' => 
     array (
       0 => '/var/www/html/app/app/Utils/IcoValidator.php',
-      1 => 1781876044,
+      1 => 1781876817,
     ),
   ),
   1 => 

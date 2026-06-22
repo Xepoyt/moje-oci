@@ -1,0 +1,103 @@
+<div class="card shadow-sm mt-4">
+    <div class="card-header bg-light">
+        <h2 class="h5 mb-0">Základní údaje</h2>
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-borderless table-striped mb-0">
+            <tbody>
+                <tr>
+                    {* Tady je hlavní změna: odstraněno w-25, přidána minimální šířka *}
+                    <th class="ps-4" style="width: 40%; min-width: 220px;">Kontaktní osoba:</th>
+                    <td class="pe-4">{$userData->contact_person_name} {$userData->contact_person_surname}</td>
+                </tr>
+                <tr>
+                    <th class="ps-4">Kontaktní e-mail:</th>
+                    <td class="pe-4">{$userData->email}</td>
+                </tr>
+                <tr>
+                    <th class="ps-4">IČO:</th>
+                    <td class="pe-4">{$userData->ico}</td>
+                </tr>
+                
+                {if $userData->name}
+                <tr>
+                    <th class="ps-4">Název ordinace/kliniky:</th>
+                    <td class="pe-4"><strong>{$userData->name}</strong></td>
+                </tr>
+                {/if}
+
+                {if $userData->address_street_number || $userData->address_city}
+                <tr>
+                    <th class="ps-4">Adresa:</th>
+                    <td class="pe-4">
+                        {$userData->address_street_number}<br>
+                        {$userData->address_city}, {$userData->address_ZIP}
+                    </td>
+                </tr>
+                {/if}
+
+                {if $userData->web}
+                <tr>
+                    <th class="ps-4">Webové stránky:</th>
+                    <td class="pe-4"><a href="{$userData->web}" target="_blank">{$userData->web}</a></td>
+                </tr>
+                {/if}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="card shadow-sm mt-4">
+    <div class="card-header bg-light">
+        <h2 class="h5 mb-0">Informace pro pacienty a rezervace</h2>
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-borderless table-striped mb-0">
+            <tbody>
+                {if $userData->program_type}
+                <tr>
+                    {* To samé tady, aby byly obě tabulky opticky stejně široké *}
+                    <th class="ps-4" style="width: 40%; min-width: 220px;">Typ programu:</th>
+                    <td class="pe-4">
+                        {$programs[$userData->program_type]}
+                    </td>
+                </tr>
+                {/if}
+
+                {if $userData->reservation_email}
+                <tr>
+                    <th class="ps-4">Rezervační e-mail:</th>
+                    <td class="pe-4"><a href="mailto:{$userData->reservation_email}">{$userData->reservation_email}</a></td>
+                </tr>
+                {/if}
+
+                {if $userData->reservation_phone}
+                <tr>
+                    <th class="ps-4">Rezervační telefon:</th>
+                    <td class="pe-4">{$userData->reservation_phone}</td>
+                </tr>
+                {/if}
+
+                {if $userData->max_patients}
+                <tr>
+                    <th class="ps-4">Kapacita nových pacientů:</th>
+                    <td class="pe-4">
+                        {if $userData->max_patients == -1}
+                            Neomezeně
+                        {else}
+                            {$userData->max_patients}
+                        {/if}
+                    </td>
+                </tr>
+                {/if}
+
+                {if $userData->description}
+                <tr>
+                    <th class="ps-4">Popis ordinace:</th>
+                    <td class="pe-4">{$userData->description|breaklines}</td>
+                </tr>
+                {/if}
+            </tbody>
+        </table>
+    </div>
+</div>

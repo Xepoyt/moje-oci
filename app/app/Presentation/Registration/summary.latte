@@ -1,0 +1,15 @@
+{block title}Shrnutí registrace{/block}
+{block content}
+
+    {if !$found}
+        <p class="lead mt-3">Záznam bohužel nebyl nalezen v databázi. Zkuste to znovu později. Pokud problém přetrvává, kontaktujte podporu.</p>
+    {else}
+
+        <p class="lead mt-3">Děkujeme za registraci. Zde je shrnutí uložených údajů o vaší klinice:</p>
+
+        {control clinicDetail $clinicId}
+    {/if}
+    <div class="mt-4">
+        <a n:href=":Home:Home:default" class="btn btn-primary">Zpět na hlavní stranu</a>
+    </div>
+{/block}

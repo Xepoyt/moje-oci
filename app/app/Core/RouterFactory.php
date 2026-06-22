@@ -23,6 +23,10 @@ final class RouterFactory
         // Zabráníme tomu, aby URL vypadala jako /registration/complete
         $router->addRoute('dokonceni-registrace', 'Registration:Registration:complete');
 
+        $router->addRoute('shrnuti-registrace/<id>', 'Registration:Registration:summary');
+
+        $router->addRoute('registrace-odeslana', 'Registration:Registration:sent');
+
         // 3. Výchozí routa (homepage) směřující na 1. krok registrace
         $router->addRoute('<presenter>/<action>[/<id>]', [
             'module' => 'Home',

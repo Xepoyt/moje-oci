@@ -6,6 +6,7 @@ services:
 	- App\Components\RegistrationForm\InitRegistrationControlFactory
 	- App\Components\RegistrationForm\CompleteRegistrationControlFactory
 	- App\Components\Admin\ClinicsGridControlFactory
+	- App\Components\Info\ClinicDetailControlFactory
 
 
 search:

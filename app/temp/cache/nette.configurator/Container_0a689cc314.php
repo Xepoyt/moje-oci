@@ -71,6 +71,7 @@ class Container_0a689cc314 extends Nette\DI\Container
 		'App\Components\RegistrationForm\InitRegistrationControlFactory' => [['05']],
 		'App\Components\RegistrationForm\CompleteRegistrationControlFactory' => [['06']],
 		'App\Components\Admin\ClinicsGridControlFactory' => [['07']],
+		'App\Components\Info\ClinicDetailControlFactory' => [['08']],
 		'Nette\Application\UI\Presenter' => [2 => ['application.1', 'application.2', 'application.4', 'application.5']],
 		'Nette\Application\UI\Control' => [2 => ['application.1', 'application.2', 'application.4', 'application.5']],
 		'Nette\Application\UI\Component' => [2 => ['application.1', 'application.2', 'application.4', 'application.5']],
@@ -202,6 +203,23 @@ class Container_0a689cc314 extends Nette\DI\Container
 	}
 
 
+	public function createService08(): App\Components\Info\ClinicDetailControlFactory
+	{
+		return new class ($this) implements App\Components\Info\ClinicDetailControlFactory {
+			public function __construct(
+				private Container_0a689cc314 $container,
+			) {
+			}
+
+
+			public function create(): App\Components\Info\ClinicDetailControl
+			{
+				return new App\Components\Info\ClinicDetailControl($this->container->getService('02'));
+			}
+		};
+	}
+
+
 	public function createServiceApplication__1(): App\Presentation\Admin\AdminPresenter
 	{
 		$service = new App\Presentation\Admin\AdminPresenter($this->getService('07'));
@@ -265,6 +283,7 @@ class Container_0a689cc314 extends Nette\DI\Container
 			$this->getService('02'),
 			$this->getService('05'),
 			$this->getService('06'),
+			$this->getService('08'),
 		);
 		$service->injectPrimary(
 			$this->getService('http.request'),
