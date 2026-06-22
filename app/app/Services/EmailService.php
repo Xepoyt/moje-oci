@@ -95,4 +95,38 @@ class EmailService
 
         $this->mailer->send($mail);
     }
+
+    public function sendClinicDeniedEmail(string $email, string $facilityName, string $reason, int $previousState): void
+    {
+
+        $params = [
+            'facilityName' => $facilityName,
+            'reason' => $reason,
+            'previousState' => $previousState
+        ];
+
+        $latte = $this->latteFactory->create();
+        
+        $htmlBody = $latte->renderToString(__DIR__ . '/../Mails/registrationDenied.latte', $params);
+
+        $mail = new Message;
+        $mail->setFrom('moje-oci@seznam.cz', 'MOJE OČI - Portál')
+            ->addTo($email)
+            ->setHtmlBody($htmlBody);
+        switch ($previousState) {
+            case 0:
+                $mail->setSubject('Vaše registrace nebyla schválena');
+                break;
+            case 1:
+                $mail->setSubject('Vaše registrace byla zrušena administrátorem');
+                break;
+            case 2:
+                $mail->setSubject('Vaše žádost o změnu registrace byla zamítnuta');
+                break;
+            default:
+                $mail->setSubject('Vaše registrace byla zamítnuta administrátorem');
+                break;
+        }
+        $this->mailer->send($mail);
+    }
 }

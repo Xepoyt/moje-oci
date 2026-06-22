@@ -45,52 +45,57 @@ class FacilityManager
         $this->database->table('clinics')->where('id', $id)->update($data);
     }
 
-    private function applySearch(Nette\Database\Table\Selection $query, ?string $searchField, ?string $searchQuery): void
+    private function applySearch(Nette\Database\Table\Selection $query, array $filters): void
     {
-        $allowedFields = [
-            'contact_person_name', 'contact_person_surname', 'email', 
-            'name', 'address_street_number', 'address_city', 'address_ZIP'
-        ];
-
-        if ($searchField && $searchQuery && in_array($searchField, $allowedFields, true)) {
-            $query->where("$searchField LIKE ?", "%$searchQuery%");
+        if (!empty($filters['ico'])) $query->where('ico LIKE ?', "%{$filters['ico']}%");
+        if (!empty($filters['name'])) $query->where('name LIKE ?', "%{$filters['name']}%");
+        if (!empty($filters['email'])) $query->where('email LIKE ?', "%{$filters['email']}%");
+        if (!empty($filters['program_type'])) $query->where('program_type = ?', $filters['program_type']);
+        
+        if (isset($filters['status']) && $filters['status'] !== '') {
+            $status = (int)$filters['status'];
+            if ($status === 0) $query->where('is_email_verified = 0 AND is_approved = 0');
+            elseif ($status === 4) $query->where('is_email_verified = 1 AND is_approved = 0'); // Čeká
+            elseif ($status === 1) $query->where('is_approved = 1');
+            elseif ($status === 2) $query->where('is_approved = 2'); // Žádá o změnu
+            elseif ($status === 3) $query->where('is_approved = 3'); // Zamítnuto
         }
     }
 
-    public function getClinicsCount(?string $searchField = null, ?string $searchQuery = null): int
+    public function getClinicsCount(array $filters = []): int
     {
         $query = $this->database->table('clinics');
-        $this->applySearch($query, $searchField, $searchQuery);
-        
+        $this->applySearch($query, $filters);
         return $query->count('*');
     }
 
-    public function getClinicsPage(int $offset, int $limit, string $sort = 'created_at', string $order = 'DESC', ?string $searchField = null, ?string $searchQuery = null)
+    public function getClinicsPage(int $offset, int $limit, string $sort = 'created_at', string $order = 'DESC', array $filters = [])
     {
         $query = $this->database->table('clinics');
-        $this->applySearch($query, $searchField, $searchQuery);
+        $this->applySearch($query, $filters);
 
-        switch($sort){
-            case 'is_approved':
-                $query->order('((is_approved * 2) + is_email_verified) ' . $order);
-                break;
-            case 'contact_person':
-                $query->order('contact_person_surname ' . $order . ', contact_person_name ' . $order);
-                break;
-            case 'address':
-                $query->order('address_city ' . $order . ', address_ZIP ' . $order . ', address_street_number ' . $order);
-                break;
-            default:
-                $query->order($sort . ' ' . $order);
+        if ($sort === 'is_approved') {
+            $query->order('is_approved ' . $order . ', is_email_verified ' . $order);
+        } else {
+            $query->order($sort . ' ' . $order);
         }
         return $query->limit($limit, $offset);
     }
 
     public function approveClinic(int $id): void
     {
-        $this->database->table('clinics')
-            ->where('id', $id)
-            ->update(['is_approved' => 1]);
+        $this->database->table('clinics')->where('id', $id)->update([
+            'is_approved' => 1,
+            'deny_reason' => null
+        ]);
+    }
+
+    public function denyClinic(int $id, string $reason): void
+    {
+        $this->database->table('clinics')->where('id', $id)->update([
+            'is_approved' => 3, 
+            'deny_reason' => $reason
+        ]);
     }
 
     public function getClinic(int $id): ?Nette\Database\Table\ActiveRow

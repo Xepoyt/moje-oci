@@ -1,0 +1,48 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Oznámení o stavu registrace</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.5; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        /* Jemný červený box pro zvýraznění důvodu zamítnutí */
+        .reason-box { background: #fff5f5; border-left: 4px solid #dc3545; padding: 15px; margin: 20px 0; border-radius: 4px; }
+        .footer { margin-top: 30px; font-size: 12px; color: #777; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {if $previousState === 0}
+            <h1>Registrace nebyla schválena</h1>
+            <p>Dobrý den,</p>
+            <p>Vaše registrace zdravotnického zařízení <strong>{$facilityName}</strong> nebyla schválena administrátorem portálu MOJE OČI.</p>
+        {elseif $previousState === 1}
+            <h1>Registrace byla zrušena</h1>
+            <p>Dobrý den,</p>
+            <p>Vaše registrace zdravotnického zařízení <strong>{$facilityName}</strong> byla zrušena administrátorem portálu MOJE OČI.</p>
+        {elseif $previousState === 2}
+            <h1>Žádost o změnu byla zamítnuta</h1>
+            <p>Dobrý den,</p>
+            <p>Vaše žádost o změnu údajů u zdravotnického zařízení <strong>{$facilityName}</strong> byla administrátorem zamítnuta.</p>
+        {else}
+            <h1>Registrace byla zamítnuta</h1>
+            <p>Dobrý den,</p>
+            <p>Vaše registrace zdravotnického zařízení <strong>{$facilityName}</strong> byla zamítnuta administrátorem portálu MOJE OČI.</p>
+        {/if}
+
+        {* Pokud administrátor vyplnil důvod, tak ho ukážeme *}
+        {if !empty($reason)}
+            <p><strong>Důvod uvedený administrátorem:</strong></p>
+            <div class="reason-box">
+                {$reason|breakLines}
+            </div>
+        {/if}
+
+        <p>Po přihlášení do portálu MOJE OČI můžete upravit informace o svém zdravotnickém zařízení a zažádat o jejich změnu v databázi.</p>
+
+        <div class="footer">
+            Tento e-mail byl vygenerován automaticky, neodpovídejte na něj.
+        </div>
+    </div>
+</body>
+</html>

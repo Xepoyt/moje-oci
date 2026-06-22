@@ -88,7 +88,9 @@ final class Template_ff60e1ff01 extends Latte\Runtime\Template
         naja.initialize();
     });
 </script>
-</html>
+';
+		$this->renderBlock('scripts', [], 'html') /* pos 45:1 */;
+		echo '</html>
 ';
 	}
 

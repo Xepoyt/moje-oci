@@ -197,7 +197,7 @@ class Container_0a689cc314 extends Nette\DI\Container
 
 			public function create(): App\Components\Admin\ClinicsGridControl
 			{
-				return new App\Components\Admin\ClinicsGridControl($this->container->getService('02'), $this->container->getService('04'));
+				return new App\Components\Admin\ClinicsGridControl($this->container->getService('02'));
 			}
 		};
 	}
@@ -222,7 +222,12 @@ class Container_0a689cc314 extends Nette\DI\Container
 
 	public function createServiceApplication__1(): App\Presentation\Admin\AdminPresenter
 	{
-		$service = new App\Presentation\Admin\AdminPresenter($this->getService('07'));
+		$service = new App\Presentation\Admin\AdminPresenter(
+			$this->getService('07'),
+			$this->getService('08'),
+			$this->getService('04'),
+			$this->getService('02'),
+		);
 		$service->injectPrimary(
 			$this->getService('http.request'),
 			$this->getService('http.response'),

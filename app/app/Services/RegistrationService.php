@@ -83,4 +83,20 @@ class RegistrationService
             );
         }
     }
+
+    public function denyClinic(int $clinicId, string $reason): void
+    {
+        $clinic = $this->facilityManager->getClinic($clinicId);
+        $previousState = $clinic ? $clinic->is_approved : null;
+        $this->facilityManager->denyClinic($clinicId, $reason);
+
+        if ($clinic) {
+            $this->emailService->sendClinicDeniedEmail(
+                $clinic->email,
+                $clinic->name,
+                $reason,
+                $previousState
+            );
+        }
+    }
 }
