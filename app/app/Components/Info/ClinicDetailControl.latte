@@ -47,6 +47,7 @@
     </div>
 </div>
 
+{if $userData->program_type}
 <div class="card shadow-sm mt-4">
     <div class="card-header bg-light">
         <h2 class="h5 mb-0">Informace pro pacienty a rezervace</h2>
@@ -54,15 +55,12 @@
     <div class="card-body p-0">
         <table class="table table-borderless table-striped mb-0">
             <tbody>
-                {if $userData->program_type}
                 <tr>
-                    {* To samé tady, aby byly obě tabulky opticky stejně široké *}
                     <th class="ps-4" style="width: 40%; min-width: 220px;">Typ programu:</th>
                     <td class="pe-4">
                         {$programs[$userData->program_type]}
                     </td>
                 </tr>
-                {/if}
 
                 {if $userData->reservation_email}
                 <tr>
@@ -101,3 +99,4 @@
         </table>
     </div>
 </div>
+{/if}

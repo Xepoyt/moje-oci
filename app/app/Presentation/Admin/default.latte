@@ -62,6 +62,10 @@
                             </div>
                         {/if}
 
+                        {if $detailClinic->is_approved == 2}
+                            {control changeRequestDetail $detailId}
+                        {/if}
+
                         {control clinicDetail $detailId}
                         
                     {else}

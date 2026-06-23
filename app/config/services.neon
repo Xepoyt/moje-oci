@@ -7,6 +7,10 @@ services:
 	- App\Components\RegistrationForm\CompleteRegistrationControlFactory
 	- App\Components\Admin\ClinicsGridControlFactory
 	- App\Components\Info\ClinicDetailControlFactory
+	- App\Components\Login\LoginControlFactory
+	- App\Security\ClinicAuthenticator
+	- App\Components\Account\ChangeContactControlFactory
+	- App\Services\AccountService
 
 
 search:

@@ -34,6 +34,12 @@ class InitRegistrationControl extends Control
         $form->addText('email', 'E-mail')
             ->setRequired('E-mail je povinný.')
             ->addRule($form::Email, 'Zadejte platný e-mail.');
+        $form->addPassword('password', 'Heslo')
+            ->setRequired('Heslo je povinné.')
+            ->addRule($form::MinLength, 'Heslo musí být dlouhé minimálně %d znaků.', 12);
+        $form->addPassword('password_repeat', 'Zopakujte heslo')
+            ->setRequired('Zopakování hesla je povinné.')
+            ->addRule($form::Equal, 'Hesla se neshodují', $form['password']);
         $form->addCheckbox('is_authorized', 'Jsem oprávněný jednat za toto zařízení')
             ->setRequired('Musíte potvdit oprávnění.');
         $form->addSubmit('send', 'Odeslat a ověřit e-mail');

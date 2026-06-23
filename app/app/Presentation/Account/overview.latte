@@ -1,0 +1,85 @@
+{block title}Přehled zařízení{/block}
+{block content}
+<div class="container mt-5">
+    {if $clinic->is_approved == 1}
+        <div class="alert alert-success d-flex align-items-center shadow-sm mb-4" role="alert">
+            <i class="bi bi-check-circle-fill fs-3 me-3"></i>
+            <div>
+                <h4 class="alert-heading h6 mb-1">Profil je schválený</h4>
+                <p class="mb-0 small">Vaše zařízení je aktivní a pacienti mohou vidět vaše aktuální údaje.</p>
+            </div>
+        </div>
+        
+    {elseif $clinic->is_approved == 2}
+        <div class="alert alert-warning d-flex align-items-center shadow-sm mb-4" role="alert">
+            <i class="bi bi-hourglass-split fs-3 me-3"></i>
+            <div>
+                <h4 class="alert-heading h6 mb-1">Změny čekají na schválení</h4>
+                <p class="mb-0 small">Nové údaje momentálně kontroluje administrátor. Do té doby se pacientům zobrazují vaše původní data.</p>
+            </div>
+        </div>
+        
+    {elseif $clinic->is_approved == 3}
+        <div class="alert alert-danger shadow-sm mb-4" role="alert">
+            <div class="d-flex align-items-center mb-2">
+                <i class="bi bi-x-octagon-fill fs-3 me-3"></i>
+                <h4 class="alert-heading h6 mb-0">Registrace byla zamítnuta</h4>
+            </div>
+            {if $clinic->deny_reason}
+                <hr>
+                <p class="mb-0"><strong>Důvod administrátora:</strong> {$clinic->deny_reason}</p>
+            {/if}
+        </div>
+        
+    {elseif $clinic->is_email_verified == 1}
+        <div class="alert alert-info d-flex align-items-center shadow-sm mb-4" role="alert">
+            <i class="bi bi-info-circle-fill fs-3 me-3"></i>
+            <div>
+                <h4 class="alert-heading h6 mb-1">Čekáme na schválení profilu</h4>
+                <p class="mb-0 small">E-mail byl úspěšně ověřen. Váš profil nyní čeká na kontrolu administrátorem, než bude zveřejněn pro pacienty.</p>
+            </div>
+        </div>
+    {/if}
+
+    <div>
+        <a n:href="Account:contact" class="btn btn-outline-primary">Změnit kontaktní údaje</a>
+        {if $clinic->is_email_verified == 1}
+            <a href="#" class="btn btn-outline-primary">Změnit údaje o klinice</a>
+        {/if}
+    </div>
+
+    {* Zde elegantně vykreslíme tvoji existující komponentu s ID přihlášené kliniky *}
+    {control clinicDetail $clinic->id}
+    {if $clinic->is_email_verified == 0}
+        <div class="card shadow-sm border-warning mt-5">
+            <div class="card-body p-4 p-md-5 text-center">
+                
+                {* Vizuální prvek - obálka s vykřičníkem (z Bootstrap Icons) *}
+                <div class="text-warning mb-3 display-1">
+                    <i class="bi bi-envelope-exclamation"></i>
+                </div>
+
+                <h3 class="h4 card-title mb-3">Čekáme na ověření e-mailu</h3>
+                <p class="card-text text-muted mb-4 fs-5">
+                    Bez ověření nemůže administrátor schválit vaše údaje.<br>
+                    Zkontrolujte prosím svou schránku.<br>
+                    Ověřovací zpráva byla odeslána na <strong>{$clinic->email}</strong>.
+                </p>
+                
+                <p class="text-muted small mb-4">
+                    <em>Zpráva nedorazila? Zkontrolujte složku Hromadné zprávy nebo Spam.</em>
+                </p>
+
+                {* Z odkazu jsme udělali hezké tlačítko *}
+                <a n:href="zaslatEmail!" class="btn btn-warning px-4 py-2 text-dark fw-bold">
+                    <i class="bi bi-send me-2"></i>Zaslat zprávu znovu
+                </a>
+            </div>
+        </div>
+    {/if}
+</div>
+{/block}
+
+{block headerAction}
+    <a n:href="logout!" class="btn btn-outline-light">Odhlásit se</a>
+{/block}

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Exception;
+use Throwable;
 use Nette;
 use Nette\Database\Explorer;
 use Nette\Utils\Random;
@@ -14,20 +16,28 @@ class FacilityManager
         private Explorer $database
     ) {}
 
-    public function createInitialRegistration(string $ico, string $contactPersonName, string $contactPersonSurname, string $email): string
+    public function createInitialRegistration(string $ico, string $contactPersonName, string $contactPersonSurname, string $email, string $password_hash): string
     {
-        do {
-            $token = Random::generate(32);
-        } while ($this->database->table('clinics')->where('token', $token)->fetch());
+        $token = $this->generateToken();
         
         $this->database->table('clinics')->insert([
             'ico' => $ico,
             'contact_person_name' => $contactPersonName,
             'contact_person_surname' => $contactPersonSurname,
             'email' => $email,
+            'password' => $password_hash,
             'token' => $token,
             'is_email_verified' => 0
         ]);
+
+        return $token;
+    }
+
+    public function generateToken(): string
+    {
+        do {
+            $token = Random::generate(32);
+        } while ($this->database->table('clinics')->where('token', $token)->fetch());
 
         return $token;
     }
@@ -40,7 +50,6 @@ class FacilityManager
     public function completeRegistration(int $id, array $data): void
     {
         $data['is_email_verified'] = 1;
-        $data['token'] = null; // Zneplatníme odkaz pro další použití
 
         $this->database->table('clinics')->where('id', $id)->update($data);
     }
@@ -98,9 +107,71 @@ class FacilityManager
         ]);
     }
 
+    public function approveClinicChange(int $id): void
+    {
+        $this->database->beginTransaction();
+        try {
+            $data = $this->database->table('clinic_change_requests')->where('clinics_id', $id)->fetch();
+            
+            if (!$data) {
+                $this->database->rollBack();
+                return;
+            }
+
+            $nonNullData = array_filter($data->toArray(), fn($value) => $value !== null && $value !== '');
+
+            unset($nonNullData['id']);
+            unset($nonNullData['clinics_id']);
+
+            $updateData = array_merge($nonNullData, [
+                'is_approved' => 1,
+                'deny_reason' => null
+            ]);
+            $this->database->table('clinics')->where('id', $id)->update($updateData);
+            $this->database->table('clinic_change_requests')->where('clinics_id', $id)->delete();
+            
+            $this->database->commit();
+
+        } catch (\Throwable $e) {
+            $this->database->rollBack();
+            throw $e;
+        }
+    }
+
+    public function denyClinicChange(int $id): void
+    {
+        $this->database->beginTransaction();
+        try {
+            $this->database->table('clinics')->where('id', $id)->update([
+                'is_approved' => 1,
+                'deny_reason' => null 
+            ]);
+
+            $this->database->table('clinic_change_requests')->where('clinics_id', $id)->delete();
+            
+            $this->database->commit();
+
+        } catch (\Throwable $e) {
+            $this->database->rollBack();
+            throw $e;
+        }
+    }
+
+    public function verifyEmail(int $id): void
+    {
+        $this->database->table('clinics')->where('id', $id)->update([
+            'is_email_verified' => 1
+        ]);
+    }
+
     public function getClinic(int $id): ?Nette\Database\Table\ActiveRow
     {
         return $this->database->table('clinics')->get($id);
+    }
+
+    public function findByIco(string $ico): ?Nette\Database\Table\ActiveRow
+    {
+        return $this->database->table('clinics')->where('ico', $ico)->fetch();
     }
 
     public function getPrograms(): array
@@ -116,5 +187,15 @@ class FacilityManager
     public function getProgramDescriptions(): array
     {
         return $this->database->table('programs')->fetchPairs('id', 'description');
+    }
+
+    public function getClinicChangeRequest(int $clinicId): ?Nette\Database\Table\ActiveRow
+    {
+        return $this->database->table('clinic_change_requests')->where('clinics_id', $clinicId)->fetch();
+    }
+
+    public function updateClinic(int $clinicId, array $data): void
+    {
+        $this->database->table('clinics')->where('id', $clinicId)->update($data);
     }
 }

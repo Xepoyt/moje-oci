@@ -1,0 +1,38 @@
+{block title}Neplatný odkaz{/block}
+
+{block content}
+<div class="row justify-content-center mt-5">
+    <div class="col-12 col-md-8 col-lg-6">
+        <div class="card shadow-sm border-0 text-center">
+            <div class="card-body p-5">
+                
+                {* Vizuální prvek - přetržený odkaz nebo varování *}
+                <div class="display-1 text-warning mb-4">
+                    <i class="bi bi-window-x"></i>
+                </div>
+
+                <h1 class="h3 mb-3">Tento odkaz již není platný</h1>
+                
+                <p class="text-muted lead mb-4">
+                    Odkaz, na který jste klikli, vypršel nebo byl zneplatněn.
+                </p>
+                
+                <p class="mb-4">
+                    K tomuto problému nejčastěji dochází, pokud jste v mezičase <strong>požádali o změnu kontaktního e-mailu</strong>, nebo pokud byl vygenerován odkaz nový. Vždy platí pouze ten nejnovější.
+                </p>
+
+                <div class="alert alert-secondary text-start fs-6 mb-4">
+                    <strong>Co dělat dál?</strong><br>
+                    Přihlaste se do svého účtu. Pokud váš e-mail stále čeká na ověření, systém vám automaticky nabídne možnost nechat si zaslat nový ověřovací odkaz.
+                </div>
+
+                <div class="mt-4 d-grid gap-2 d-sm-block">
+                    <a n:href=":Login:Login:default" class="btn btn-primary px-4">Přejít k přihlášení</a>
+                    <a n:href=":Home:Home:default" class="btn btn-outline-secondary px-4 mt-2 mt-sm-0">Zpět na hlavní stranu</a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

@@ -27,6 +27,12 @@ final class RouterFactory
 
         $router->addRoute('registrace-odeslana', 'Registration:Registration:sent');
 
+        $router->addRoute('prihlaseni', 'Login:Login:default');
+
+        $router->addRoute('moje-udaje', 'Account:Account:overview');
+
+        $router->addRoute('zmena-kontaktnich-udaju', 'Account:Account:contact');
+
         // 3. Výchozí routa (homepage) směřující na 1. krok registrace
         $router->addRoute('<presenter>/<action>[/<id>]', [
             'module' => 'Home',

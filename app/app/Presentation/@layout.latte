@@ -19,8 +19,9 @@
 
 <body>
 	<header class="bg-primary text-light position-sticky top-0 py-3 mb-4 z-3">
-		<div class="container d-flex justify-content-center align-items-center">
+		<div class="container d-flex justify-content-between align-items-center">
 			<h1><a n:href=":Home:Home:default" class="text-light text-decoration-none"><i class="bi bi-eye"></i> Moje Oči</a></h1>
+			{ifset headerAction}{include headerAction}{/ifset}
 		</div>
 	</header>
 
@@ -42,5 +43,5 @@
         naja.initialize();
     });
 </script>
-{include scripts}
+{ifset scripts}{include scripts}{/ifset}
 </html>

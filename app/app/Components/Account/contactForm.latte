@@ -3,13 +3,6 @@
         <p n:foreach="$form->ownErrors as $error">{$error}</p>
     </div>
 
-    <div class="mb-2">
-        <label n:name="ico" class="form-label fw-bold" />
-        <input n:name="ico" n:class="form-control, $form['ico']->error ? is-invalid">
-        <div class="invalid-feedback" n:ifcontent>{$form['ico']->error}</div>
-    </div>
-
-    <label class="form-label fw-bold">Kontaktní osoba</label>
     <div class="row g-3 mb-2">
         <div class="col-md-6">
             <label n:name="contact_person_name" class="form-label" />
@@ -27,26 +20,6 @@
         <label n:name="email" class="form-label" />
         <input n:name="email" type="email" n:class="form-control, $form['email']->error ? is-invalid">
         <div class="invalid-feedback" n:ifcontent>{$form['email']->error}</div>
-    </div>
-
-    <label class="form-label fw-bold">Přihlašovací údaje</label>
-    <div class="row g-3 mb-2">
-        <div class="col-md-6">
-            <label n:name="password" class="form-label" />
-            <input n:name="password" n:class="form-control, $form['password']->error ? is-invalid">
-            <div class="invalid-feedback" n:ifcontent>{$form['password']->error}</div>
-        </div>
-        <div class="col-md-6">
-            <label n:name="password_repeat" class="form-label" />
-            <input n:name="password_repeat" n:class="form-control, $form['password_repeat']->error ? is-invalid">
-            <div class="invalid-feedback" n:ifcontent>{$form['password_repeat']->error}</div>
-        </div>
-    </div>
-
-    <div class="form-check mb-4">
-        <input n:name="is_authorized" n:class="form-check-input, $form['is_authorized']->error ? is-invalid">
-        <label n:name="is_authorized" class="form-check-label" />
-        <div class="invalid-feedback" n:ifcontent>{$form['is_authorized']->error}</div>
     </div>
 
     <input n:name="send" class="btn btn-primary w-100">

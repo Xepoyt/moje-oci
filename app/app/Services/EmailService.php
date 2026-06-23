@@ -129,4 +129,44 @@ class EmailService
         }
         $this->mailer->send($mail);
     }
+
+    public function emailChangeOldAddress(string $oldEmail, string $ico): void
+    {
+        $params = [
+            'ico' => $ico
+        ];
+
+        $latte = $this->latteFactory->create();
+        
+        // Zde nepotřebujeme předávat žádné parametry, jde jen o informační e-mail
+        $htmlBody = $latte->renderToString(__DIR__ . '/../Mails/emailChangeOld.latte', $params);
+
+        $mail = new Message;
+        $mail->setFrom('moje-oci@seznam.cz', 'MOJE OČI - Portál')
+            ->addTo($oldEmail)
+            ->setSubject('Upozornění na změnu e-mailové adresy')
+            ->setHtmlBody($htmlBody);
+
+        $this->mailer->send($mail);
+    }
+
+    public function emailChangeNewAddress(string $newEmail, string $link, string $ico): void
+    {
+        $params = [
+            'link' => $link,
+            'ico' => $ico
+        ];
+
+        $latte = $this->latteFactory->create();
+        
+        $htmlBody = $latte->renderToString(__DIR__ . '/../Mails/emailChangeNew.latte', $params);
+
+        $mail = new Message;
+        $mail->setFrom('moje-oci@seznam.cz', 'MOJE OČI - Portál')
+            ->addTo($newEmail)
+            ->setSubject('Ověření nové e-mailové adresy')
+            ->setHtmlBody($htmlBody);
+
+        $this->mailer->send($mail);
+    }
 }

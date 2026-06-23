@@ -15,4 +15,18 @@ final class HomePresenter extends Nette\Application\UI\Presenter
     {
         $this->template->programs = $this->facilityManager->getPrograms();
     }
+    public function actionVerified(string $token): void
+    {
+        $clinic = $this->facilityManager->findByToken($token);
+
+        if (!$clinic) {
+            $this->redirect(':Home:Home:invalid');
+        }
+        elseif ($clinic->is_email_verified == 0){
+            $this->redirect(':Registrations:Registration:complete', ['token' => $token]);
+        }
+        else{
+            $this->facilityManager->verifyEmail($clinic->id);
+        }
+    }
 }

@@ -17,11 +17,13 @@ class RegistrationService
 
     public function initiateRegistration(\stdClass $values): void
     {
+        $hash = password_hash($values->password, null);
         $token = $this->facilityManager->createInitialRegistration(
             $values->ico, 
             $values->contact_person_name,
             $values->contact_person_surname, 
-            $values->email
+            $values->email,
+            $hash
         );
         
         // LinkGenerator vyžaduje plný název cíle
@@ -72,10 +74,15 @@ class RegistrationService
 
     public function approveClinic(int $clinicId): void
     {
-        $this->facilityManager->approveClinic($clinicId);
-
         $clinic = $this->facilityManager->getClinic($clinicId);
+        $previousState = $clinic ? $clinic->is_approved : null;
 
+        if($previousState != 2){
+            $this->facilityManager->approveClinic($clinicId);
+        }
+        else{
+            $this->facilityManager->approveClinicChange($clinicId);
+        }
         if ($clinic) {
             $this->emailService->sendApprovalNotification(
                 $clinic->email,
@@ -88,7 +95,13 @@ class RegistrationService
     {
         $clinic = $this->facilityManager->getClinic($clinicId);
         $previousState = $clinic ? $clinic->is_approved : null;
-        $this->facilityManager->denyClinic($clinicId, $reason);
+        
+        if($previousState != 2){
+            $this->facilityManager->denyClinic($clinicId, $reason);
+        }
+        else{
+            $this->facilityManager->denyClinicChange($clinicId);
+        }
 
         if ($clinic) {
             $this->emailService->sendClinicDeniedEmail(

@@ -43,8 +43,10 @@ class RegistrationPresenter extends Presenter
         $this->clinicRecord = $this->facilityManager->findByToken($token);
 
         if (!$this->clinicRecord) {
-            $this->flashMessage('Odkaz je neplatný nebo již byl použit. Pokud jste registraci již dokončili, přihlaste se.', 'danger');
-            $this->redirect(':Home:Home:default');
+            $this->redirect(':Home:Home:invalid');
+        }
+        elseif ($this->clinicRecord->is_email_verified == 2){
+            $this->redirect(':Home:Home:verified', ['token' => $token]);
         }
     }
 

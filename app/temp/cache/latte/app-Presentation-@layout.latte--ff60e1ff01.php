@@ -58,27 +58,31 @@ final class Template_ff60e1ff01 extends Latte\Runtime\Template
 
 <body>
 	<header class="bg-primary text-light position-sticky top-0 py-3 mb-4 z-3">
-		<div class="container d-flex justify-content-center align-items-center">
+		<div class="container d-flex justify-content-between align-items-center">
 			<h1><a href="';
 		echo LR\HtmlHelpers::escapeAttr($this->global->uiControl->link(':Home:Home:default')) /* pos 23:11 */;
 		echo '" class="text-light text-decoration-none"><i class="bi bi-eye"></i> Moje Oči</a></h1>
-		</div>
+';
+		if ($this->hasBlock('headerAction')) /* pos 24:4 */ {
+			$this->renderBlock('headerAction', [], 'html') /* pos 24:24 */;
+		}
+		echo '		</div>
 	</header>
 
 	<div';
 		echo ' id="', htmlspecialchars($this->global->snippetDriver->getHtmlId('flashes')), '"';
 		echo ' class="container mt-3 z-3">';
-		$this->renderBlock('flashes', [], null, 'snippet') /* pos 27:7 */;
+		$this->renderBlock('flashes', [], null, 'snippet') /* pos 28:7 */;
 		echo '</div>
 	<main class="container my-4 d-flex flex-column align-items-center">
 ';
-		if ($this->hasBlock('title')) /* pos 34:3 */ {
+		if ($this->hasBlock('title')) /* pos 35:3 */ {
 			echo '		<h2 class="text-center">';
-			$this->renderBlock('title', [], 'html') /* pos 34:40 */;
+			$this->renderBlock('title', [], 'html') /* pos 35:40 */;
 			echo '</h2>';
 		}
 		echo "\n";
-		$this->renderBlock('content', [], 'html') /* pos 35:3 */;
+		$this->renderBlock('content', [], 'html') /* pos 36:3 */;
 		echo '	</main>
 </body>
 <script src="https://unpkg.com/naja@2/dist/Naja.min.js"></script>
@@ -89,7 +93,9 @@ final class Template_ff60e1ff01 extends Latte\Runtime\Template
     });
 </script>
 ';
-		$this->renderBlock('scripts', [], 'html') /* pos 45:1 */;
+		if ($this->hasBlock('scripts')) /* pos 46:1 */ {
+			$this->renderBlock('scripts', [], 'html') /* pos 46:16 */;
+		}
 		echo '</html>
 ';
 	}
@@ -100,7 +106,7 @@ final class Template_ff60e1ff01 extends Latte\Runtime\Template
 		extract($this->params);
 
 		if (!$this->getReferringTemplate() || $this->getReferenceType() === 'extends') {
-			foreach (array_intersect_key(['flash' => '28'], $this->params) as $ʟ_v => $ʟ_l) {
+			foreach (array_intersect_key(['flash' => '29'], $this->params) as $ʟ_v => $ʟ_l) {
 				trigger_error("Variable \$$ʟ_v overwritten in foreach on line $ʟ_l");
 			}
 		}
@@ -108,22 +114,22 @@ final class Template_ff60e1ff01 extends Latte\Runtime\Template
 	}
 
 
-	/** n:snippet="flashes" on line 27 */
+	/** n:snippet="flashes" on line 28 */
 	public function blockFlashes(array $ʟ_args): void
 	{
 		extract($this->params);
 		extract($ʟ_args);
 		unset($ʟ_args);
 
-		$this->global->snippetDriver->enter('flashes', 'static') /* pos 27:7 */;
+		$this->global->snippetDriver->enter('flashes', 'static') /* pos 28:7 */;
 		try {
 			echo "\n";
-			foreach ($flashes as $flash) /* pos 28:8 */ {
+			foreach ($flashes as $flash) /* pos 29:8 */ {
 				echo '		<div class="alert alert-';
-				echo LR\HtmlHelpers::escapeAttr($flash->type === 'error' ? 'danger' : $flash->type) /* pos 28:58 */;
+				echo LR\HtmlHelpers::escapeAttr($flash->type === 'error' ? 'danger' : $flash->type) /* pos 29:58 */;
 				echo ' alert-dismissible fade show shadow-sm text-center" role="alert">
 			';
-				echo LR\HtmlHelpers::escapeText($flash->message) /* pos 29:4 */;
+				echo LR\HtmlHelpers::escapeText($flash->message) /* pos 30:4 */;
 				echo '
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Zavřít"></button>
 		</div>
