@@ -1,0 +1,16 @@
+{block title}Změna údajů kliniky{/block}
+{block content}
+<div class="container mt-2">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <p class="lead">Pole s údaji, které nechcete měnit, můžete nechat prázdná.</p>
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    {control clinicForm}
+                    <a n:href="Account:overview" class="btn btn-danger w-100 mt-2">Zrušit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

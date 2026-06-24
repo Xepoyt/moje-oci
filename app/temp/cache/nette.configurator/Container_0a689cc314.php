@@ -140,7 +140,10 @@ class Container_0a689cc314 extends Nette\DI\Container
 		'App\Presentation\Registration\RegistrationPresenter' => [2 => ['application.7']],
 		'NetteModule\ErrorPresenter' => [2 => ['application.8']],
 		'NetteModule\MicroPresenter' => [2 => ['application.9']],
-		'App\Components\Info\ChangeRequestDetailControlFactory' => [['013']],
+		'App\Components\Account\ChangeClinicControlFactory' => [['013']],
+		'App\Components\Account\ChangePasswordControlFactory' => [['014']],
+		'App\Components\Info\ChangeRequestDetailControlFactory' => [['015']],
+		'App\Components\Login\ForgottenPasswordControlFactory' => [['016']],
 	];
 
 
@@ -311,7 +314,45 @@ class Container_0a689cc314 extends Nette\DI\Container
 	}
 
 
-	public function createService013(): App\Components\Info\ChangeRequestDetailControlFactory
+	public function createService013(): App\Components\Account\ChangeClinicControlFactory
+	{
+		return new class ($this) implements App\Components\Account\ChangeClinicControlFactory {
+			public function __construct(
+				private Container_0a689cc314 $container,
+			) {
+			}
+
+
+			public function create(): App\Components\Account\ChangeClinicControl
+			{
+				return new App\Components\Account\ChangeClinicControl(
+					$this->container->getService('012'),
+					$this->container->getService('02'),
+					$this->container->getService('security.user'),
+				);
+			}
+		};
+	}
+
+
+	public function createService014(): App\Components\Account\ChangePasswordControlFactory
+	{
+		return new class ($this) implements App\Components\Account\ChangePasswordControlFactory {
+			public function __construct(
+				private Container_0a689cc314 $container,
+			) {
+			}
+
+
+			public function create(int $clinicId): App\Components\Account\ChangePasswordControl
+			{
+				return new App\Components\Account\ChangePasswordControl($clinicId, $this->container->getService('02'));
+			}
+		};
+	}
+
+
+	public function createService015(): App\Components\Info\ChangeRequestDetailControlFactory
 	{
 		return new class ($this) implements App\Components\Info\ChangeRequestDetailControlFactory {
 			public function __construct(
@@ -328,11 +369,30 @@ class Container_0a689cc314 extends Nette\DI\Container
 	}
 
 
+	public function createService016(): App\Components\Login\ForgottenPasswordControlFactory
+	{
+		return new class ($this) implements App\Components\Login\ForgottenPasswordControlFactory {
+			public function __construct(
+				private Container_0a689cc314 $container,
+			) {
+			}
+
+
+			public function create(): App\Components\Login\ForgottenPasswordControl
+			{
+				return new App\Components\Login\ForgottenPasswordControl($this->container->getService('012'));
+			}
+		};
+	}
+
+
 	public function createServiceApplication__1(): App\Presentation\Account\AccountPresenter
 	{
 		$service = new App\Presentation\Account\AccountPresenter(
 			$this->getService('08'),
 			$this->getService('011'),
+			$this->getService('014'),
+			$this->getService('013'),
 			$this->getService('02'),
 			$this->getService('012'),
 		);
@@ -355,6 +415,7 @@ class Container_0a689cc314 extends Nette\DI\Container
 		$service = new App\Presentation\Admin\AdminPresenter(
 			$this->getService('07'),
 			$this->getService('08'),
+			$this->getService('015'),
 			$this->getService('04'),
 			$this->getService('02'),
 		);
@@ -414,7 +475,12 @@ class Container_0a689cc314 extends Nette\DI\Container
 
 	public function createServiceApplication__6(): App\Presentation\Login\LoginPresenter
 	{
-		$service = new App\Presentation\Login\LoginPresenter($this->getService('09'));
+		$service = new App\Presentation\Login\LoginPresenter(
+			$this->getService('09'),
+			$this->getService('014'),
+			$this->getService('016'),
+			$this->getService('02'),
+		);
 		$service->injectPrimary(
 			$this->getService('http.request'),
 			$this->getService('http.response'),

@@ -7,15 +7,35 @@ return array (
       0 => '/var/www/html/app/app/Bootstrap.php',
       1 => 1781646263,
     ),
+    'App\\Components\\Account\\ChangeClinicControl' => 
+    array (
+      0 => '/var/www/html/app/app/Components/Account/ChangeClinicControl.php',
+      1 => 1782338974,
+    ),
+    'App\\Components\\Account\\ChangeClinicControlFactory' => 
+    array (
+      0 => '/var/www/html/app/app/Components/Account/ChangeClinicControlFactory.php',
+      1 => 1782337675,
+    ),
     'App\\Components\\Account\\ChangeContactControl' => 
     array (
       0 => '/var/www/html/app/app/Components/Account/ChangeContactControl.php',
-      1 => 1782251127,
+      1 => 1782335566,
     ),
     'App\\Components\\Account\\ChangeContactControlFactory' => 
     array (
       0 => '/var/www/html/app/app/Components/Account/ChangeContactControlFactory.php',
       1 => 1782248081,
+    ),
+    'App\\Components\\Account\\ChangePasswordControl' => 
+    array (
+      0 => '/var/www/html/app/app/Components/Account/ChangePasswordControl.php',
+      1 => 1782340977,
+    ),
+    'App\\Components\\Account\\ChangePasswordControlFactory' => 
+    array (
+      0 => '/var/www/html/app/app/Components/Account/ChangePasswordControlFactory.php',
+      1 => 1782335537,
     ),
     'App\\Components\\Admin\\ClinicsGridControl' => 
     array (
@@ -46,6 +66,16 @@ return array (
     array (
       0 => '/var/www/html/app/app/Components/Info/ClinicDetailControlFactory.php',
       1 => 1782081870,
+    ),
+    'App\\Components\\Login\\ForgottenPasswordControl' => 
+    array (
+      0 => '/var/www/html/app/app/Components/Login/ForgottenPasswordControl.php',
+      1 => 1782341724,
+    ),
+    'App\\Components\\Login\\ForgottenPasswordControlFactory' => 
+    array (
+      0 => '/var/www/html/app/app/Components/Login/ForgottenPasswordControlFactory.php',
+      1 => 1782333181,
     ),
     'App\\Components\\Login\\LoginControl' => 
     array (
@@ -80,12 +110,17 @@ return array (
     'App\\Core\\RouterFactory' => 
     array (
       0 => '/var/www/html/app/app/Core/RouterFactory.php',
-      1 => 1782250957,
+      1 => 1782341394,
+    ),
+    'App\\Exceptions\\ClinicNotFoundException' => 
+    array (
+      0 => '/var/www/html/app/app/Exceptions/ClinicNotFoundException.php',
+      1 => 1782341645,
     ),
     'App\\Models\\FacilityManager' => 
     array (
       0 => '/var/www/html/app/app/Models/FacilityManager.php',
-      1 => 1782253340,
+      1 => 1782341146,
     ),
     'App\\Presentation\\Accessory\\LatteExtension' => 
     array (
@@ -95,12 +130,12 @@ return array (
     'App\\Presentation\\Account\\AccountPresenter' => 
     array (
       0 => '/var/www/html/app/app/Presentation/Account/AccountPresenter.php',
-      1 => 1782254353,
+      1 => 1782340850,
     ),
     'App\\Presentation\\Admin\\AdminPresenter' => 
     array (
       0 => '/var/www/html/app/app/Presentation/Admin/AdminPresenter.php',
-      1 => 1782091070,
+      1 => 1782339952,
     ),
     'App\\Presentation\\Error\\Error4xx\\Error4xxPresenter' => 
     array (
@@ -120,7 +155,7 @@ return array (
     'App\\Presentation\\Login\\LoginPresenter' => 
     array (
       0 => '/var/www/html/app/app/Presentation/Login/LoginPresenter.php',
-      1 => 1782143716,
+      1 => 1782341469,
     ),
     'App\\Presentation\\Registration\\RegistrationPresenter' => 
     array (
@@ -135,12 +170,12 @@ return array (
     'App\\Services\\AccountService' => 
     array (
       0 => '/var/www/html/app/app/Services/AccountService.php',
-      1 => 1782254536,
+      1 => 1782342058,
     ),
     'App\\Services\\EmailService' => 
     array (
       0 => '/var/www/html/app/app/Services/EmailService.php',
-      1 => 1782251993,
+      1 => 1782341858,
     ),
     'App\\Services\\FileMailer' => 
     array (
@@ -161,29 +196,23 @@ return array (
   1 => 
   array (
     'null' => 3,
-    'App\\Presentation\\Admin\\AdminDefaultTemplate' => 3,
-    'App\\Presentation\\Admin\\AdminTemplate' => 3,
-    'App\\Components\\Admin\\ClinicsGridTemplate' => 3,
-    'App\\Components\\Info\\ClinicDetailTemplate' => 3,
-    'App\\Presentation\\Home\\HomeDefaultTemplate' => 3,
-    'App\\Presentation\\Home\\HomeTemplate' => 3,
-    'App\\Presentation\\Registration\\RegistrationDefaultTemplate' => 3,
-    'App\\Presentation\\Registration\\RegistrationTemplate' => 3,
-    'App\\Components\\RegistrationForm\\InitRegistrationTemplate' => 3,
-    'App\\Presentation\\Registration\\RegistrationSentTemplate' => 1,
-    'App\\Presentation\\Home\\Login\\LoginPresenter' => 1,
-    'App\\Presentation\\Login\\LoginDefaultTemplate' => 3,
-    'App\\Presentation\\Login\\LoginTemplate' => 3,
-    'App\\Components\\Login\\LoginTemplate' => 3,
-    'App\\Presentation\\Login\\Account\\AccountPresenter' => 1,
-    'App\\Presentation\\Account\\AccountOverviewTemplate' => 3,
+    'App\\Presentation\\Account\\AccountClinicTemplate' => 3,
     'App\\Presentation\\Account\\AccountTemplate' => 3,
-    'App\\Presentation\\Account\\Login\\LoginPresenter' => 2,
-    'App\\Presentation\\Account\\AccountContactTemplate' => 3,
-    'App\\Components\\Account\\ChangeContactTemplate' => 3,
-    'App\\Presentation\\Home\\HomeInvalidTemplate' => 3,
-    'App\\Presentation\\Registration\\RegistrationCompleteTemplate' => 1,
-    'App\\Components\\RegistrationForm\\CompleteRegistrationTemplate' => 1,
+    'App\\Components\\Account\\ChangeClinicTemplate' => 2,
+    'App\\Presentation\\Account\\AccountOverviewTemplate' => 3,
+    'App\\Components\\Info\\ClinicDetailTemplate' => 3,
+    'App\\Presentation\\Account\\AccountPasswordTemplate' => 3,
+    'App\\Components\\Account\\ChangePasswordTemplate' => 3,
+    'App\\Presentation\\Home\\HomeDefaultTemplate' => 1,
+    'App\\Presentation\\Home\\HomeTemplate' => 1,
+    'App\\Presentation\\Login\\LoginDefaultTemplate' => 2,
+    'App\\Presentation\\Login\\LoginTemplate' => 3,
+    'App\\Components\\Login\\LoginTemplate' => 2,
+    'App\\Presentation\\Login\\LoginForgottenTemplate' => 3,
+    'App\\Components\\Login\\ForgottenPasswordTemplate' => 3,
+    'App\\Presentation\\Login\\RegistrationPresenter' => 1,
+    'App\\Presentation\\Login\\LoginSentResetTemplate' => 1,
+    'App\\Presentation\\Login\\LoginResetTemplate' => 2,
   ),
   2 => 
   array (

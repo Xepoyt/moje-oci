@@ -159,9 +159,47 @@ class FacilityManager
 
     public function verifyEmail(int $id): void
     {
-        $this->database->table('clinics')->where('id', $id)->update([
-            'is_email_verified' => 1
-        ]);
+        $this->database->beginTransaction();
+        try{
+            $newEmail = $this->database->table('clinics')->where('id', $id)->fetchPairs('id', 'unverified_email');
+            reset($newEmail);
+
+            $this->database->table('clinics')->where('id', $id)->update([
+                'email' => $newEmail,
+                'unverified_email' => null,
+                'is_email_verified' => 1
+            ]);
+
+            $this->database->commit();
+        } catch (\Throwable $e) {
+            $this->database->rollBack();
+            throw $e;
+        }
+    }
+
+    public function clinicChangeRequest(array $data): void
+    {
+        $this->database->beginTransaction();
+        try{
+            $changeRequest = $this->getClinicChangeRequest($data['clinics_id']);
+            if(!$changeRequest){
+                $this->database->table('clinic_change_requests')->insert($data);
+            }else{
+                $this->database->table('clinic_change_requests')->where('clinics_id', $data['clinics_id'])->update($data);
+            }
+
+            $this->database->commit();
+        } catch (\Throwable $e) {
+            $this->database->rollBack();
+            throw $e;
+        }
+    }
+
+    public function changePassword(int $clinicId, string $password): void
+    {
+        $token = $this->generateToken();
+        $hash = password_hash($password, null);
+        $this->updateClinic($clinicId, ['password' => $hash, 'token' => $token]);
     }
 
     public function getClinic(int $id): ?Nette\Database\Table\ActiveRow
@@ -171,6 +209,7 @@ class FacilityManager
 
     public function findByIco(string $ico): ?Nette\Database\Table\ActiveRow
     {
+        $ico = preg_replace('#\s+#', '', $ico);
         return $this->database->table('clinics')->where('ico', $ico)->fetch();
     }
 

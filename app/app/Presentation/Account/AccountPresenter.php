@@ -2,8 +2,12 @@
 
 namespace App\Presentation\Account;
 
+use App\Components\Account\ChangeClinicControl;
+use App\Components\Account\ChangeClinicControlFactory;
 use App\Components\Account\ChangeContactControl;
 use App\Components\Account\ChangeContactControlFactory;
+use App\Components\Account\ChangePasswordControl;
+use App\Components\Account\ChangePasswordControlFactory;
 use Nette\Application\UI\Presenter;
 use App\Components\Info\ClinicDetailControl;
 use App\Components\Info\ClinicDetailControlFactory;
@@ -15,6 +19,8 @@ final class AccountPresenter extends Presenter
     public function __construct(
         private ClinicDetailControlFactory $clinicDetailControlFactory,
         private ChangeContactControlFactory $changeContactControlFactory,
+        private ChangePasswordControlFactory $changePasswordControlFactory,
+        private ChangeClinicControlFactory $changeClinicControlFactory,
         private FacilityManager $facilityManger,
         private AccountService $accountService
     ) {
@@ -47,6 +53,7 @@ final class AccountPresenter extends Presenter
     {
         $this->accountService->resendEmail($this->getUser()->id);
         $this->flashMessage('Nový odkaz byl odeslán.', 'success');
+        $this->redirect('Account:overview');
     }
 
     protected function createComponentClinicDetail(): ClinicDetailControl
@@ -60,6 +67,30 @@ final class AccountPresenter extends Presenter
 
         $control->onComplete[] = function (ChangeContactControl $control, \stdClass $values) {
             $this->flashMessage('Vaše údaje byly úspěšně změněny.', 'success');
+            $this->redirect('Account:overview');
+        };
+
+        return $control;
+    }
+
+    protected function createComponentClinicForm(): ChangeClinicControl
+    {
+        $control = $this->changeClinicControlFactory->create();
+
+        $control->onComplete[] = function (ChangeClinicControl $control, \stdClass $values) {
+            $this->flashMessage('Administrátorovi byla odeslána žádost o změnu údajů.', 'success');
+            $this->redirect('Account:overview');
+        };
+
+        return $control;
+    }
+
+    protected function createComponentPasswordForm(): ChangePasswordControl
+    {
+        $control = $this->changePasswordControlFactory->create($this->getUser()->getId());
+
+        $control->onComplete[] = function (ChangePasswordControl $control, \stdClass $values) {
+            $this->flashMessage('Vaše heslo bylo úspěšně změněno.', 'success');
             $this->redirect('Account:overview');
         };
 

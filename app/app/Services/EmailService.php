@@ -96,6 +96,27 @@ class EmailService
         $this->mailer->send($mail);
     }
 
+    public function sendAdminClinicChangeNotification(string $facilityName, string $ico, string $contactPerson): void
+    {
+        $params = [
+            'facilityName' => $facilityName,
+            'ico' => $ico,
+            'contactPerson' => $contactPerson
+        ];
+
+        $latte = $this->latteFactory->create();
+        
+        $htmlBody = $latte->renderToString(__DIR__ . '/../Mails/clinicChangeAdmin.latte', $params);
+
+        $mail = new Message;
+        $mail->setFrom('moje-oci@seznam.cz', 'MOJE OČI - Portál')
+            ->addTo($this->adminEmail)
+            ->setSubject('Změna údajů ke schválení: ' . $facilityName)
+            ->setHtmlBody($htmlBody);
+
+        $this->mailer->send($mail);
+    }
+
     public function sendClinicDeniedEmail(string $email, string $facilityName, string $reason, int $previousState): void
     {
 
@@ -165,6 +186,26 @@ class EmailService
         $mail->setFrom('moje-oci@seznam.cz', 'MOJE OČI - Portál')
             ->addTo($newEmail)
             ->setSubject('Ověření nové e-mailové adresy')
+            ->setHtmlBody($htmlBody);
+
+        $this->mailer->send($mail);
+    }
+
+    public function sendPasswordResetEmail(string $email, string $contactPerson, string $resetLink): void
+    {
+        $params = [
+            'contactPerson' => $contactPerson,
+            'link' => $resetLink
+        ];
+
+        $latte = $this->latteFactory->create();
+        
+        $htmlBody = $latte->renderToString(__DIR__ . '/../Mails/passwordReset.latte', $params);
+
+        $mail = new Message;
+        $mail->setFrom('moje-oci@seznam.cz', 'MOJE OČI - Portál')
+            ->addTo($email)
+            ->setSubject('Obnova zapomenutého hesla')
             ->setHtmlBody($htmlBody);
 
         $this->mailer->send($mail);

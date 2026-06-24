@@ -1,0 +1,40 @@
+{block title}Odkaz pro obnovu hesla odeslán{/block}
+
+{block content}
+<div class="row justify-content-center mt-5">
+    <div class="col-12 col-md-8 col-lg-6">
+        <div class="card shadow-sm border-0 text-center">
+            <div class="card-body p-5">
+                
+                <div class="display-1 text-success mb-4">
+                    <i class="bi bi-envelope-check"></i>
+                </div>
+
+                <h1 class="h3 mb-3">Zkontrolujte si e-mail</h1>
+                
+                <p class="text-muted lead mb-2">
+                    Odkaz pro obnovu hesla jsme právě odeslali na adresu:
+                </p>
+                
+                <p class="fs-5 fw-bold text-primary mb-4">
+                    {$email}
+                </p>
+
+                <p class="mb-4">
+                    Kliknutím na bezpečný odkaz ve zprávě dostanete možnost vytvořit nové přihlašovací heslo pro váš účet.
+                </p>
+
+                <div class="alert alert-warning text-start fs-6 mb-4">
+                    <strong>Nedostali jste e-mail?</strong><br>
+                    Může to chvilku trvat. Pokud zpráva nedorazí do 5 minut, zkontrolujte prosím i složku <strong>Hromadné</strong> nebo <strong>Spam</strong>. Nebo zažádejte o nový odkaz.
+                </div>
+
+                <div class="mt-2">
+                    <a n:href=":Home:Home:default" class="btn btn-outline-secondary">Zpět na hlavní stranu</a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

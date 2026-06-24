@@ -1,0 +1,160 @@
+{form form}
+    <div n:if="$form->ownErrors" class="alert alert-danger">
+        <p n:foreach="$form->ownErrors as $error">{$error}</p>
+    </div>
+
+    <div class="mb-2">
+        <label n:name="name" class="form-label fw-bold" />
+        <input n:name="name" n:class="form-control, $form['name']->error ? is-invalid">
+        <div class="invalid-feedback" n:ifcontent>{$form['name']->error}</div>
+    </div>
+
+    <label class="form-label fw-bold">Adresa</label>
+    <div class="mb-2">
+        <label n:name="address_street_number" class="form-label" />
+        <input n:name="address_street_number" n:class="form-control, $form['address_street_number']->error ? is-invalid">
+        <div class="invalid-feedback" n:ifcontent>{$form['address_street_number']->error}</div>
+    </div>
+
+    <div class="row g-3 mb-2">
+        <div class="col-md-8">
+            <label n:name="address_city" class="form-label" />
+            <input n:name="address_city" n:class="form-control, $form['address_city']->error ? is-invalid">
+            <div class="invalid-feedback" n:ifcontent>{$form['address_city']->error}</div>
+        </div>
+
+        <div class="col-md-4">
+            <label n:name="address_ZIP" class="form-label" />
+            <input n:name="address_ZIP" n:class="form-control, $form['address_ZIP']->error ? is-invalid">
+            <div class="invalid-feedback" n:ifcontent>{$form['address_ZIP']->error}</div>
+        </div>
+    </div>
+
+    <div class="mb-2">
+        <label n:name="web" class="form-label fw-bold" />
+        <input n:name="web" n:class="form-control, $form['web']->error ? is-invalid">
+        <div class="invalid-feedback" n:ifcontent>{$form['web']->error}</div>
+    </div>
+
+    <div class="mb-2">
+        <label n:name="description" class="form-label fw-bold" />
+        <input n:name="description" n:class="form-control, $form['description']->error ? is-invalid">
+        <div class="invalid-feedback" n:ifcontent>{$form['description']->error}</div>
+    </div>
+
+    <div class="form-group mb-2">
+        <label class="form-label fw-bold">{$form['program_type']->caption}</label>
+        
+        <div class="radio-list">
+            {foreach $form['program_type']->items as $key => $label}
+                <div class="radio-item mb-1">
+                    <label n:name="program_type:$key">
+                        <input n:name="program_type:$key" n:class="$form['program_type']->error ? is-invalid"> 
+                        <strong>{$label}</strong>
+                    </label>
+                    
+                    <div class="description" style="margin-left: 25px; color: #666; font-size: 0.9em;">
+                        {$descriptions[$key]}
+                    </div>
+                </div>
+            {/foreach}
+        </div>
+        <div class="invalid-feedback" n:ifcontent>{$form['program_type']->error}</div>
+    </div>
+
+    <div id="snippet-email" class="mb-2">
+        <label n:name="reservation_email" class="form-label fw-bold" />
+        <input n:name="reservation_email" type="email" n:class="form-control, $form['reservation_email']->error ? is-invalid">
+        <div class="invalid-feedback" n:ifcontent>{$form['reservation_email']->error}</div>
+    </div>
+
+    <div id="snippet-phone" class="mb-2">
+        <label n:name="reservation_phone" class="form-label fw-bold" />
+        <input n:name="reservation_phone" type="tel" n:class="form-control, $form['reservation_phone']->error ? is-invalid">
+        <div class="invalid-feedback" n:ifcontent>{$form['reservation_phone']->error}</div>
+    </div>
+
+    <div id="snippet-patients" class="mb-2">
+        <label n:name="max_patients" class="form-label fw-bold" />
+        <input n:name="max_patients" min="1" n:class="form-control, $form['max_patients']->error ? is-invalid">
+        <div class="invalid-feedback" n:ifcontent>{$form['max_patients']->error}</div>
+    </div>
+
+    <input n:name="send" class="btn btn-success w-100 mt-3">
+{/form}
+
+<style>
+/* 1. Pro klasické samostatné bloky (které nejsou řádkem) */
+.mb-2:not(.row) {
+    position: relative;
+    padding-bottom: 20px !important; 
+}
+.mb-2:not(.row) .invalid-feedback {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-top: 0;
+}
+
+/* 2. Pro políčka, která jsou vedle sebe uvnitř Bootstrap řádku */
+.row > [class^="col-"], 
+.row > [class*=" col-"] {
+    position: relative;
+    /* Přidáme sloupcům spodní odsazení pro chybu */
+    padding-bottom: 20px !important; 
+}
+
+.row > [class^="col-"] .invalid-feedback,
+.row > [class*=" col-"] .invalid-feedback {
+    position: absolute;
+    bottom: 0;
+    /* Trik: Bootstrap sloupce mají vnitřní odsazení (gutter). 
+       Tímto zarovnáme text chyby přesně s okrajem inputu. */
+    left: calc(var(--bs-gutter-x, 1.5rem) * 0.5);
+    margin-top: 0;
+}
+
+/* 3. Ošetření pro checkbox na konci */
+.form-check.mb-4 {
+    position: relative;
+    padding-bottom: 20px !important;
+}
+.form-check.mb-4 .invalid-feedback {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+/* 1. Klasická políčka (pevně povinná i ta podmíněně povinná) */
+.form-label:has(+ :required, + [data-nette-rules*='":filled"'])::after {
+    content: " *";
+    color: #dc3545; /* Bootstrap danger červená */
+    font-weight: bold;
+}
+
+/* 2. Checkboxy */
+.form-check-input:is(:required, [data-nette-rules*='":filled"']) + .form-check-label::after {
+    content: " *";
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* 3. Skupina rádio tlačítek */
+.form-group:has(.radio-list :required, .radio-list [data-nette-rules*='":filled"']) > .form-label::after {
+    content: " *";
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.form-control.is-invalid {
+    /* Tvůj konkrétní bi-exclamation-circle převedený do data URI */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23dc3545' viewBox='0 0 16 16'%3e%3cpath d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16'/%3e%3cpath d='M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z'/%3e%3c/svg%3e") !important;
+    
+    background-repeat: no-repeat !important;
+    background-position: right calc(0.375em + 0.1875rem) center !important;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem) !important;
+    
+    /* Padding, aby text v políčku nepodjížděl pod novou ikonku */
+    padding-right: calc(1.5em + 0.75rem) !important;
+}
+</style>

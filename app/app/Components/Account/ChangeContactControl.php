@@ -24,11 +24,12 @@ class ChangeContactControl extends Control
         private FacilityManager $facilityManager,
         private User $user
     ) {
+        $this->id = $this->user->getId();
     }
 
     protected function createComponentForm(): Form
     {
-        $clinic = $this->facilityManager->getClinic($this->user->getId());
+        $clinic = $this->facilityManager->getClinic($this->id);
         $form = new Form;
         $form->addText('contact_person_name', 'Jméno')
             ->setDefaultValue($clinic->contact_person_name);

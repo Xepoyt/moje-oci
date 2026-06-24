@@ -7,6 +7,8 @@ use Nette\Application\UI\Form;
 use Nette\Application\Attributes\Persistent;
 use App\Components\Admin\ClinicsGridControlFactory;
 use App\Components\Admin\ClinicsGridControl;
+use App\Components\Info\ChangeRequestDetailControl;
+use App\Components\Info\ChangeRequestDetailControlFactory;
 use App\Components\Info\ClinicDetailControlFactory;
 use App\Components\Info\ClinicDetailControl;
 use App\Services\RegistrationService;
@@ -20,6 +22,7 @@ class AdminPresenter extends Presenter
     public function __construct(
         private ClinicsGridControlFactory $gridFactory,
         private ClinicDetailControlFactory $detailFactory,
+        private ChangeRequestDetailControlFactory $changeRequestDetailFactory,
         private RegistrationService $registrationService,
         private FacilityManager $facilityManager
     ) {
@@ -96,5 +99,10 @@ class AdminPresenter extends Presenter
     protected function createComponentClinicDetail(): ClinicDetailControl
     {
         return $this->detailFactory->create();
+    }
+
+    protected function createComponentChangeRequestDetail(): ChangeRequestDetailControl
+    {
+        return $this->changeRequestDetailFactory->create();
     }
 }
