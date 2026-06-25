@@ -108,7 +108,7 @@ class AccountService
         // 4. Update pouze pokud došlo k nějaké změně
         if (!empty($data)) {
             // Přepnutí stavu kliniky na "čeká na schválení změn"
-            if ($clinic->is_approved == 1) {
+            if ($clinic->is_approved == 1 || $clinic->is_approved == 3) {
                 $this->facilityManager->updateClinic($clinicId, ['is_approved' => 2]);
                 $this->emailService->sendAdminClinicChangeNotification($clinic->name, $clinic->ico, $clinic->contact_person_name . " " . $clinic->contact_person_surname);
             }

@@ -38,7 +38,8 @@
 
     <div class="mb-2">
         <label n:name="description" class="form-label fw-bold" />
-        <input n:name="description" n:class="form-control, $form['description']->error ? is-invalid">
+        {* Změněno na <textarea> a přidán uzavírací tag *}
+        <textarea n:name="description" n:class="form-control, $form['description']->error ? is-invalid"></textarea>
         <div class="invalid-feedback" n:ifcontent>{$form['description']->error}</div>
     </div>
 

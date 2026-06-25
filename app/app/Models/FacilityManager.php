@@ -142,11 +142,6 @@ class FacilityManager
     {
         $this->database->beginTransaction();
         try {
-            $this->database->table('clinics')->where('id', $id)->update([
-                'is_approved' => 1,
-                'deny_reason' => null 
-            ]);
-
             $this->database->table('clinic_change_requests')->where('clinics_id', $id)->delete();
             
             $this->database->commit();

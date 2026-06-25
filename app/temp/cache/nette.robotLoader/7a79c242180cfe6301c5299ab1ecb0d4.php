@@ -10,7 +10,7 @@ return array (
     'App\\Components\\Account\\ChangeClinicControl' => 
     array (
       0 => '/var/www/html/app/app/Components/Account/ChangeClinicControl.php',
-      1 => 1782338974,
+      1 => 1782347468,
     ),
     'App\\Components\\Account\\ChangeClinicControlFactory' => 
     array (
@@ -170,7 +170,7 @@ return array (
     'App\\Services\\AccountService' => 
     array (
       0 => '/var/www/html/app/app/Services/AccountService.php',
-      1 => 1782342058,
+      1 => 1782347663,
     ),
     'App\\Services\\EmailService' => 
     array (
@@ -198,21 +198,25 @@ return array (
     'null' => 3,
     'App\\Presentation\\Account\\AccountClinicTemplate' => 3,
     'App\\Presentation\\Account\\AccountTemplate' => 3,
-    'App\\Components\\Account\\ChangeClinicTemplate' => 2,
+    'App\\Components\\Account\\ChangeClinicTemplate' => 3,
     'App\\Presentation\\Account\\AccountOverviewTemplate' => 3,
     'App\\Components\\Info\\ClinicDetailTemplate' => 3,
     'App\\Presentation\\Account\\AccountPasswordTemplate' => 3,
     'App\\Components\\Account\\ChangePasswordTemplate' => 3,
-    'App\\Presentation\\Home\\HomeDefaultTemplate' => 1,
-    'App\\Presentation\\Home\\HomeTemplate' => 1,
-    'App\\Presentation\\Login\\LoginDefaultTemplate' => 2,
+    'App\\Presentation\\Home\\HomeDefaultTemplate' => 2,
+    'App\\Presentation\\Home\\HomeTemplate' => 2,
+    'App\\Presentation\\Login\\LoginDefaultTemplate' => 3,
     'App\\Presentation\\Login\\LoginTemplate' => 3,
-    'App\\Components\\Login\\LoginTemplate' => 2,
+    'App\\Components\\Login\\LoginTemplate' => 3,
     'App\\Presentation\\Login\\LoginForgottenTemplate' => 3,
     'App\\Components\\Login\\ForgottenPasswordTemplate' => 3,
     'App\\Presentation\\Login\\RegistrationPresenter' => 1,
     'App\\Presentation\\Login\\LoginSentResetTemplate' => 1,
     'App\\Presentation\\Login\\LoginResetTemplate' => 2,
+    'App\\Presentation\\Admin\\AdminDefaultTemplate' => 3,
+    'App\\Presentation\\Admin\\AdminTemplate' => 3,
+    'App\\Components\\Admin\\ClinicsGridTemplate' => 3,
+    'App\\Components\\Info\\ChangeRequestDetailTemplate' => 3,
   ),
   2 => 
   array (

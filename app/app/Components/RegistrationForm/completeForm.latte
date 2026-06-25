@@ -37,10 +37,10 @@
     </div>
 
     <div class="mb-2">
-        <label n:name="description" class="form-label fw-bold" />
-        <input n:name="description" n:class="form-control, $form['description']->error ? is-invalid">
-        <div class="invalid-feedback" n:ifcontent>{$form['description']->error}</div>
-    </div>
+    <label n:name="description" class="form-label fw-bold" />
+    <textarea n:name="description" n:class="form-control, $form['description']->error ? is-invalid"></textarea>
+    <div class="invalid-feedback" n:ifcontent>{$form['description']->error}</div>
+</div>
 
     <div class="form-group mb-2">
         <label class="form-label fw-bold">{$form['program_type']->caption}</label>
