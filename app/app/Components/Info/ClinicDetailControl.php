@@ -22,11 +22,7 @@ class ClinicDetailControl extends Control
         }
 
         // Definice textů pro typy programů (uprav si podle potřeby)
-        $programs = [
-            1 => 'Základní program',
-            2 => 'Rozšířený program',
-            3 => 'Přímé rezervace termínů',
-        ];
+        $programs = $this->facilityManager->getProgramNames();
 
         // Předáme data do šablony komponenty
         $this->template->userData = $clinic;
