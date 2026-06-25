@@ -142,6 +142,11 @@ class FacilityManager
     {
         $this->database->beginTransaction();
         try {
+            $prev = $this->database->table('clinics')->where('id', $id)->fetchPairs('id', 'prev_is_approved');
+            $prev = reset($prev);
+
+            $this->updateClinic($id, ['is_approved' => $prev]);
+
             $this->database->table('clinic_change_requests')->where('clinics_id', $id)->delete();
             
             $this->database->commit();
@@ -157,7 +162,7 @@ class FacilityManager
         $this->database->beginTransaction();
         try{
             $newEmail = $this->database->table('clinics')->where('id', $id)->fetchPairs('id', 'unverified_email');
-            reset($newEmail);
+            $newEmail = reset($newEmail);
 
             $this->database->table('clinics')->where('id', $id)->update([
                 'email' => $newEmail,
