@@ -65,17 +65,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		// 1. Přepis funkce pro přidání chyby k políčku
 		Nette.addError = function(element, message) {
-			if (message) {
-				element.classList.add('is-invalid');
-				let errorDiv = element.parentNode.querySelector('.invalid-feedback');
-				if (!errorDiv) {
-					errorDiv = document.createElement('div');
-					errorDiv.className = 'invalid-feedback';
-					element.parentNode.appendChild(errorDiv);
-				}
-				errorDiv.innerText = message;
-			}
-		};
+            if (message) {
+                element.classList.add('is-invalid');
+                
+                // NAJDEME SPRÁVNÝ OBAL:
+                // Pokud je input uvnitř .input-group, vezmeme jako cíl celý .input-group.
+                // Pokud ne, vezmeme samotný input.
+                let targetWrapper = element.closest('.input-group') || element;
+                let parent = targetWrapper.parentNode;
+                
+                let errorDiv = parent.querySelector('.invalid-feedback');
+                if (!errorDiv) {
+                    errorDiv = document.createElement('div');
+                    errorDiv.className = 'invalid-feedback';
+                    // Vložíme hned ZA wrapper (tedy bezpečně mimo input-group)
+                    parent.insertBefore(errorDiv, targetWrapper.nextSibling);
+                }
+                errorDiv.innerText = message;
+            }
+        };
 
 		// 2. Úplný přepis hlavní validační smyčky Nette
 		Nette.validateForm = function(sender, onlyCheck) {
@@ -120,12 +128,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		// 3. Schování chyby, jakmile uživatel začne do políčka psát
 		document.addEventListener('input', function(e) {
-			if (e.target.classList && e.target.classList.contains('is-invalid')) {
-				e.target.classList.remove('is-invalid');
-				const errorDiv = e.target.parentNode.querySelector('.invalid-feedback');
-				if (errorDiv) errorDiv.remove();
-			}
-		});
+            if (e.target.classList && e.target.classList.contains('is-invalid')) {
+                e.target.classList.remove('is-invalid');
+                
+                // Opět hledáme na stejném místě, kde jsme ji vytvořili
+                let targetWrapper = e.target.closest('.input-group') || e.target;
+                const errorDiv = targetWrapper.parentNode.querySelector('.invalid-feedback');
+                
+                if (errorDiv) {
+                    errorDiv.remove();
+                }
+            }
+        });
 
         const originalValidateRule = Nette.validateRule;
         Nette.validateRule = function(elem, op, arg, val) {

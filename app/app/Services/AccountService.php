@@ -111,11 +111,13 @@ class AccountService
             if ($clinic->is_approved == 1 || $clinic->is_approved == 3) {
                 $this->facilityManager->updateClinic($clinicId, ['is_approved' => 2, 'prev_is_approved' => $clinic->is_approved]);
                 $this->emailService->sendAdminClinicChangeNotification($clinic->name, $clinic->ico, $clinic->contact_person_name . " " . $clinic->contact_person_surname);
-            }
 
-            // Uložení do tabulky s requesty
-            $data['clinics_id'] = $clinicId;
-            $this->facilityManager->clinicChangeRequest($data);
+                $data['clinics_id'] = $clinicId;
+                $this->facilityManager->clinicChangeRequest($data);
+            }
+            else{
+                $this->facilityManager->updateClinic($clinicId, $data);
+            }
         }
     }
 
@@ -130,11 +132,12 @@ class AccountService
 
         if($clinic->is_email_verified == 0){
             $link = $this->linkGenerator->link('Registration:Registration:complete', ['token' => $token]);
-            $this->emailService->sendVerificationEmail($clinic->unverified_email, $clinic->contact_person_name . ' ' . $clinic->contact_person_surname, $link);
+
+            $this->emailService->sendVerificationEmail($clinic->email, $clinic->contact_person_name . ' ' . $clinic->contact_person_surname, $link);
         }
         elseif($clinic->is_email_verified == 2){
             $link = $this->linkGenerator->link('Home:Home:verified', ['token' => $token]);
-            $this->emailService->emailChangeNewAddress($clinic->email, $link, $clinic->ico);
+            $this->emailService->emailChangeNewAddress($clinic->unverified_email, $link, $clinic->ico);
         }
     }
 

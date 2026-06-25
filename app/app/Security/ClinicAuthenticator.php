@@ -29,11 +29,10 @@ class ClinicAuthenticator implements Authenticator
             throw new AuthenticationException('Zadali jste nesprávné heslo.');
         }
 
-        // Vracíme ID kliniky, roli (např. 'clinic') a užitečná data do session
+        // Vracíme ID kliniky, roli (např. 'clinic')
         return new SimpleIdentity(
             $row->id,
-            'clinic',
-            ['name' => $row->name, 'ico' => $row->ico, 'email' => $row->email]
+            'clinic'
         );
     }
 }

@@ -163,6 +163,7 @@ class FacilityManager
         try{
             $newEmail = $this->database->table('clinics')->where('id', $id)->fetchPairs('id', 'unverified_email');
             $newEmail = reset($newEmail);
+            if($newEmail === null) return;
 
             $this->database->table('clinics')->where('id', $id)->update([
                 'email' => $newEmail,

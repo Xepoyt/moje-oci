@@ -120,7 +120,7 @@ return array (
     'App\\Models\\FacilityManager' => 
     array (
       0 => '/var/www/html/app/app/Models/FacilityManager.php',
-      1 => 1782341146,
+      1 => 1782417226,
     ),
     'App\\Presentation\\Accessory\\LatteExtension' => 
     array (
@@ -165,12 +165,12 @@ return array (
     'App\\Security\\ClinicAuthenticator' => 
     array (
       0 => '/var/www/html/app/app/Security/ClinicAuthenticator.php',
-      1 => 1782144591,
+      1 => 1782415563,
     ),
     'App\\Services\\AccountService' => 
     array (
       0 => '/var/www/html/app/app/Services/AccountService.php',
-      1 => 1782347663,
+      1 => 1782416938,
     ),
     'App\\Services\\EmailService' => 
     array (
@@ -196,27 +196,33 @@ return array (
   1 => 
   array (
     'null' => 3,
-    'App\\Presentation\\Account\\AccountClinicTemplate' => 3,
-    'App\\Presentation\\Account\\AccountTemplate' => 3,
-    'App\\Components\\Account\\ChangeClinicTemplate' => 3,
     'App\\Presentation\\Account\\AccountOverviewTemplate' => 3,
+    'App\\Presentation\\Account\\AccountTemplate' => 3,
     'App\\Components\\Info\\ClinicDetailTemplate' => 3,
-    'App\\Presentation\\Account\\AccountPasswordTemplate' => 3,
-    'App\\Components\\Account\\ChangePasswordTemplate' => 3,
-    'App\\Presentation\\Home\\HomeDefaultTemplate' => 2,
-    'App\\Presentation\\Home\\HomeTemplate' => 2,
+    'App\\Presentation\\Account\\AccountPasswordTemplate' => 2,
+    'App\\Components\\Account\\ChangePasswordTemplate' => 2,
+    'App\\Presentation\\Home\\HomeDefaultTemplate' => 3,
+    'App\\Presentation\\Home\\HomeTemplate' => 3,
     'App\\Presentation\\Login\\LoginDefaultTemplate' => 3,
     'App\\Presentation\\Login\\LoginTemplate' => 3,
     'App\\Components\\Login\\LoginTemplate' => 3,
-    'App\\Presentation\\Login\\LoginForgottenTemplate' => 3,
-    'App\\Components\\Login\\ForgottenPasswordTemplate' => 3,
-    'App\\Presentation\\Login\\RegistrationPresenter' => 1,
-    'App\\Presentation\\Login\\LoginSentResetTemplate' => 1,
-    'App\\Presentation\\Login\\LoginResetTemplate' => 2,
+    'App\\Presentation\\Registration\\RegistrationDefaultTemplate' => 3,
+    'App\\Presentation\\Registration\\RegistrationTemplate' => 3,
+    'App\\Components\\RegistrationForm\\InitRegistrationTemplate' => 2,
+    'App\\Presentation\\Registration\\RegistrationSentTemplate' => 1,
+    'App\\Presentation\\Account\\AccountContactTemplate' => 3,
+    'App\\Components\\Account\\ChangeContactTemplate' => 3,
+    'App\\Presentation\\Registration\\RegistrationCompleteTemplate' => 2,
+    'App\\Components\\RegistrationForm\\CompleteRegistrationTemplate' => 1,
+    'App\\Presentation\\Registration\\RegistrationSummaryTemplate' => 1,
+    'App\\Presentation\\Account\\AccountClinicTemplate' => 3,
+    'App\\Components\\Account\\ChangeClinicTemplate' => 3,
+    'App\\Presentation\\Home\\HomeInvalidTemplate' => 1,
+    'App\\Presentation\\Home\\HomeVerifiedTemplate' => 2,
     'App\\Presentation\\Admin\\AdminDefaultTemplate' => 3,
     'App\\Presentation\\Admin\\AdminTemplate' => 3,
     'App\\Components\\Admin\\ClinicsGridTemplate' => 3,
-    'App\\Components\\Info\\ChangeRequestDetailTemplate' => 3,
+    'App\\Components\\Info\\ChangeRequestDetailTemplate' => 2,
   ),
   2 => 
   array (
