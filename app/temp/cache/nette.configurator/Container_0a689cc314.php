@@ -799,6 +799,7 @@ class Container_0a689cc314 extends Nette\DI\Container
 		(function () {
 			if (!Tracy\Debugger::isEnabled()) { return; }
 			$logger = $this->getService('tracy.logger');
+			Tracy\Debugger::$showBar = false;
 			$keysToHide = [];
 			array_push(Tracy\Debugger::$keysToHide, ...$keysToHide);
 			array_push(Tracy\Debugger::getBlueScreen()->keysToHide, ...$keysToHide);;

@@ -60,7 +60,7 @@ return array (
     'App\\Components\\Info\\ClinicDetailControl' => 
     array (
       0 => '/var/www/html/app/app/Components/Info/ClinicDetailControl.php',
-      1 => 1782081872,
+      1 => 1782417624,
     ),
     'App\\Components\\Info\\ClinicDetailControlFactory' => 
     array (
@@ -208,21 +208,23 @@ return array (
     'App\\Components\\Login\\LoginTemplate' => 3,
     'App\\Presentation\\Registration\\RegistrationDefaultTemplate' => 3,
     'App\\Presentation\\Registration\\RegistrationTemplate' => 3,
-    'App\\Components\\RegistrationForm\\InitRegistrationTemplate' => 2,
-    'App\\Presentation\\Registration\\RegistrationSentTemplate' => 1,
+    'App\\Components\\RegistrationForm\\InitRegistrationTemplate' => 3,
+    'App\\Presentation\\Registration\\RegistrationSentTemplate' => 2,
     'App\\Presentation\\Account\\AccountContactTemplate' => 3,
     'App\\Components\\Account\\ChangeContactTemplate' => 3,
-    'App\\Presentation\\Registration\\RegistrationCompleteTemplate' => 2,
-    'App\\Components\\RegistrationForm\\CompleteRegistrationTemplate' => 1,
-    'App\\Presentation\\Registration\\RegistrationSummaryTemplate' => 1,
+    'App\\Presentation\\Registration\\RegistrationCompleteTemplate' => 3,
+    'App\\Components\\RegistrationForm\\CompleteRegistrationTemplate' => 2,
+    'App\\Presentation\\Registration\\RegistrationSummaryTemplate' => 2,
     'App\\Presentation\\Account\\AccountClinicTemplate' => 3,
     'App\\Components\\Account\\ChangeClinicTemplate' => 3,
     'App\\Presentation\\Home\\HomeInvalidTemplate' => 1,
-    'App\\Presentation\\Home\\HomeVerifiedTemplate' => 2,
+    'App\\Presentation\\Home\\HomeVerifiedTemplate' => 3,
     'App\\Presentation\\Admin\\AdminDefaultTemplate' => 3,
     'App\\Presentation\\Admin\\AdminTemplate' => 3,
     'App\\Components\\Admin\\ClinicsGridTemplate' => 3,
     'App\\Components\\Info\\ChangeRequestDetailTemplate' => 2,
+    'App\\Presentation\\Login\\LoginForgottenTemplate' => 1,
+    'App\\Components\\Login\\ForgottenPasswordTemplate' => 1,
   ),
   2 => 
   array (
