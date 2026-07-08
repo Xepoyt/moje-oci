@@ -18,8 +18,9 @@ class RegistrationService
     public function initiateRegistration(\stdClass $values): void
     {
         $hash = password_hash($values->password, null);
+        $ico = preg_replace('#\s+#', '', $values->ico);
         $token = $this->facilityManager->createInitialRegistration(
-            $values->ico, 
+            $ico, 
             $values->contact_person_name,
             $values->contact_person_surname, 
             $values->email,
