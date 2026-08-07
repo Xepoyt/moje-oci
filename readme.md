@@ -38,7 +38,7 @@ Aplikace využívá striktní rozvrstvení na logické celky a využívá návrh
 
 1. **Klonování repozitáře:** 
     ```bash 
-    git clone <url-tveho-repozitare>
+    git clone https://github.com/Xepoyt/moje-oci.git
     cd moje-oci
     ```
 2. **Instalace závislostí:** 
