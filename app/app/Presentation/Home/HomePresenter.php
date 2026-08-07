@@ -4,6 +4,7 @@ namespace App\Presentation\Home;
 
 use Nette;
 use App\Models\FacilityManager;
+use App\Enums\EmailVerified;
 
 
 final class HomePresenter extends Nette\Application\UI\Presenter
@@ -22,7 +23,7 @@ final class HomePresenter extends Nette\Application\UI\Presenter
         if (!$clinic) {
             $this->redirect(':Home:Home:invalid');
         }
-        elseif ($clinic->is_email_verified == 0){
+        elseif ($clinic->is_email_verified == EmailVerified::UNVERIFIED->value){
             $this->redirect(':Registrations:Registration:complete', ['token' => $token]);
         }
         else{

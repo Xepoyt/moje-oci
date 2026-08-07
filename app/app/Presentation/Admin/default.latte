@@ -17,13 +17,13 @@
                         <div class="d-flex flex-wrap justify-content-between align-items-center bg-white p-3 border rounded mb-4 shadow-sm">
                             <div class="mb-2 mb-md-0">
                                 <strong class="me-2">Aktuální stav:</strong>
-                                {if $detailClinic->is_approved == 1}
+                                {if $detailClinic->is_approved == App\Enums\Approved::APPROVED->value}
                                     <span class="badge bg-success fs-6">Schváleno</span>
-                                {elseif $detailClinic->is_approved == 2}
+                                {elseif $detailClinic->is_approved == App\Enums\Approved::PENDING_CHANGES->value}
                                     <span class="badge bg-warning text-dark fs-6"><i class="bi bi-pencil-square"></i> Žádá o změnu</span>
-                                {elseif $detailClinic->is_approved == 3}
+                                {elseif $detailClinic->is_approved == App\Enums\Approved::DENIED->value}
                                     <span class="badge bg-danger fs-6"><i class="bi bi-x-circle"></i> Zamítnuto</span>
-                                {elseif $detailClinic->is_email_verified == 1}
+                                {elseif $detailClinic->is_email_verified == App\Enums\EmailVerified::VERIFIED->value}
                                     <span class="badge bg-info text-dark fs-6"><i class="bi bi-hourglass-split"></i> Čeká na schválení</span>
                                 {else}
                                     <span class="badge bg-secondary fs-6">Neověřeno</span>
@@ -31,11 +31,11 @@
                             </div>
 
                             {* Akční tlačítka viditelná jen u ověřených e-mailů *}
-                            <div class="d-flex gap-2" n:if="$detailClinic->is_email_verified == 1">
-                                {if in_array($detailClinic->is_approved, [0, 2])}
+                            <div class="d-flex gap-2" n:if="$detailClinic->is_email_verified == App\Enums\EmailVerified::VERIFIED->value">
+                                {if in_array($detailClinic->is_approved, [App\Enums\Approved::UNAPPROVED->value, App\Enums\Approved::PENDING_CHANGES->value])}
                                     <a n:href="approveDetail!" class="btn btn-success ajax"><i class="bi bi-check-lg"></i> Schválit</a>
                                     <button type="button" class="btn btn-danger" data-bs-toggle="collapse" data-bs-target="#denyCollapse"><i class="bi bi-x-lg"></i> Zamítnout</button>
-                                {elseif $detailClinic->is_approved == 1}
+                                {elseif $detailClinic->is_approved == App\Enums\Approved::APPROVED->value}
                                     <button type="button" class="btn btn-warning text-dark" data-bs-toggle="collapse" data-bs-target="#denyCollapse"><i class="bi bi-slash-circle"></i> Zrušit schválení</button>
                                 {/if}
                             </div>
@@ -62,7 +62,7 @@
                             </div>
                         {/if}
 
-                        {if $detailClinic->is_approved == 2}
+                        {if $detailClinic->is_approved == App\Enums\Approved::PENDING_CHANGES->value}
                             {control changeRequestDetail $detailId}
                         {/if}
 

@@ -41,13 +41,13 @@
                         {else}-{/if}
                     </td>
                     <td>
-                        {if $clinic->is_approved == 1}
+                        {if $clinic->is_approved == App\Enums\Approved::APPROVED->value}
                             <span class="badge bg-success">Schváleno</span>
-                        {elseif $clinic->is_approved == 2}
+                        {elseif $clinic->is_approved == App\Enums\Approved::PENDING_CHANGES->value}
                             <span class="badge bg-warning text-dark">Žádá o změnu</span>
-                        {elseif $clinic->is_approved == 3}
+                        {elseif $clinic->is_approved == App\Enums\Approved::DENIED->value}
                             <span class="badge bg-danger">Zamítnuto</span>
-                        {elseif $clinic->is_email_verified == 1}
+                        {elseif $clinic->is_email_verified == App\Enums\EmailVerified::VERIFIED->value}
                             <span class="badge bg-info text-dark">Čeká</span>
                         {else}
                             <span class="badge bg-secondary">Neověřeno</span>

@@ -12,6 +12,7 @@ use App\Components\RegistrationForm\InitRegistrationControlFactory;
 use App\Components\RegistrationForm\CompleteRegistrationControlFactory;
 use App\Components\Info\ClinicDetailControl;
 use App\Components\Info\ClinicDetailControlFactory;
+use App\Enums\EmailVerified;
 
 class RegistrationPresenter extends Presenter
 {
@@ -45,7 +46,7 @@ class RegistrationPresenter extends Presenter
         if (!$this->clinicRecord) {
             $this->redirect(':Home:Home:invalid');
         }
-        elseif ($this->clinicRecord->is_email_verified == 2){
+        elseif ($this->clinicRecord->is_email_verified == EmailVerified::EDITING->value){
             $this->redirect(':Home:Home:verified', ['token' => $token]);
         }
     }

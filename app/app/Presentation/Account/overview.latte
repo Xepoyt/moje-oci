@@ -1,7 +1,7 @@
 {block title}Přehled zařízení{/block}
 {block content}
 <div class="container mt-5">
-    {if $clinic->is_approved == 1}
+    {if $clinic->is_approved == App\Enums\Approved::APPROVED->value}
         <div class="alert alert-success d-flex align-items-center shadow-sm mb-4" role="alert">
             <i class="bi bi-check-circle-fill fs-3 me-3"></i>
             <div>
@@ -10,7 +10,7 @@
             </div>
         </div>
         
-    {elseif $clinic->is_approved == 2}
+    {elseif $clinic->is_approved == App\Enums\Approved::PENDING_CHANGES->value}
         <div class="alert alert-warning d-flex align-items-center shadow-sm mb-4" role="alert">
             <i class="bi bi-hourglass-split fs-3 me-3"></i>
             <div>
@@ -19,7 +19,7 @@
             </div>
         </div>
         
-    {elseif $clinic->is_approved == 3}
+    {elseif $clinic->is_approved == App\Enums\Approved::DENIED->value}
         <div class="alert alert-danger shadow-sm mb-4" role="alert">
             <div class="d-flex align-items-center mb-2">
                 <i class="bi bi-x-octagon-fill fs-3 me-3"></i>
@@ -31,7 +31,7 @@
             {/if}
         </div>
         
-    {elseif $clinic->is_email_verified == 1}
+    {elseif $clinic->is_email_verified == App\Enums\EmailVerified::VERIFIED->value}
         <div class="alert alert-info d-flex align-items-center shadow-sm mb-4" role="alert">
             <i class="bi bi-info-circle-fill fs-3 me-3"></i>
             <div>
@@ -44,14 +44,14 @@
     <div>
         <a n:href="Account:contact" class="btn btn-outline-primary">Změnit kontaktní údaje</a>
         <a n:href="Account:password" class="btn btn-outline-primary">Změnit přihlašovací heslo</a>
-        {if $clinic->is_email_verified == 1}
+        {if $clinic->is_email_verified == App\Enums\EmailVerified::VERIFIED->value}
             <a n:href="Account:clinic" class="btn btn-outline-primary">Změnit údaje o klinice</a>
         {/if}
     </div>
 
     {* Zde elegantně vykreslíme tvoji existující komponentu s ID přihlášené kliniky *}
     {control clinicDetail $clinic->id}
-    {if $clinic->is_email_verified == 0}
+    {if $clinic->is_email_verified == App\Enums\EmailVerified::UNVERIFIED->value}
         <div class="card shadow-sm border-warning mt-5">
             <div class="card-body p-4 p-md-5 text-center">
                 
@@ -79,7 +79,7 @@
         </div>
     {/if}
     
-    {if $clinic->is_email_verified == 2}
+    {if $clinic->is_email_verified == App\Enums\EmailVerified::EDITING->value}
         <div class="card shadow-sm border-warning mt-5">
             <div class="card-body p-4 p-md-5 text-center">
                 

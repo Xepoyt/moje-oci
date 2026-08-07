@@ -7,6 +7,7 @@ use Nette\Application\UI\Form;
 use App\Models\FacilityManager;
 use Nette\Utils\Paginator;
 use Nette\Application\Attributes\Persistent;
+use App\Enums\FilterStatus;
 
 class ClinicsGridControl extends Control
 {
@@ -62,12 +63,9 @@ class ClinicsGridControl extends Control
         $form->addText('email')->setDefaultValue($this->fEmail);
         $form->addSelect('program_type', null, [null => 'Vše'] + $this->facilityManager->getProgramNames())
              ->setDefaultValue($this->fProgram);
-        $form->addSelect('status', null, [
-            null => 'Vše',
-            4 => 'Čeká na schválení', 1 => 'Schváleno',
-            2 => 'Žádá o změnu', 3 => 'Zamítnuto', 0 => 'Neověřeno'
-        ])->setDefaultValue($this->fStatus);
-        
+        $form->addSelect('status', null, [null => 'Vše'] + FilterStatus::getOptionsForForm())
+             ->setDefaultValue($this->fStatus);
+
         $form->addSubmit('filter', 'Filtrovat')->onClick[] = [$this, 'processFilter'];
         $form->addSubmit('reset', 'Zrušit')->setValidationScope([])->onClick[] = [$this, 'resetFilter'];
         return $form;

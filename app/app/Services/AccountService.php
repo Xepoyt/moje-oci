@@ -7,7 +7,9 @@ namespace App\Services;
 use App\Models\FacilityManager;
 use App\Exceptions\ClinicNotFoundException;
 use Nette\Application\LinkGenerator;
-use Nette\Utils\Random;
+use App\Enums\ProgramType;
+use App\Enums\EmailVerified;
+use App\Enums\Approved;
 
 class AccountService
 {
@@ -35,13 +37,13 @@ class AccountService
             $token = $this->facilityManager->generateToken();
             $data['token'] = $token;
 
-            if ($clinic->is_email_verified == 0) {
+            if ($clinic->is_email_verified == EmailVerified::UNVERIFIED->value) {
                 $data['email'] = $values->email;
                 $link = $this->linkGenerator->link('Registration:Registration:complete', ['token' => $token]);
             } else {
                 $data['unverified_email'] = $values->email;
                 $link = $this->linkGenerator->link('Home:Home:verified', ['token' => $token]);
-                $data['is_email_verified'] = 2; 
+                $data['is_email_verified'] = EmailVerified::EDITING->value;
             }
 
             $this->emailService->emailChangeOldAddress($clinic->email, $clinic->ico);
@@ -59,7 +61,7 @@ class AccountService
         $data = [];
 
         // 1. Předzpracování dat (odstranění mezer), pokud data existují
-        if ($values->program_type === 1 && isset($values->reservation_phone)) {
+        if ($values->program_type === ProgramType::ZAKLADNI->value && isset($values->reservation_phone)) {
             $values->reservation_phone = preg_replace('#\s+#', '', $values->reservation_phone);
         }
         if (isset($values->address_ZIP)) {
@@ -108,8 +110,8 @@ class AccountService
         // 4. Update pouze pokud došlo k nějaké změně
         if (!empty($data)) {
             // Přepnutí stavu kliniky na "čeká na schválení změn"
-            if ($clinic->is_approved == 1 || $clinic->is_approved == 3) {
-                $this->facilityManager->updateClinic($clinicId, ['is_approved' => 2, 'prev_is_approved' => $clinic->is_approved]);
+            if ($clinic->is_approved == Approved::APPROVED->value || $clinic->is_approved == Approved::DENIED->value) {
+                $this->facilityManager->updateClinic($clinicId, ['is_approved' => Approved::PENDING_CHANGES->value, 'prev_is_approved' => $clinic->is_approved]);
                 $this->emailService->sendAdminClinicChangeNotification($clinic->name, $clinic->ico, $clinic->contact_person_name . " " . $clinic->contact_person_surname);
 
                 $data['clinics_id'] = $clinicId;
@@ -124,18 +126,18 @@ class AccountService
     public function resendEmail(int $clinicId): void
     {
         $clinic = $this->facilityManager->getClinic($clinicId);
-        if($clinic->is_email_verified == 1) return;
+        if($clinic->is_email_verified == EmailVerified::VERIFIED->value) return;
 
         $token = $this->facilityManager->generateToken();
         $data['token'] = $token;
         $this->facilityManager->updateClinic($clinicId, $data);
 
-        if($clinic->is_email_verified == 0){
+        if($clinic->is_email_verified == EmailVerified::UNVERIFIED->value){
             $link = $this->linkGenerator->link('Registration:Registration:complete', ['token' => $token]);
 
             $this->emailService->sendVerificationEmail($clinic->email, $clinic->contact_person_name . ' ' . $clinic->contact_person_surname, $link);
         }
-        elseif($clinic->is_email_verified == 2){
+        elseif($clinic->is_email_verified == EmailVerified::EDITING->value){
             $link = $this->linkGenerator->link('Home:Home:verified', ['token' => $token]);
             $this->emailService->emailChangeNewAddress($clinic->unverified_email, $link, $clinic->ico);
         }

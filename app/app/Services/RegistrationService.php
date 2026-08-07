@@ -6,6 +6,8 @@ namespace App\Services;
 
 use App\Models\FacilityManager;
 use Nette\Application\LinkGenerator;
+use App\Enums\ProgramType;
+use App\Enums\Approved;
 
 class RegistrationService
 {
@@ -36,7 +38,7 @@ class RegistrationService
     public function completeRegistration(int $clinicId, array $values): void
     {
         
-        if ($values['program_type'] === 1) {
+        if ($values['program_type'] === ProgramType::ZAKLADNI->value) {
             $values['reservation_phone'] = preg_replace('#\s+#', '', $values['reservation_phone']);
         }
         $values['address_ZIP'] = preg_replace('#\s+#', '', $values['address_ZIP']);
@@ -78,7 +80,7 @@ class RegistrationService
         $clinic = $this->facilityManager->getClinic($clinicId);
         $previousState = $clinic ? $clinic->is_approved : null;
 
-        if($previousState != 2){
+        if($previousState != Approved::PENDING_CHANGES->value){
             $this->facilityManager->approveClinic($clinicId);
         }
         else{
@@ -97,7 +99,7 @@ class RegistrationService
         $clinic = $this->facilityManager->getClinic($clinicId);
         $previousState = $clinic ? $clinic->is_approved : null;
         
-        if($previousState != 2){
+        if($previousState != Approved::PENDING_CHANGES->value){
             $this->facilityManager->denyClinic($clinicId, $reason);
         }
         else{

@@ -8,9 +8,8 @@ use App\Models\FacilityManager;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
 use App\Services\AccountService;
-use Nette\Database\UniqueConstraintViolationException;
-use App\Utils\IcoValidator;
 use Nette\Security\User;
+use App\Enums\ProgramType;
 
 
 class ChangeClinicControl extends Control
@@ -62,7 +61,7 @@ class ChangeClinicControl extends Control
 
         $form->addText('reservation_email', 'Kontaktní e-mail')
             ->setDefaultValue($clinic->reservation_email)
-            ->addConditionOn($programType, $form::IsIn, [1, 2]) //magicky cisla :(
+            ->addConditionOn($programType, $form::IsIn, [ProgramType::ZAKLADNI->value, ProgramType::ZPROSTREDKOVANI->value])
                 ->setRequired('Zadejte e-mail.')
                 ->addRule($form::Email, 'Zadejte platný e-mail.')
                 ->toggle('snippet-email'); // Toto ID musí být v Latte

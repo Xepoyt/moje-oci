@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Exception;
-use Throwable;
 use Nette;
 use Nette\Database\Explorer;
 use Nette\Utils\Random;
+use App\Enums\EmailVerified;
+use App\Enums\FilterStatus;
+use App\Enums\Approved;
 
 class FacilityManager
 {
@@ -27,7 +28,7 @@ class FacilityManager
             'email' => $email,
             'password' => $password_hash,
             'token' => $token,
-            'is_email_verified' => 0
+            'is_email_verified' => EmailVerified::UNVERIFIED->value
         ]);
 
         return $token;
@@ -49,7 +50,7 @@ class FacilityManager
 
     public function completeRegistration(int $id, array $data): void
     {
-        $data['is_email_verified'] = 1;
+        $data['is_email_verified'] = EmailVerified::VERIFIED->value;
 
         $this->database->table('clinics')->where('id', $id)->update($data);
     }
@@ -63,11 +64,11 @@ class FacilityManager
         
         if (isset($filters['status']) && $filters['status'] !== '') {
             $status = (int)$filters['status'];
-            if ($status === 0) $query->where('is_email_verified = 0 AND is_approved = 0');
-            elseif ($status === 4) $query->where('is_email_verified = 1 AND is_approved = 0'); // Čeká
-            elseif ($status === 1) $query->where('is_approved = 1');
-            elseif ($status === 2) $query->where('is_approved = 2'); // Žádá o změnu
-            elseif ($status === 3) $query->where('is_approved = 3'); // Zamítnuto
+            if ($status === FilterStatus::UNVERIFIED->value) $query->where('is_email_verified = ? AND is_approved = ?', EmailVerified::UNVERIFIED->value, Approved::UNAPPROVED->value);
+            elseif ($status === FilterStatus::PENDING_APPROVAL->value) $query->where('is_email_verified = ? AND is_approved = ?', EmailVerified::VERIFIED->value, Approved::UNAPPROVED->value);
+            elseif ($status === FilterStatus::APPROVED->value) $query->where('is_approved = ?', Approved::APPROVED->value);
+            elseif ($status === FilterStatus::PENDING_CHANGES->value) $query->where('is_approved = ?', Approved::PENDING_CHANGES->value);
+            elseif ($status === FilterStatus::DENIED->value) $query->where('is_approved = ?', Approved::DENIED->value);
         }
     }
 
@@ -94,7 +95,7 @@ class FacilityManager
     public function approveClinic(int $id): void
     {
         $this->database->table('clinics')->where('id', $id)->update([
-            'is_approved' => 1,
+            'is_approved' => Approved::APPROVED->value,
             'deny_reason' => null
         ]);
     }
@@ -102,7 +103,7 @@ class FacilityManager
     public function denyClinic(int $id, string $reason): void
     {
         $this->database->table('clinics')->where('id', $id)->update([
-            'is_approved' => 3, 
+            'is_approved' => Approved::DENIED->value,
             'deny_reason' => $reason
         ]);
     }
@@ -124,7 +125,7 @@ class FacilityManager
             unset($nonNullData['clinics_id']);
 
             $updateData = array_merge($nonNullData, [
-                'is_approved' => 1,
+                'is_approved' => Approved::APPROVED->value,
                 'deny_reason' => null
             ]);
             $this->database->table('clinics')->where('id', $id)->update($updateData);
@@ -168,7 +169,7 @@ class FacilityManager
             $this->database->table('clinics')->where('id', $id)->update([
                 'email' => $newEmail,
                 'unverified_email' => null,
-                'is_email_verified' => 1
+                'is_email_verified' => EmailVerified::VERIFIED->value
             ]);
 
             $this->database->commit();
